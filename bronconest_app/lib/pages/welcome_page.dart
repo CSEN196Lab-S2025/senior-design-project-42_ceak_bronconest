@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:bronconest_app/pages/home_page.dart';
 import 'package:bronconest_app/pages/explore_page.dart';
 import 'package:bronconest_app/pages/saved_places_page.dart';
@@ -19,7 +20,6 @@ class _WelcomePageState extends State<WelcomePage> {
       final GoogleSignIn googleSignIn = GoogleSignIn();
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
       if (googleUser == null) {
-        // User canceled the sign-in
         return;
       }
       final GoogleSignInAuthentication googleAuth =
@@ -29,7 +29,27 @@ class _WelcomePageState extends State<WelcomePage> {
         idToken: googleAuth.idToken,
       );
 
-      await FirebaseAuth.instance.signInWithCredential(credential);
+      final UserCredential userCredential = await FirebaseAuth.instance
+          .signInWithCredential(credential);
+      final User? user = userCredential.user;
+
+      if (user != null) {
+        final FirebaseFirestore firestore = FirebaseFirestore.instance;
+        final DocumentReference userDoc = firestore
+            .collection('users')
+            .doc(user.uid);
+        final DocumentSnapshot userSnapshot = await userDoc.get();
+        final bool isStudent =
+            user.email != null && user.email!.endsWith('.edu');
+        if (!userSnapshot.exists) {
+          await userDoc.set({
+            'id': user.uid,
+            'name': user.displayName,
+            'email': user.email,
+            'isStudent': isStudent,
+          });
+        }
+      }
 
       if (mounted) {
         Navigator.of(context).pushReplacement(
@@ -61,7 +81,6 @@ class _WelcomePageState extends State<WelcomePage> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Error signing in: ${e.toString()}')),
         );
-        print("Error signing in: $e");
       }
     }
   }
