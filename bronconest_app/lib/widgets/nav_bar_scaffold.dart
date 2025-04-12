@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class NavBarScaffold extends StatefulWidget {
-  NavBarScaffold({
+  const NavBarScaffold({
     super.key,
     required this.pages,
     required this.navigationDestination,
@@ -10,7 +10,7 @@ class NavBarScaffold extends StatefulWidget {
 
   final List<Widget> pages;
   final List<NavigationDestination> navigationDestination;
-  int startingIndex;
+  final int startingIndex;
 
   @override
   State<NavBarScaffold> createState() => _NavBarScaffoldState();

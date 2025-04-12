@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "853556404389",
+    "project_id": "bronconest-d1f01",
+    "storage_bucket": "bronconest-d1f01.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:853556404389:android:a44ee397e38b762bbd6d4c",
+        "android_client_info": {
+          "package_name": "com.example.bronconest_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "853556404389-ca9lo50vmedvhdjmtqefjl8en73ehveh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4nDR7muSPT7UXVgvh8aTvPwGl97a4wu4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "853556404389-ca9lo50vmedvhdjmtqefjl8en73ehveh.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "853556404389-ppc8e4u60ucm27s9oqr8pch8u7v0l5k2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.bronconestApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
