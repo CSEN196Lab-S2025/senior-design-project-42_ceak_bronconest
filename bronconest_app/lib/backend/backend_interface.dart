@@ -1,8 +1,25 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:bronconest_app/models/school.dart';
 import 'package:bronconest_app/models/dorm.dart';
 
 String apiUrl = '';
+
+/// Returns a [List] of all [School]s.
+Future<List<School>> getSchools() async {
+  String endpoint = '/get_schools';
+  var response = await http.Client().get(Uri.parse('$apiUrl$endpoint'));
+
+  if (response.statusCode == 200) {
+    Map<String, dynamic> json = jsonDecode(response.body);
+
+    return (json['schools'] as List<dynamic>)
+        .map((school) => School.fromJSON(school))
+        .toList();
+  } else {
+    throw Exception('Error, code ${response.statusCode}');
+  }
+}
 
 /// Returns a [Map] of each school ID as a [String] mapped to a [List] of
 /// [Dorm]s at that school.
@@ -57,12 +74,13 @@ Future<Dorm> getDorm(String schoolID, String dormID) async {
   }
 }
 
-/// Uploads a [dorm] of type [Dorm] to firebase. Returns a [bool] if successful.
-Future<bool> createDorm(Dorm dorm) async {
+/// Uploads a [dorm] of type [Dorm] under school [schoolID] to firebase.
+/// Returns a [bool] if successful.
+Future<bool> createDorm(String schoolID, Dorm dorm) async {
   String endpoint = '/create_dorm';
   var response = await http.Client().post(
     Uri.parse('$apiUrl$endpoint'),
-    body: {}, // TODO: add payload
+    body: {'school_id': schoolID, 'dorm': dorm.toJsonString()},
   );
 
   if (response.statusCode == 200) {
