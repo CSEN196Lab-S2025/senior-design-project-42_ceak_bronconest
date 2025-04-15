@@ -34,11 +34,22 @@ class _WelcomePageState extends State<WelcomePage> {
       final User? user = userCredential.user;
 
       if (user != null) {
+        final domain = user.email?.split('@')[1].split('.')[0];
         final FirebaseFirestore firestore = FirebaseFirestore.instance;
+        final DocumentReference schoolDoc = firestore
+            .collection('schools')
+            .doc(domain);
         final DocumentReference userDoc = firestore
             .collection('users')
             .doc(user.uid);
         final DocumentSnapshot userSnapshot = await userDoc.get();
+        final DocumentSnapshot schoolSnapshot = await schoolDoc.get();
+        final List<String> whitelist = [];
+        if (schoolSnapshot.exists) {
+          whitelist.addAll(List<String>.from(schoolSnapshot['whitelist']));
+        }
+        final bool isAdmin =
+            user.email != null && whitelist.contains(user.email);
         final bool isStudent =
             user.email != null && user.email!.endsWith('.edu');
         if (!userSnapshot.exists) {
@@ -47,6 +58,7 @@ class _WelcomePageState extends State<WelcomePage> {
             'name': user.displayName,
             'email': user.email,
             'isStudent': isStudent,
+            'isAdmin': isAdmin,
           });
         }
       }
