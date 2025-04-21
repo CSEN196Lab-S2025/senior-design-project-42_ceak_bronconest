@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:bronconest_app/globals.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -8,6 +10,32 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<String> schools = [];
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchSchools();
+  }
+
+  Future<void> _fetchSchools() async {
+    try {
+      final schoolsSnapshot =
+          await FirebaseFirestore.instance.collection('schools').get();
+      setState(() {
+        schools = schoolsSnapshot.docs.map((doc) => doc.id).toList();
+        isLoading = false;
+      });
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Error fetching schools: $e')));
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +46,29 @@ class _HomePageState extends State<HomePage> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [const Text('Home Page')],
+          children: [
+            const Text('Home Page'),
+            Text('School: $school'),
+            Text('User ID: $userId'),
+            isLoading
+                ? const CircularProgressIndicator()
+                : DropdownButton<String>(
+                  value: school,
+                  hint: const Text('Select a school'),
+                  items:
+                      schools.map((String schoolName) {
+                        return DropdownMenuItem<String>(
+                          value: schoolName,
+                          child: Text(schoolName),
+                        );
+                      }).toList(),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      school = newValue!;
+                    });
+                  },
+                ),
+          ],
         ),
       ),
     );

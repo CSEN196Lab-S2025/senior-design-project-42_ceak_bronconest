@@ -6,6 +6,8 @@ import 'package:bronconest_app/pages/home_page.dart';
 import 'package:bronconest_app/pages/explore_page.dart';
 import 'package:bronconest_app/pages/saved_places_page.dart';
 import 'package:bronconest_app/widgets/nav_bar_scaffold.dart';
+import 'package:bronconest_app/pages/admin_page.dart';
+import 'package:bronconest_app/globals.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
@@ -59,8 +61,11 @@ class _WelcomePageState extends State<WelcomePage> {
             'email': user.email,
             'isStudent': isStudent,
             'isAdmin': isAdmin,
+            'savedPlaces': [],
           });
         }
+        school = domain ?? '';
+        userId = user.uid;
       }
 
       if (mounted) {
@@ -69,7 +74,12 @@ class _WelcomePageState extends State<WelcomePage> {
             builder:
                 (context) => NavBarScaffold(
                   startingIndex: 1,
-                  pages: [ExplorePage(), HomePage(), SavedPlacesPage()],
+                  pages: [
+                    ExplorePage(),
+                    HomePage(),
+                    SavedPlacesPage(),
+                    AdminPage(),
+                  ],
                   navigationDestination: [
                     NavigationDestination(
                       icon: Icon(Icons.search),
@@ -82,6 +92,10 @@ class _WelcomePageState extends State<WelcomePage> {
                     NavigationDestination(
                       icon: Icon(Icons.favorite),
                       label: 'Saved Places',
+                    ),
+                    NavigationDestination(
+                      icon: Icon(Icons.admin_panel_settings),
+                      label: 'Admin Page',
                     ),
                   ],
                 ),
