@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:bronconest_app/models/review.dart';
 import 'package:bronconest_app/models/dorm.dart';
+import 'package:bronconest_app/widgets/review_card.dart';
 import 'package:bronconest_app/globals.dart';
 
 class DormReviewsPage extends StatefulWidget {
@@ -60,29 +61,10 @@ class _DormReviewsPageState extends State<DormReviewsPage> {
               : reviews.isEmpty
               ? const Center(child: Text('No reviews yet'))
               : ListView.builder(
-                itemCount: reviews.length,
                 itemBuilder: (context, index) {
-                  final review = reviews[index];
-                  return Card(
-                    margin: const EdgeInsets.all(8.0),
-                    child: ListTile(
-                      title: Text('User: ${review.userId}'),
-                      subtitle: Text(review.content),
-                      trailing: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('Walkability: ${review.walkability}'),
-                          Text('Cleaniness: ${review.cleaniness}'),
-                          Text('Quietness: ${review.quietness}'),
-                          Text('Comfort: ${review.comfort}'),
-                          Text('Safety: ${review.safety}'),
-                          Text('Amenities: ${review.amenities}'),
-                          Text('Community: ${review.community}'),
-                        ],
-                      ),
-                    ),
-                  );
+                  return ReviewTile(review: reviews[index]);
                 },
+                itemCount: reviews.length,
               ),
     );
   }

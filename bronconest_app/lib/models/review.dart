@@ -5,7 +5,7 @@ class Review {
   final String userId;
   final String content;
   final int walkability;
-  final int cleaniness;
+  final int cleanliness;
   final int quietness;
   final int comfort;
   final int safety;
@@ -17,7 +17,7 @@ class Review {
     required this.userId,
     required this.content,
     required this.walkability,
-    required this.cleaniness,
+    required this.cleanliness,
     required this.quietness,
     required this.comfort,
     required this.safety,
@@ -30,7 +30,7 @@ class Review {
     userId: json['user_id'].toString(),
     content: json['content'].toString(),
     walkability: int.parse(json['walkability'].toString()),
-    cleaniness: int.parse(json['cleaniness'].toString()),
+    cleanliness: int.parse(json['cleanliness'].toString()),
     quietness: int.parse(json['quietness'].toString()),
     comfort: int.parse(json['comfort'].toString()),
     safety: int.parse(json['safety'].toString()),
@@ -43,7 +43,7 @@ class Review {
     'user_id': userId,
     'content': content,
     'walkability': walkability,
-    'cleaniness': cleaniness,
+    'cleanliness': cleanliness,
     'quietness': quietness,
     'comfort': comfort,
     'safety': safety,

@@ -13,6 +13,7 @@ class ExplorePage extends StatefulWidget {
 
 class _ExplorePageState extends State<ExplorePage> {
   List<Dorm> dorms = [];
+  List<String> savedPlaceIds = [];
   bool isLoading = true;
 
   @override
@@ -29,10 +30,19 @@ class _ExplorePageState extends State<ExplorePage> {
               .doc(school)
               .collection('dorms')
               .get();
+      final userSnapshot =
+          await FirebaseFirestore.instance
+              .collection('users')
+              .doc(userId)
+              .get();
 
       setState(() {
         dorms =
             dormsSnapshot.docs.map((doc) => Dorm.fromJSON(doc.data())).toList();
+        savedPlaceIds =
+            userSnapshot.data()?['savedPlaces'] != null
+                ? List<String>.from(userSnapshot.data()!['savedPlaces'])
+                : [];
         isLoading = false;
       });
     } catch (e) {
@@ -41,6 +51,26 @@ class _ExplorePageState extends State<ExplorePage> {
           context,
         ).showSnackBar(SnackBar(content: Text('Error fetching dorms: $e')));
       }
+    }
+  }
+
+  Future<void> _toggleSavedPlace(Dorm dorm) async {
+    final userDoc = FirebaseFirestore.instance.collection('users').doc(userId);
+
+    if (savedPlaceIds.contains(dorm.id)) {
+      await userDoc.update({
+        'savedPlaces': FieldValue.arrayRemove([dorm.id]),
+      });
+      setState(() {
+        savedPlaceIds.remove(dorm.id);
+      });
+    } else {
+      await userDoc.update({
+        'savedPlaces': FieldValue.arrayUnion([dorm.id]),
+      });
+      setState(() {
+        savedPlaceIds.add(dorm.id);
+      });
     }
   }
 
@@ -58,6 +88,7 @@ class _ExplorePageState extends State<ExplorePage> {
                 itemCount: dorms.length,
                 itemBuilder: (context, index) {
                   final dorm = dorms[index];
+                  final isSaved = savedPlaceIds.contains(dorm.id);
                   return InkWell(
                     onTap: () {
                       Navigator.of(context).push(
@@ -77,6 +108,14 @@ class _ExplorePageState extends State<ExplorePage> {
                         ),
                         title: Text(dorm.name),
                         subtitle: Text(dorm.shortDescription),
+                        trailing: IconButton(
+                          icon: Icon(
+                            isSaved ? Icons.favorite : Icons.favorite_border,
+                          ),
+                          onPressed: () {
+                            _toggleSavedPlace(dorm);
+                          },
+                        ),
                       ),
                     ),
                   );
