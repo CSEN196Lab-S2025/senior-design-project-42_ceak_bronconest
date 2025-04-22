@@ -81,6 +81,7 @@ class _SavedPlacesPageState extends State<SavedPlacesPage> {
                 itemBuilder: (context, index) {
                   final dorm = savedPlaces[index];
                   return ListTile(
+                    leading: Icon(Icons.favorite),
                     title: Text(dorm.name),
                     subtitle: Text(dorm.shortDescription),
                     onTap: () {
