@@ -11,6 +11,7 @@ class Review {
   final int safety;
   final int amenities;
   final int community;
+  final bool isAnonymous;
 
   Review({
     required this.id,
@@ -23,6 +24,7 @@ class Review {
     required this.safety,
     required this.amenities,
     required this.community,
+    this.isAnonymous = false,
   });
 
   factory Review.fromJSON(Map<String, dynamic> json) => Review(
@@ -36,6 +38,8 @@ class Review {
     safety: int.parse(json['safety'].toString()),
     amenities: int.parse(json['amenities'].toString()),
     community: int.parse(json['community'].toString()),
+    isAnonymous:
+        json['is_anonymous'] != null ? json['is_anonymous'] as bool : false,
   );
 
   String toJsonString() => json.encode({
@@ -49,6 +53,7 @@ class Review {
     'safety': safety,
     'amenities': amenities,
     'community': community,
+    'is_anonymous': isAnonymous,
   });
 
   Map<String, dynamic> toJson() {
@@ -63,6 +68,7 @@ class Review {
       'safety': safety,
       'amenities': amenities,
       'community': community,
+      'is_anonymous': isAnonymous,
     };
   }
 }

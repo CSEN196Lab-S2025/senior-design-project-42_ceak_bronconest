@@ -107,7 +107,33 @@ class _ExplorePageState extends State<ExplorePage> {
                           fit: BoxFit.cover,
                         ),
                         title: Text(dorm.name),
-                        subtitle: Text(dorm.shortDescription),
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(dorm.shortDescription),
+                            Text(
+                              'Walkability: ${dorm.walkabilityAvg.toStringAsFixed(1)}',
+                            ),
+                            Text(
+                              'Cleanliness: ${dorm.cleanlinessAvg.toStringAsFixed(1)}',
+                            ),
+                            Text(
+                              'Quietness: ${dorm.quietnessAvg.toStringAsFixed(1)}',
+                            ),
+                            Text(
+                              'Comfort: ${dorm.comfortAvg.toStringAsFixed(1)}',
+                            ),
+                            Text(
+                              'Safety: ${dorm.safetyAvg.toStringAsFixed(1)}',
+                            ),
+                            Text(
+                              'Amenities: ${dorm.amenitiesAvg.toStringAsFixed(1)}',
+                            ),
+                            Text(
+                              'Community: ${dorm.communityAvg.toStringAsFixed(1)}',
+                            ),
+                          ],
+                        ),
                         trailing: IconButton(
                           icon: Icon(
                             isSaved ? Icons.favorite : Icons.favorite_border,

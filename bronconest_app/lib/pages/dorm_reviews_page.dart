@@ -62,7 +62,7 @@ class _DormReviewsPageState extends State<DormReviewsPage> {
               : reviews.isEmpty
               ? Column(
                 children: [
-                  if (isStudent) // Only show if isStudent is true
+                  if (isStudent)
                     Card(
                       margin: const EdgeInsets.all(16.0),
                       child: ListTile(

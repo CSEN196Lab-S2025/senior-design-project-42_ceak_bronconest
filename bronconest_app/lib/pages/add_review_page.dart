@@ -70,7 +70,7 @@ class _AddReviewPageState extends State<AddReviewPage> {
       final review = Review(
         id: docRef.id,
         content: _reviewContentController.text,
-        userId: isAnonymous ? '' : userId,
+        userId: userId,
         walkability: walkability!,
         cleanliness: cleanliness!,
         quietness: quietness!,
@@ -78,9 +78,12 @@ class _AddReviewPageState extends State<AddReviewPage> {
         safety: safety!,
         amenities: amenities!,
         community: community!,
+        isAnonymous: isAnonymous,
       );
 
       await docRef.set(review.toJson());
+
+      await _updateDormAvgs();
 
       if (mounted) {
         ScaffoldMessenger.of(
@@ -99,6 +102,73 @@ class _AddReviewPageState extends State<AddReviewPage> {
       setState(() {
         isLoading = false;
       });
+    }
+  }
+
+  Future<void> _updateDormAvgs() async {
+    try {
+      final dormRef = FirebaseFirestore.instance
+          .collection('schools')
+          .doc(school)
+          .collection('dorms')
+          .doc(widget.dorm.id);
+
+      final dormSnapshot = await dormRef.get();
+      if (dormSnapshot.exists) {
+        final dormData = dormSnapshot.data()!;
+        final reviewsSnapshot = await dormRef.collection('reviews').get();
+        final totalReviews = reviewsSnapshot.docs.length - 1;
+        if (totalReviews == 0) {
+          // If there are no reviews, set the averages to the current review values
+          await dormRef.update({
+            'walkability_avg': walkability,
+            'cleanliness_avg': cleanliness,
+            'quietness_avg': quietness,
+            'comfort_avg': comfort,
+            'safety_avg': safety,
+            'amenities_avg': amenities,
+            'community_avg': community,
+          });
+          return;
+        }
+        final newTotalReviews = totalReviews + 1;
+
+        // Default averages to 0.0 if they don't exist
+        final double walkabilityAvg =
+            dormData['walkability_avg']?.toDouble() ?? 0.0;
+        final double cleanlinessAvg =
+            dormData['cleanliness_avg']?.toDouble() ?? 0.0;
+        final double quietnessAvg =
+            dormData['quietness_avg']?.toDouble() ?? 0.0;
+        final double comfortAvg = dormData['comfort_avg']?.toDouble() ?? 0.0;
+        final double safetyAvg = dormData['safety_avg']?.toDouble() ?? 0.0;
+        final double amenitiesAvg =
+            dormData['amenities_avg']?.toDouble() ?? 0.0;
+        final double communityAvg =
+            dormData['community_avg']?.toDouble() ?? 0.0;
+
+        await dormRef.update({
+          'walkability_avg':
+              (walkabilityAvg * totalReviews + walkability!) / newTotalReviews,
+          'cleanliness_avg':
+              (cleanlinessAvg * totalReviews + cleanliness!) / newTotalReviews,
+          'quietness_avg':
+              (quietnessAvg * totalReviews + quietness!) / newTotalReviews,
+          'comfort_avg':
+              (comfortAvg * totalReviews + comfort!) / newTotalReviews,
+          'safety_avg': (safetyAvg * totalReviews + safety!) / newTotalReviews,
+          'amenities_avg':
+              (amenitiesAvg * totalReviews + amenities!) / newTotalReviews,
+          'community_avg':
+              (communityAvg * totalReviews + community!) / newTotalReviews,
+        });
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error updating dorm averages: $e')),
+        );
+      }
     }
   }
 

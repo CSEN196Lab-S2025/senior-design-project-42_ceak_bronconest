@@ -19,7 +19,7 @@ class _ReviewTileState extends State<ReviewTile> {
       margin: const EdgeInsets.all(8.0),
       child: ExpansionTile(
         title: Text(
-          'User: ${widget.review.userId == "" ? 'Anonymous' : widget.review.userId}',
+          'User: ${widget.review.isAnonymous ? 'Anonymous' : widget.review.userId}',
         ),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

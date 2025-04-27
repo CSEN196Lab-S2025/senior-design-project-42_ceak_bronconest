@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:bronconest_app/pages/add_dorm_page.dart';
+import 'package:bronconest_app/pages/edit_dorm_page.dart';
+import 'package:bronconest_app/models/dorm.dart';
 import 'package:bronconest_app/globals.dart';
 
 class AdminPage extends StatefulWidget {
@@ -10,39 +13,36 @@ class AdminPage extends StatefulWidget {
 }
 
 class _AdminPageState extends State<AdminPage> {
-  final CollectionReference dormsCollection = FirebaseFirestore.instance
-      .collection('schools')
-      .doc(school)
-      .collection('dorms');
+  bool isLoading = true;
+  List<Dorm> dorms = [];
 
-  void _addDorm() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        String dormName = '';
-        return AlertDialog(
-          title: const Text('Add Dorm'),
-          content: TextField(
-            onChanged: (value) => dormName = value,
-            decoration: const InputDecoration(hintText: 'Enter dorm name'),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                if (dormName.isNotEmpty) {
-                  dormsCollection.add({'name': dormName});
-                }
-                Navigator.pop(context);
-                ScaffoldMessenger.of(
-                  context,
-                ).showSnackBar(SnackBar(content: Text('Dorm $dormName added')));
-              },
-              child: const Text('Add'),
-            ),
-          ],
-        );
-      },
-    );
+  @override
+  void initState() {
+    super.initState();
+    _fetchDorms();
+  }
+
+  Future<void> _fetchDorms() async {
+    try {
+      final dormsSnapshot =
+          await FirebaseFirestore.instance
+              .collection('schools')
+              .doc(school)
+              .collection('dorms')
+              .get();
+
+      setState(() {
+        dorms =
+            dormsSnapshot.docs.map((doc) => Dorm.fromJSON(doc.data())).toList();
+        isLoading = false;
+      });
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Error fetching reviews: $e')));
+      }
+    }
   }
 
   void _deleteDorm(String dormId) {
@@ -61,11 +61,8 @@ class _AdminPageState extends State<AdminPage> {
             ),
             TextButton(
               onPressed: () {
-                dormsCollection.doc(dormId).delete();
                 Navigator.pop(context);
-                ScaffoldMessenger.of(
-                  context,
-                ).showSnackBar(SnackBar(content: Text('Dorm deleted')));
+                _performDelete(dormId);
               },
               child: const Text('Delete'),
             ),
@@ -75,6 +72,29 @@ class _AdminPageState extends State<AdminPage> {
     );
   }
 
+  Future<void> _performDelete(String dormId) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('schools')
+          .doc(school)
+          .collection('dorms')
+          .doc(dormId)
+          .delete();
+
+      if (!mounted) return;
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('Dorm deleted')));
+
+      _fetchDorms();
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Error deleting dorm: $e')));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,44 +102,47 @@ class _AdminPageState extends State<AdminPage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text('Admin Page'),
       ),
-      body: StreamBuilder<QuerySnapshot>(
-        stream: dormsCollection.snapshots(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          }
-          if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-            return const Center(child: Text('No dorms available'));
-          }
-          final dorms = snapshot.data!.docs;
-          return ListView.builder(
-            itemCount: dorms.length,
-            itemBuilder: (context, index) {
-              final dorm = dorms[index];
-              return ListTile(
-                title: Text(dorm['name']),
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    IconButton(
-                      icon: const Icon(Icons.edit),
-                      onPressed: () {
-                        // Edit dorm functionality
-                      },
+      body:
+          isLoading
+              ? const Center(child: CircularProgressIndicator())
+              : dorms.isEmpty
+              ? const Center(child: Text('No dorms available'))
+              : ListView.builder(
+                itemCount: dorms.length,
+                itemBuilder: (context, index) {
+                  final dorm = dorms[index];
+                  return ListTile(
+                    title: Text(dorm.name),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.edit),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => EditDormPage(dorm: dorm),
+                              ),
+                            ).then((_) => _fetchDorms());
+                          },
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.delete),
+                          onPressed: () => _deleteDorm(dorm.id),
+                        ),
+                      ],
                     ),
-                    IconButton(
-                      icon: const Icon(Icons.delete),
-                      onPressed: () => _deleteDorm(dorm.id),
-                    ),
-                  ],
-                ),
-              );
-            },
-          );
-        },
-      ),
+                  );
+                },
+              ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _addDorm,
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AddDormPage()),
+          ).then((_) => _fetchDorms());
+        },
         child: const Icon(Icons.add),
       ),
     );
