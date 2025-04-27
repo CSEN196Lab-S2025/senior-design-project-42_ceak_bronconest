@@ -50,22 +50,24 @@ class _WelcomePageState extends State<WelcomePage> {
         if (schoolSnapshot.exists) {
           whitelist.addAll(List<String>.from(schoolSnapshot['whitelist']));
         }
-        final bool isAdmin =
+        final bool isAdminNow =
             user.email != null && whitelist.contains(user.email);
-        final bool isStudent =
+        final bool isStudentNow =
             user.email != null && user.email!.endsWith('.edu');
         if (!userSnapshot.exists) {
           await userDoc.set({
             'id': user.uid,
             'name': user.displayName,
             'email': user.email,
-            'isStudent': isStudent,
-            'isAdmin': isAdmin,
+            'isStudent': isStudentNow,
+            'isAdmin': isAdminNow,
             'savedPlaces': [],
           });
         }
         school = domain ?? '';
         userId = user.uid;
+        isStudent = isStudentNow;
+        isAdmin = isAdminNow;
       }
 
       if (mounted) {
@@ -78,7 +80,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     ExplorePage(),
                     HomePage(),
                     SavedPlacesPage(),
-                    AdminPage(),
+                    if (isAdmin) AdminPage(),
                   ],
                   navigationDestination: [
                     NavigationDestination(
@@ -93,10 +95,11 @@ class _WelcomePageState extends State<WelcomePage> {
                       icon: Icon(Icons.favorite),
                       label: 'Saved Places',
                     ),
-                    NavigationDestination(
-                      icon: Icon(Icons.admin_panel_settings),
-                      label: 'Admin Page',
-                    ),
+                    if (isAdmin)
+                      NavigationDestination(
+                        icon: Icon(Icons.admin_panel_settings),
+                        label: 'Admin Page',
+                      ),
                   ],
                 ),
           ),

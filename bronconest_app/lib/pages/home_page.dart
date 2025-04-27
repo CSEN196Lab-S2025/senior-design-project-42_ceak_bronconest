@@ -53,7 +53,7 @@ class _HomePageState extends State<HomePage> {
             isLoading
                 ? const CircularProgressIndicator()
                 : DropdownButton<String>(
-                  value: school,
+                  value: schools.contains(school) ? school : null,
                   hint: const Text('Select a school'),
                   items:
                       schools.map((String schoolName) {

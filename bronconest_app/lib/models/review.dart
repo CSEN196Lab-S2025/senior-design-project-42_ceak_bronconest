@@ -50,4 +50,19 @@ class Review {
     'amenities': amenities,
     'community': community,
   });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'user_id': userId,
+      'content': content,
+      'walkability': walkability,
+      'cleanliness': cleanliness,
+      'quietness': quietness,
+      'comfort': comfort,
+      'safety': safety,
+      'amenities': amenities,
+      'community': community,
+    };
+  }
 }

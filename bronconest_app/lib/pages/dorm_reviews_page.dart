@@ -4,6 +4,7 @@ import 'package:bronconest_app/models/review.dart';
 import 'package:bronconest_app/models/dorm.dart';
 import 'package:bronconest_app/widgets/review_card.dart';
 import 'package:bronconest_app/globals.dart';
+import 'package:bronconest_app/pages/add_review_page.dart';
 
 class DormReviewsPage extends StatefulWidget {
   final Dorm dorm;
@@ -59,12 +60,53 @@ class _DormReviewsPageState extends State<DormReviewsPage> {
           isLoading
               ? const Center(child: CircularProgressIndicator())
               : reviews.isEmpty
-              ? const Center(child: Text('No reviews yet'))
+              ? Column(
+                children: [
+                  if (isStudent) // Only show if isStudent is true
+                    Card(
+                      margin: const EdgeInsets.all(16.0),
+                      child: ListTile(
+                        leading: const Icon(Icons.add),
+                        title: const Text('Add a Review'),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder:
+                                  (context) => AddReviewPage(dorm: widget.dorm),
+                            ),
+                          ).then((_) => _fetchReviews());
+                        },
+                      ),
+                    ),
+                  const Expanded(child: Center(child: Text('No reviews yet'))),
+                ],
+              )
               : ListView.builder(
+                itemCount: reviews.length + (isStudent ? 1 : 0),
                 itemBuilder: (context, index) {
-                  return ReviewTile(review: reviews[index]);
+                  if (isStudent && index == 0) {
+                    return Card(
+                      margin: const EdgeInsets.all(16.0),
+                      child: ListTile(
+                        leading: const Icon(Icons.add),
+                        title: const Text('Add a Review'),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder:
+                                  (context) => AddReviewPage(dorm: widget.dorm),
+                            ),
+                          ).then((_) => _fetchReviews());
+                        },
+                      ),
+                    );
+                  }
+                  return ReviewTile(
+                    review: reviews[isStudent ? index - 1 : index],
+                  );
                 },
-                itemCount: reviews.length,
               ),
     );
   }
