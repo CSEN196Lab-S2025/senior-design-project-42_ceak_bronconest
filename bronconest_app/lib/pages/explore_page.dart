@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:bronconest_app/models/dorm.dart';
 import 'package:bronconest_app/globals.dart';
 import 'package:bronconest_app/pages/dorm_reviews_page.dart';
+import 'package:bronconest_app/pages/filter_page.dart';
 
 class ExplorePage extends StatefulWidget {
   const ExplorePage({super.key});
@@ -70,6 +71,22 @@ class _ExplorePageState extends State<ExplorePage> {
       });
       setState(() {
         savedPlaceIds.add(dorm.id);
+      });
+    }
+  }
+
+  Future<void> _navigateToFilterPage() async {
+    final sortedIds = await Navigator.of(
+      context,
+    ).push(MaterialPageRoute(builder: (context) => const FilterPage()));
+
+    if (sortedIds != null) {
+      setState(() {
+        dorms.sort((a, b) {
+          final indexA = sortedIds.indexOf(a.id);
+          final indexB = sortedIds.indexOf(b.id);
+          return indexA.compareTo(indexB);
+        });
       });
     }
   }
@@ -147,6 +164,10 @@ class _ExplorePageState extends State<ExplorePage> {
                   );
                 },
               ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _navigateToFilterPage,
+        child: const Icon(Icons.filter_list),
+      ),
     );
   }
 }
