@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:bronconest_app/pages/home_page.dart';
 import 'package:bronconest_app/pages/explore_page.dart';
 import 'package:bronconest_app/pages/saved_places_page.dart';
@@ -10,13 +11,69 @@ import 'package:bronconest_app/pages/admin_page.dart';
 import 'package:bronconest_app/globals.dart';
 
 class WelcomePage extends StatefulWidget {
-  const WelcomePage({super.key});
+  final bool logoutFlag;
+
+  const WelcomePage({super.key, required this.logoutFlag});
 
   @override
   State<WelcomePage> createState() => _WelcomePageState();
 }
 
 class _WelcomePageState extends State<WelcomePage> {
+  @override
+  void initState() {
+    super.initState();
+    _checkLoginState();
+  }
+
+  Future<void> _checkLoginState() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final bool isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
+
+    if (isLoggedIn && !widget.logoutFlag) {
+      userId = prefs.getString('userId') ?? '';
+      school = prefs.getString('school') ?? '';
+      isStudent = prefs.getBool('isStudent') ?? false;
+      isAdmin = prefs.getBool('isAdmin') ?? false;
+
+      if (mounted) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder:
+                (context) => NavBarScaffold(
+                  startingIndex: 1,
+                  pages: [
+                    ExplorePage(),
+                    HomePage(),
+                    SavedPlacesPage(),
+                    if (isAdmin) AdminPage(),
+                  ],
+                  navigationDestination: [
+                    NavigationDestination(
+                      icon: Icon(Icons.search),
+                      label: 'Explore',
+                    ),
+                    NavigationDestination(
+                      icon: Icon(Icons.home),
+                      label: 'Home',
+                    ),
+                    NavigationDestination(
+                      icon: Icon(Icons.favorite),
+                      label: 'Saved Places',
+                    ),
+                    if (isAdmin)
+                      NavigationDestination(
+                        icon: Icon(Icons.admin_panel_settings),
+                        label: 'Admin Page',
+                      ),
+                  ],
+                ),
+          ),
+        );
+      }
+    }
+  }
+
   Future<void> _signInWithGoogle() async {
     try {
       final GoogleSignIn googleSignIn = GoogleSignIn();
@@ -69,6 +126,13 @@ class _WelcomePageState extends State<WelcomePage> {
         isStudent = isStudentNow;
         isAdmin = isAdminNow;
       }
+
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setBool('isLoggedIn', true);
+      await prefs.setString('userId', userId);
+      await prefs.setString('school', school);
+      await prefs.setBool('isStudent', isStudent);
+      await prefs.setBool('isAdmin', isAdmin);
 
       if (mounted) {
         Navigator.of(context).pushReplacement(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:bronconest_app/pages/welcome_page.dart';
 import 'package:bronconest_app/globals.dart';
 
 class HomePage extends StatefulWidget {
@@ -68,6 +69,17 @@ class _HomePageState extends State<HomePage> {
                     });
                   },
                 ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => WelcomePage(logoutFlag: true),
+                  ),
+                );
+              },
+              child: const Text('Logout'),
+            ),
           ],
         ),
       ),
