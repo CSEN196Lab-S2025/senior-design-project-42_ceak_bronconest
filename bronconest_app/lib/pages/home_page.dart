@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:bronconest_app/pages/welcome_page.dart';
 import 'package:bronconest_app/globals.dart';
@@ -37,6 +38,21 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  Future<void> _logout() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isLoggedIn', false);
+
+    if (!mounted) return;
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => const WelcomePage()),
+      (route) => false,
+    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text('Logged out successfully')));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,12 +87,7 @@ class _HomePageState extends State<HomePage> {
                 ),
             ElevatedButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => WelcomePage(logoutFlag: true),
-                  ),
-                );
+                _logout();
               },
               child: const Text('Logout'),
             ),

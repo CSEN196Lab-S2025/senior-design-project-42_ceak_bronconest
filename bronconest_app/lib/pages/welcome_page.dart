@@ -11,9 +11,7 @@ import 'package:bronconest_app/pages/admin_page.dart';
 import 'package:bronconest_app/globals.dart';
 
 class WelcomePage extends StatefulWidget {
-  final bool logoutFlag;
-
-  const WelcomePage({super.key, required this.logoutFlag});
+  const WelcomePage({super.key});
 
   @override
   State<WelcomePage> createState() => _WelcomePageState();
@@ -28,9 +26,9 @@ class _WelcomePageState extends State<WelcomePage> {
 
   Future<void> _checkLoginState() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final bool isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
+    isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
 
-    if (isLoggedIn && !widget.logoutFlag) {
+    if (isLoggedIn) {
       userId = prefs.getString('userId') ?? '';
       school = prefs.getString('school') ?? '';
       isStudent = prefs.getBool('isStudent') ?? false;
@@ -125,6 +123,7 @@ class _WelcomePageState extends State<WelcomePage> {
         userId = user.uid;
         isStudent = isStudentNow;
         isAdmin = isAdminNow;
+        isLoggedIn = true;
       }
 
       final SharedPreferences prefs = await SharedPreferences.getInstance();
