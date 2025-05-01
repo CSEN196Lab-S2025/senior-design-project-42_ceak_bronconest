@@ -105,6 +105,8 @@ class _DormReviewsPageState extends State<DormReviewsPage> {
                   }
                   return ReviewTile(
                     review: reviews[isStudent ? index - 1 : index],
+                    dormId: widget.dorm.id,
+                    onReviewChanged: _fetchReviews,
                   );
                 },
               ),

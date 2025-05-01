@@ -1,19 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:bronconest_app/models/review.dart';
-import 'package:bronconest_app/models/dorm.dart';
 import 'package:bronconest_app/globals.dart';
 
-class AddReviewPage extends StatefulWidget {
-  final Dorm dorm;
+class EditReviewPage extends StatefulWidget {
+  final Review review;
+  final String dormId;
+  final VoidCallback onReviewChanged;
 
-  const AddReviewPage({super.key, required this.dorm});
+  const EditReviewPage({
+    super.key,
+    required this.review,
+    required this.dormId,
+    required this.onReviewChanged,
+  });
 
   @override
-  State<AddReviewPage> createState() => _AddReviewPageState();
+  State<EditReviewPage> createState() => _EditReviewPageState();
 }
 
-class _AddReviewPageState extends State<AddReviewPage> {
+class _EditReviewPageState extends State<EditReviewPage> {
   final TextEditingController _reviewContentController =
       TextEditingController();
   int? walkability;
@@ -25,7 +31,21 @@ class _AddReviewPageState extends State<AddReviewPage> {
   int? community;
   bool isAnonymous = false;
   bool isLoading = false;
-  
+
+  @override
+  void initState() {
+    super.initState();
+    _reviewContentController.text = widget.review.content;
+    walkability = widget.review.walkability;
+    cleanliness = widget.review.cleanliness;
+    quietness = widget.review.quietness;
+    comfort = widget.review.comfort;
+    safety = widget.review.safety;
+    amenities = widget.review.amenities;
+    community = widget.review.community;
+    isAnonymous = widget.review.isAnonymous;
+  }
+
   @override
   void dispose() {
     _reviewContentController.dispose();
@@ -58,14 +78,13 @@ class _AddReviewPageState extends State<AddReviewPage> {
     });
 
     try {
-      final docRef =
-          FirebaseFirestore.instance
-              .collection('schools')
-              .doc(school)
-              .collection('dorms')
-              .doc(widget.dorm.id)
-              .collection('reviews')
-              .doc();
+      final docRef = FirebaseFirestore.instance
+          .collection('schools')
+          .doc(school)
+          .collection('dorms')
+          .doc(widget.dormId)
+          .collection('reviews')
+          .doc(widget.review.id);
 
       final review = Review(
         id: docRef.id,
@@ -81,22 +100,23 @@ class _AddReviewPageState extends State<AddReviewPage> {
         isAnonymous: isAnonymous,
       );
 
-      await docRef.set(review.toJson());
+      await docRef.update(review.toJson());
 
       await _updateDormAvgs();
 
       if (mounted) {
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(const SnackBar(content: Text('Review submitted')));
+        ).showSnackBar(const SnackBar(content: Text('Review updated')));
 
         Navigator.of(context).pop();
+        widget.onReviewChanged();
       }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(SnackBar(content: Text('Error submitting review: $e')));
+        ).showSnackBar(SnackBar(content: Text('Error updating review: $e')));
       }
     } finally {
       setState(() {
@@ -111,56 +131,44 @@ class _AddReviewPageState extends State<AddReviewPage> {
           .collection('schools')
           .doc(school)
           .collection('dorms')
-          .doc(widget.dorm.id);
+          .doc(widget.dormId);
 
       final dormSnapshot = await dormRef.get();
       if (dormSnapshot.exists) {
         final dormData = dormSnapshot.data()!;
         final reviewsSnapshot = await dormRef.collection('reviews').get();
-        final totalReviews = reviewsSnapshot.docs.length - 1;
-        if (totalReviews == 0) {
-          // If there are no reviews, set the averages to the current review values
-          await dormRef.update({
-            'walkability_avg': walkability,
-            'cleanliness_avg': cleanliness,
-            'quietness_avg': quietness,
-            'comfort_avg': comfort,
-            'safety_avg': safety,
-            'amenities_avg': amenities,
-            'community_avg': community,
-          });
-          return;
-        }
-        final newTotalReviews = totalReviews + 1;
+        final totalReviews = reviewsSnapshot.docs.length;
 
-        // Default averages to 0.0 if they don't exist
-        final double walkabilityAvg =
-            dormData['walkability_avg']?.toDouble() ?? 0.0;
-        final double cleanlinessAvg =
-            dormData['cleanliness_avg']?.toDouble() ?? 0.0;
-        final double quietnessAvg =
-            dormData['quietness_avg']?.toDouble() ?? 0.0;
-        final double comfortAvg = dormData['comfort_avg']?.toDouble() ?? 0.0;
-        final double safetyAvg = dormData['safety_avg']?.toDouble() ?? 0.0;
-        final double amenitiesAvg =
-            dormData['amenities_avg']?.toDouble() ?? 0.0;
-        final double communityAvg =
-            dormData['community_avg']?.toDouble() ?? 0.0;
+        final double walkabilityAvg = dormData['walkability_avg']?.toDouble();
+        final double cleanlinessAvg = dormData['cleanliness_avg']?.toDouble();
+        final double quietnessAvg = dormData['quietness_avg']?.toDouble();
+        final double comfortAvg = dormData['comfort_avg']?.toDouble();
+        final double safetyAvg = dormData['safety_avg']?.toDouble();
+        final double amenitiesAvg = dormData['amenities_avg']?.toDouble();
+        final double communityAvg = dormData['community_avg']?.toDouble();
+
+        // Calculate the difference between old and new values
+        final double walkabilityDiff =
+            walkability!.toDouble() - widget.review.walkability;
+        final double cleanlinessDiff =
+            cleanliness!.toDouble() - widget.review.cleanliness;
+        final double quietnessDiff =
+            quietness!.toDouble() - widget.review.quietness;
+        final double comfortDiff = comfort!.toDouble() - widget.review.comfort;
+        final double safetyDiff = safety!.toDouble() - widget.review.safety;
+        final double amenitiesDiff =
+            amenities!.toDouble() - widget.review.amenities;
+        final double communityDiff =
+            community!.toDouble() - widget.review.community;
 
         await dormRef.update({
-          'walkability_avg':
-              (walkabilityAvg * totalReviews + walkability!) / newTotalReviews,
-          'cleanliness_avg':
-              (cleanlinessAvg * totalReviews + cleanliness!) / newTotalReviews,
-          'quietness_avg':
-              (quietnessAvg * totalReviews + quietness!) / newTotalReviews,
-          'comfort_avg':
-              (comfortAvg * totalReviews + comfort!) / newTotalReviews,
-          'safety_avg': (safetyAvg * totalReviews + safety!) / newTotalReviews,
-          'amenities_avg':
-              (amenitiesAvg * totalReviews + amenities!) / newTotalReviews,
-          'community_avg':
-              (communityAvg * totalReviews + community!) / newTotalReviews,
+          'walkability_avg': walkabilityAvg + (walkabilityDiff / totalReviews),
+          'cleanliness_avg': cleanlinessAvg + (cleanlinessDiff / totalReviews),
+          'quietness_avg': quietnessAvg + (quietnessDiff / totalReviews),
+          'comfort_avg': comfortAvg + (comfortDiff / totalReviews),
+          'safety_avg': safetyAvg + (safetyDiff / totalReviews),
+          'amenities_avg': amenitiesAvg + (amenitiesDiff / totalReviews),
+          'community_avg': communityAvg + (communityDiff / totalReviews),
         });
       }
     } catch (e) {
@@ -322,7 +330,7 @@ class _AddReviewPageState extends State<AddReviewPage> {
                 child:
                     isLoading
                         ? const CircularProgressIndicator()
-                        : const Text('Submit Review'),
+                        : const Text('Update Review'),
               ),
             ],
           ),

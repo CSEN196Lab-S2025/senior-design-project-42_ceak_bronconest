@@ -74,6 +74,19 @@ class _AdminPageState extends State<AdminPage> {
 
   Future<void> _performDelete(String dormId) async {
     try {
+      final reviews =
+          await FirebaseFirestore.instance
+              .collection('schools')
+              .doc(school)
+              .collection('dorms')
+              .doc(dormId)
+              .collection('reviews')
+              .get();
+
+      for (final reviewDoc in reviews.docs) {
+        await reviewDoc.reference.delete();
+      }
+
       await FirebaseFirestore.instance
           .collection('schools')
           .doc(school)

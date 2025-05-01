@@ -1,5 +1,9 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:bronconest_app/models/dorm.dart';
 import 'package:bronconest_app/globals.dart';
 
@@ -17,9 +21,10 @@ class _EditDormPageState extends State<EditDormPage> {
   final TextEditingController _shortDescriptionController =
       TextEditingController();
   final TextEditingController _addressController = TextEditingController();
-  final TextEditingController _coverImageController = TextEditingController();
   final TextEditingController _latController = TextEditingController();
   final TextEditingController _longController = TextEditingController();
+  final ImagePicker _picker = ImagePicker();
+  File? _coverImage;
   bool isLoading = false;
 
   @override
@@ -28,7 +33,6 @@ class _EditDormPageState extends State<EditDormPage> {
     _nameController.text = widget.dorm.name;
     _shortDescriptionController.text = widget.dorm.shortDescription;
     _addressController.text = widget.dorm.locationAddress;
-    _coverImageController.text = widget.dorm.coverImage;
     _latController.text = widget.dorm.locationLongLat.$2.toString();
     _longController.text = widget.dorm.locationLongLat.$1.toString();
   }
@@ -38,19 +42,45 @@ class _EditDormPageState extends State<EditDormPage> {
     _nameController.dispose();
     _shortDescriptionController.dispose();
     _addressController.dispose();
-    _coverImageController.dispose();
     _latController.dispose();
     _longController.dispose();
     super.dispose();
+  }
+
+  Future<void> _pickImage() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      setState(() {
+        _coverImage = File(pickedFile.path);
+      });
+    }
+  }
+
+  Future<String> _uploadImage(File image) async {
+    try {
+      final storageRef = FirebaseStorage.instance.ref().child(
+        'cover_images/${DateTime.now().millisecondsSinceEpoch}.jpg',
+      );
+      final uploadTask = storageRef.putFile(image);
+      final snapshot = await uploadTask;
+      return await snapshot.ref.getDownloadURL();
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Error uploading image: $e')));
+      }
+      return '';
+    }
   }
 
   Future<void> _submitDorm() async {
     if (_nameController.text.isEmpty ||
         _shortDescriptionController.text.isEmpty ||
         _addressController.text.isEmpty ||
-        _coverImageController.text.isEmpty ||
         _latController.text.isEmpty ||
-        _longController.text.isEmpty) {
+        _longController.text.isEmpty ||
+        _coverImage == null) {
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(const SnackBar(content: Text('Please fill all fields')));
@@ -70,6 +100,16 @@ class _EditDormPageState extends State<EditDormPage> {
     });
 
     try {
+      final imageUrl = await _uploadImage(_coverImage!);
+      if (imageUrl.isEmpty) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Error uploading image')),
+          );
+        }
+        return;
+      }
+
       final docRef = FirebaseFirestore.instance
           .collection('schools')
           .doc(school)
@@ -81,7 +121,7 @@ class _EditDormPageState extends State<EditDormPage> {
         name: _nameController.text,
         shortDescription: _shortDescriptionController.text,
         locationAddress: _addressController.text,
-        coverImage: _coverImageController.text,
+        coverImage: imageUrl,
         locationLongLat: (
           double.parse(_longController.text),
           double.parse(_latController.text),
@@ -145,9 +185,29 @@ class _EditDormPageState extends State<EditDormPage> {
                 decoration: const InputDecoration(labelText: 'Address'),
               ),
               const SizedBox(height: 16),
-              TextField(
-                controller: _coverImageController,
-                decoration: const InputDecoration(labelText: 'Cover Image URL'),
+              GestureDetector(
+                onTap: _pickImage,
+                child: Container(
+                  height: 150,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child:
+                      _coverImage == null
+                          ? CachedNetworkImage(
+                            imageUrl: widget.dorm.coverImage,
+                            placeholder:
+                                (context, url) =>
+                                    const CircularProgressIndicator(),
+                            errorWidget:
+                                (context, url, error) =>
+                                    const Icon(Icons.error),
+                            fit: BoxFit.cover,
+                          )
+                          : Image.file(_coverImage!, fit: BoxFit.cover),
+                ),
               ),
               const SizedBox(height: 16),
               TextField(

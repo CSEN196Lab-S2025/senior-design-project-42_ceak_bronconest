@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:bronconest_app/models/dorm.dart';
 import 'package:bronconest_app/globals.dart';
 import 'package:bronconest_app/pages/dorm_reviews_page.dart';
@@ -117,11 +118,16 @@ class _ExplorePageState extends State<ExplorePage> {
                     child: Card(
                       margin: const EdgeInsets.all(8.0),
                       child: ListTile(
-                        leading: Image.network(
-                          dorm.coverImage,
+                        leading: CachedNetworkImage(
+                          imageUrl: dorm.coverImage,
                           width: 50,
                           height: 50,
                           fit: BoxFit.cover,
+                          placeholder:
+                              (context, url) =>
+                                  const CircularProgressIndicator(),
+                          errorWidget:
+                              (context, url, error) => const Icon(Icons.error),
                         ),
                         title: Text(dorm.name),
                         subtitle: Column(
