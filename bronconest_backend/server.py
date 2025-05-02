@@ -1,6 +1,13 @@
+import os
+import requests
+import json
+from groq import Groq
 from flask import Flask, request
 from flask_cors import CORS
 from firebase_admin import credentials, firestore, initialize_app
+from pinecone import Pinecone
+from sentence_transformers import SentenceTransformer
+
 
 app = Flask(__name__)
 CORS(app)
@@ -72,3 +79,57 @@ def create_dorm():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=3000, debug=True)
+
+#Initialize the Pinecone Vector DB
+pinecone_api_key = os.getenv("PINECONE_API_KEY")
+pc = Pinecone(api_key=pinecone_api_key)
+#index = pc.Index("reviews")
+
+#Initialize Sentence Transformer
+jina_api_key = os.getenv("JINA_API_KEY")
+
+# Generate embeddings
+user_query = "What is the best dorm at Santa Clara University?"
+
+API_URL = "https://api.jina.ai/v1/embeddings"
+
+headers = {
+    "Content-Type": "application/json",
+    "Authorization": f"Bearer {jina_api_key}"
+}
+
+data = {
+    "model": "jina-clip-v2",  
+    "dimensions" : 1024,
+    "input": [user_query]
+}
+
+response = requests.post(API_URL, json=data, headers=headers)
+
+# Print the embeddings
+print(response.json())
+query_embeddings = response.json()["data"][0]["embedding"]
+
+context = ""
+
+sys_prompt = f"""
+Instructions:
+- You are a helpful assistant trying to help a student find a dorm that suits them
+Context: {context}
+"""
+
+# Initialize Groq
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+client = Groq(api_key=GROQ_API_KEY)
+
+# Generate response with Groq
+response = client.chat.completions.create(
+    model="llama-3.3-70b-versatile",
+    messages=[
+        {"role": "system", "content": sys_prompt},
+        {"role": "user", "content": user_query},
+    ]
+)
+
+# Print response
+print(response.choices[0].message.content)
