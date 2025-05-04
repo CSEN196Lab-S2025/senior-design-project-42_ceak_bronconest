@@ -87,7 +87,12 @@ class _SavedPlacesPageState extends State<SavedPlacesPage> {
           isLoading
               ? const Center(child: CircularProgressIndicator())
               : savedPlaces.isEmpty
-              ? const Center(child: Text('No saved places'))
+              ? const Center(
+                child: Text(
+                  'Save your favorite places \non the explore page',
+                  textAlign: TextAlign.center,
+                ),
+              )
               : ListView.builder(
                 itemCount: savedPlaces.length,
                 itemBuilder: (context, index) {

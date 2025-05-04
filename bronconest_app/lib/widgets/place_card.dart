@@ -1,3 +1,4 @@
+import 'package:bronconest_app/widgets/image_gradient_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:bronconest_app/pages/dorm_reviews_page.dart';
@@ -20,64 +21,10 @@ class PlaceCard extends StatefulWidget {
   State<PlaceCard> createState() => _PlaceCardState();
 }
 
-class RatingScore {
-  String name;
-  double score;
-  late String scoreString;
-  IconData icon;
-
-  RatingScore({required this.name, required this.score, required this.icon}) {
-    scoreString = score.toStringAsFixed(1);
-  }
-}
-
 class _PlaceCardState extends State<PlaceCard> {
-  late List<RatingScore> ratingScores = [];
-
   @override
   void initState() {
     super.initState();
-
-    ratingScores = [
-      RatingScore(
-        name: 'walkability',
-        score: widget.dorm.walkabilityAvg,
-        icon: Icons.directions_walk,
-      ),
-      RatingScore(
-        name: 'cleaniness',
-        score: widget.dorm.cleanlinessAvg,
-        icon: Icons.shower,
-      ),
-      RatingScore(
-        name: 'quietness',
-        score: widget.dorm.quietnessAvg,
-        icon: Icons.music_off,
-      ),
-      RatingScore(
-        name: 'comfort',
-        score: widget.dorm.comfortAvg,
-        icon: Icons.fireplace,
-      ),
-      RatingScore(
-        name: 'safety',
-        score: widget.dorm.safetyAvg,
-        icon: Icons.lock,
-      ),
-      RatingScore(
-        name: 'amenities',
-        score: widget.dorm.amenitiesAvg,
-        icon: Icons.local_cafe,
-      ),
-      RatingScore(
-        name: 'community',
-        score: widget.dorm.communityAvg,
-        icon: Icons.groups,
-      ),
-    ];
-
-    // sort by descending order
-    ratingScores.sort((a, b) => b.score.compareTo(a.score));
   }
 
   @override
@@ -113,20 +60,7 @@ class _PlaceCardState extends State<PlaceCard> {
                       ),
                   errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
-                Positioned.fill(
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.center,
-                        colors: [
-                          Color.fromARGB(75, 0, 0, 0),
-                          Colors.transparent,
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+                ImageGradientOverlay(),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
@@ -148,7 +82,7 @@ class _PlaceCardState extends State<PlaceCard> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         spacing: 8.0,
                         children:
-                            ratingScores
+                            widget.dorm.ratingScores
                                 .sublist(0, 3)
                                 .map(
                                   (e) => Container(

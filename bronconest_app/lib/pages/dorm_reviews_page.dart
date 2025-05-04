@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:bronconest_app/models/review.dart';
 import 'package:bronconest_app/models/dorm.dart';
 import 'package:bronconest_app/widgets/review_card.dart';
+import 'package:bronconest_app/widgets/image_gradient_overlay.dart';
 import 'package:bronconest_app/globals.dart';
 import 'package:bronconest_app/pages/add_review_page.dart';
+import 'package:bronconest_app/styles.dart';
 
 class DormReviewsPage extends StatefulWidget {
   final Dorm dorm;
@@ -59,61 +62,151 @@ class _DormReviewsPageState extends State<DormReviewsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('${widget.dorm.name} Reviews')),
-      body:
-          isLoading
-              ? const Center(child: CircularProgressIndicator())
-              : reviews.isEmpty
-              ? Column(
-                children: [
-                  if (isStudent)
-                    Card(
-                      margin: const EdgeInsets.all(16.0),
-                      child: ListTile(
-                        leading: const Icon(Icons.add),
-                        title: const Text('Add a Review'),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder:
-                                  (context) => AddReviewPage(dorm: widget.dorm),
-                            ),
-                          ).then((_) => _fetchReviews());
-                        },
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          // image
+          Stack(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.only(
+                  bottomRight: Radius.circular(24.0),
+                  bottomLeft: Radius.circular(24.0),
+                ),
+                child: SizedBox(
+                  height: 250,
+                  child: CachedNetworkImage(
+                    imageUrl: widget.dorm.coverImage,
+                    fit: BoxFit.cover,
+                    width: 2000, // lol this makes the cover fit the width
+                    placeholder:
+                        (context, url) => Center(
+                          child: const CircularProgressIndicator(
+                            color: Colors.white,
+                          ),
+                        ),
+                    errorWidget:
+                        (context, url, error) => const Icon(Icons.error),
+                  ),
+                ),
+              ),
+              ImageGradientOverlay(),
+              Align(
+                alignment: Alignment.topLeft,
+                child: IconButton(
+                  icon: Icon(Icons.arrow_back, color: Colors.white, size: 30.0),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+              ),
+            ],
+          ),
+
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(widget.dorm.name, style: Styles.largeTextStyle),
+                    Text(
+                      widget.dorm.shortDescription,
+                      style: Styles.smallTextStyle,
+                    ),
+                    // Reviews:
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: Text(
+                        'Overall Scores',
+                        style: Styles.mediumTextStyle,
+                        textAlign: TextAlign.start,
                       ),
                     ),
-                  const Expanded(child: Center(child: Text('No reviews yet'))),
-                ],
-              )
-              : ListView.builder(
-                itemCount: reviews.length + (isStudent ? 1 : 0),
-                itemBuilder: (context, index) {
-                  if (isStudent && index == 0) {
-                    return Card(
-                      margin: const EdgeInsets.all(16.0),
-                      child: ListTile(
-                        leading: const Icon(Icons.add),
-                        title: const Text('Add a Review'),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder:
-                                  (context) => AddReviewPage(dorm: widget.dorm),
-                            ),
-                          ).then((_) => _fetchReviews());
-                        },
+                    Wrap(
+                      children:
+                          widget.dorm.ratingScores
+                              .map(
+                                (e) => Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: Theme.of(
+                                        context,
+                                      ).primaryColor.withValues(alpha: 0.1),
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(3.5),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Icon(e.icon),
+                                          Text(
+                                            ' ${e.name} ${e.scoreString}',
+                                            style: Styles.smallTextStyle,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              )
+                              .toList(),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: Text(
+                        'User Reviews',
+                        style: Styles.mediumTextStyle,
+                        textAlign: TextAlign.start,
                       ),
-                    );
-                  }
-                  return ReviewTile(
-                    review: reviews[isStudent ? index - 1 : index],
-                    dormId: widget.dorm.id,
-                    onReviewChanged: _fetchReviews,
-                  );
-                },
+                    ),
+                    isLoading
+                        ? const Center(child: CircularProgressIndicator())
+                        : Column(
+                          children: [
+                            if (isStudent)
+                              Card(
+                                margin: const EdgeInsets.all(16.0),
+                                child: ListTile(
+                                  leading: const Icon(Icons.add),
+                                  title: const Text('Add a Review'),
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder:
+                                            (context) => AddReviewPage(
+                                              dorm: widget.dorm,
+                                            ),
+                                      ),
+                                    ).then((_) => _fetchReviews());
+                                  },
+                                ),
+                              ),
+                            if (reviews.isEmpty)
+                              const Expanded(
+                                child: Center(child: Text('No reviews yet')),
+                              )
+                            else
+                              ...reviews.map(
+                                (review) => ReviewTile(
+                                  review: review,
+                                  dormId: widget.dorm.id,
+                                  onReviewChanged: _fetchReviews,
+                                ),
+                              ),
+                          ],
+                        ),
+                  ],
+                ),
               ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

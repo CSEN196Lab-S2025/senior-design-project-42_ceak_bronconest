@@ -219,6 +219,7 @@ class _ReviewTileState extends State<ReviewTile> {
             ),
           ],
         ),
+        showTrailingIcon: canEdit || canDelete,
         children: [
           if (canEdit)
             ListTile(

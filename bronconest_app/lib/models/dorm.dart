@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:bronconest_app/models/review.dart';
 
 class Dorm {
@@ -17,6 +18,7 @@ class Dorm {
   final double communityAvg;
   final List<Review> reviews;
   String? schoolId;
+  late List<RatingScore> ratingScores;
 
   Dorm({
     required this.id,
@@ -34,7 +36,36 @@ class Dorm {
     required this.communityAvg,
     required this.reviews,
     this.schoolId,
-  });
+  }) {
+    ratingScores = [
+      RatingScore(
+        name: 'Walkability',
+        score: walkabilityAvg,
+        icon: Icons.directions_walk,
+      ),
+      RatingScore(
+        name: 'Cleaniness',
+        score: cleanlinessAvg,
+        icon: Icons.shower,
+      ),
+      RatingScore(
+        name: 'Quietness',
+        score: quietnessAvg,
+        icon: Icons.music_off,
+      ),
+      RatingScore(name: 'Comfort', score: comfortAvg, icon: Icons.fireplace),
+      RatingScore(name: 'Safety', score: safetyAvg, icon: Icons.lock),
+      RatingScore(
+        name: 'Amenities',
+        score: amenitiesAvg,
+        icon: Icons.local_cafe,
+      ),
+      RatingScore(name: 'Community', score: communityAvg, icon: Icons.groups),
+    ];
+
+    // sort by descending order
+    ratingScores.sort((a, b) => b.score.compareTo(a.score));
+  }
 
   factory Dorm.fromJSON(Map<String, dynamic> json) => Dorm(
     id: json['id'].toString(),
@@ -90,5 +121,16 @@ class Dorm {
       'amenities_avg': amenitiesAvg,
       'community_avg': communityAvg,
     };
+  }
+}
+
+class RatingScore {
+  String name;
+  double score;
+  late String scoreString;
+  IconData icon;
+
+  RatingScore({required this.name, required this.score, required this.icon}) {
+    scoreString = score.toStringAsFixed(1);
   }
 }
