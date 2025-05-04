@@ -106,7 +106,11 @@ class _PlaceCardState extends State<PlaceCard> {
                   fit: BoxFit.cover,
                   width: 2000, // lol this makes the cover fit the width
                   placeholder:
-                      (context, url) => const CircularProgressIndicator(),
+                      (context, url) => Center(
+                        child: const CircularProgressIndicator(
+                          color: Colors.white,
+                        ),
+                      ),
                   errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
                 Positioned.fill(
@@ -142,6 +146,7 @@ class _PlaceCardState extends State<PlaceCard> {
                       Spacer(),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
+                        spacing: 8.0,
                         children:
                             ratingScores
                                 .sublist(0, 3)

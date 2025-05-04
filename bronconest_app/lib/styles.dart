@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Styles {
+  // Colors:
+  static const Color customBlack = Color(0xFF1F1F1F);
+
+  // Text Styles:
   static TextStyle homePageTitleTextStyle = GoogleFonts.onest(
     textStyle: TextStyle(fontSize: 35.0, color: Colors.white),
   );

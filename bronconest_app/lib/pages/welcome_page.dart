@@ -185,6 +185,8 @@ class _WelcomePageState extends State<WelcomePage> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Error signing in: ${e.toString()}')),
         );
+
+        setState(() => isLoading = false);
       }
     }
   }
