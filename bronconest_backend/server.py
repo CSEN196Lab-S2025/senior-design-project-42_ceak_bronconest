@@ -46,13 +46,21 @@ headers = {
 
 #Json helper function to format LLM response
 def extract_json(text):
-    json_match = re.search(r'\{[\s\S]*\}', text)
+    # Strip markdown code blocks if present
+    text = re.sub(r"^```(?:json)?|```$", "", text.strip(), flags=re.MULTILINE)
+
+    # Attempt to find the first valid JSON object
+    json_match = re.search(r"\{[\s\S]*\}", text)
+
     if json_match:
+        json_str = json_match.group()
         try:
-            return json.loads(json_match.group())
+            return json.loads(json_str)
         except json.JSONDecodeError as e:
             print("JSON decode failed:", e)
-    return {"error": "Invalid JSON from LLM", "raw": text}
+            return {"error": "Malformed JSON", "raw": json_str}
+
+    return {"error": "No JSON found", "raw": text}
 
 
 
@@ -95,8 +103,8 @@ def index_scu_dorms():
 
 
 #Rank SCU dorms based on user query
-def rank_scu_dorms(user_query):
-    #Embed the user query
+def rank_scu_dorms(user_query, max_retries=2):
+    # Embed the user query
     query_data = {
         "model": "jina-clip-v2",
         "dimensions": 1024,
@@ -105,59 +113,71 @@ def rank_scu_dorms(user_query):
     response = requests.post(API_URL, json=query_data, headers=headers)
     query_embedding = response.json()["data"][0]["embedding"]
 
-    #Query Pinecone
+    # Query Pinecone
     results = index.query(
         vector=query_embedding,
         top_k=12,
         include_metadata=True
     )
 
-    #Creating context for LLM
+    # Create context for LLM
     context_entries = []
+    valid_ids = []
     for match in results.get("matches", []):
         meta = match["metadata"]
+        dorm_id = match["id"]
+        valid_ids.append(dorm_id)
         context_entries.append(json.dumps({
-            "id": match["id"],
+            "id": dorm_id,
             "name": meta.get("name", ""),
             "scores": meta.get("score_summary", "")
-    }))
+        }))
 
     context = "[\n" + ",\n".join(context_entries) + "\n]"
 
     print("==== CONTEXT SENT TO LLM ====")
     print(context)
 
-
-    #Prompt the LLM
     sys_prompt = f"""
-                You are an assistant ranking Santa Clara University dorms.
-                Given the dorms and their summaries below, return their IDs sorted from best to worst according to the user's query.
+You are an assistant ranking Santa Clara University dorms.
+Given the dorms and their summaries below, return their IDs sorted from best to worst according to the user's query.
 
-                Context:
-                {context}
+Context:
+{context}
 
-                ONLY return a single line of raw JSON — no markdown, no explanation, no commentary. Ids should be firebase IDS not names of dorms
-                {{
-                "sorted_ids": ["id1", "id2", ...]
-                }}
+ONLY return a single line of raw JSON — no markdown, no explanation, no commentary.
+Format:
+{{ "sorted_ids": ["id1", "id2", ...] }}
 
+Use the exact Firebase dorm IDs provided. Do not invent or rename them.
+"""
 
-            """
+    # Retry loop in case of malformed JSON
+    for attempt in range(max_retries):
+        chat_response = client.chat.completions.create(
+            model="llama-3.3-70b-versatile",
+            messages=[
+                {"role": "system", "content": sys_prompt},
+                {"role": "user", "content": user_query}
+            ]
+        )
 
-    chat_response = client.chat.completions.create(
-        model="llama-3.3-70b-versatile",
-        messages=[
-            {"role": "system", "content": sys_prompt},
-            {"role": "user", "content": user_query}
-        ]
-    )
+        response_content = chat_response.choices[0].message.content.strip()
+        print("LLM RAW RESPONSE:\n", response_content)
 
-    #Returning response as a JSON
-    response_content = chat_response.choices[0].message.content.strip()
-    print("LLM RAW RESPONSE:\n", response_content)
+        response_json = extract_json(response_content)
 
-    response_json = extract_json(response_content)
-    return response_json
+        # Validate returned IDs are all in our known Pinecone match results
+        if "sorted_ids" in response_json:
+            sorted_ids = response_json["sorted_ids"]
+            filtered = [id for id in sorted_ids if id in valid_ids]
+            return {"sorted_ids": filtered}
+
+        print(f"[Retry {attempt+1}] Invalid JSON or IDs. Retrying...")
+
+    # Return last raw response after all retries fail
+    return {"error": "Failed to get valid sorted_ids", "raw": response_content}
+
 
 
 

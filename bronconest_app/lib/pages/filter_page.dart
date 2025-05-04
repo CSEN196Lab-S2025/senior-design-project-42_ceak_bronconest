@@ -56,7 +56,7 @@ class _FilterPageState extends State<FilterPage> {
 
       final response = await http.get(
         Uri.parse(
-          'http://192.168.1.117:3000/rank_dorms?query=${_filterController.text}',
+          'http://0.0.0.0:3000/rank_dorms?query=${_filterController.text}',
         ),
       );
 
