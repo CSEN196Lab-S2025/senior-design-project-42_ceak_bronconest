@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:bronconest_app/pages/add_dorm_page.dart';
 import 'package:bronconest_app/pages/edit_dorm_page.dart';
+import 'package:bronconest_app/widgets/admin_card.dart';
 import 'package:bronconest_app/models/dorm.dart';
 import 'package:bronconest_app/globals.dart';
 
@@ -120,34 +122,29 @@ class _AdminPageState extends State<AdminPage> {
               ? const Center(child: CircularProgressIndicator())
               : dorms.isEmpty
               ? const Center(child: Text('No dorms available'))
-              : ListView.builder(
-                itemCount: dorms.length,
-                itemBuilder: (context, index) {
-                  final dorm = dorms[index];
-                  return ListTile(
-                    title: Text(dorm.name),
-                    trailing: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        IconButton(
-                          icon: const Icon(Icons.edit),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => EditDormPage(dorm: dorm),
-                              ),
-                            ).then((_) => _fetchDorms());
-                          },
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.delete),
-                          onPressed: () => _deleteDorm(dorm.id),
-                        ),
-                      ],
-                    ),
-                  );
-                },
+              : Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: MasonryGridView.count(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 8.0,
+                  crossAxisSpacing: 8.0,
+                  itemCount: dorms.length,
+                  itemBuilder: (context, index) {
+                    final dorm = dorms[index];
+                    return AdminCard(
+                      dorm: dorm,
+                      onEdit: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => EditDormPage(dorm: dorm),
+                          ),
+                        ).then((_) => _fetchDorms());
+                      },
+                      onDelete: () => _deleteDorm(dorm.id),
+                    );
+                  },
+                ),
               ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
