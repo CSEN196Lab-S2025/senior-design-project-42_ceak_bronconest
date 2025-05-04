@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:bronconest_app/models/dorm.dart';
 import 'package:bronconest_app/globals.dart';
+import 'package:bronconest_app/widgets/place_card.dart';
 import 'package:bronconest_app/pages/dorm_reviews_page.dart';
 import 'package:bronconest_app/pages/filter_page.dart';
 
@@ -107,66 +108,10 @@ class _ExploreDormsPageState extends State<ExploreDormsPage> {
                 itemBuilder: (context, index) {
                   final dorm = dorms[index];
                   final isSaved = savedPlaceIds.contains(dorm.id);
-                  return InkWell(
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => DormReviewsPage(dorm: dorm),
-                        ),
-                      );
-                    },
-                    child: Card(
-                      margin: const EdgeInsets.all(8.0),
-                      child: ListTile(
-                        leading: CachedNetworkImage(
-                          imageUrl: dorm.coverImage,
-                          width: 50,
-                          height: 50,
-                          fit: BoxFit.cover,
-                          placeholder:
-                              (context, url) =>
-                                  const CircularProgressIndicator(),
-                          errorWidget:
-                              (context, url, error) => const Icon(Icons.error),
-                        ),
-                        title: Text(dorm.name),
-                        subtitle: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(dorm.shortDescription),
-                            Text(
-                              'Walkability: ${dorm.walkabilityAvg.toStringAsFixed(1)}',
-                            ),
-                            Text(
-                              'Cleanliness: ${dorm.cleanlinessAvg.toStringAsFixed(1)}',
-                            ),
-                            Text(
-                              'Quietness: ${dorm.quietnessAvg.toStringAsFixed(1)}',
-                            ),
-                            Text(
-                              'Comfort: ${dorm.comfortAvg.toStringAsFixed(1)}',
-                            ),
-                            Text(
-                              'Safety: ${dorm.safetyAvg.toStringAsFixed(1)}',
-                            ),
-                            Text(
-                              'Amenities: ${dorm.amenitiesAvg.toStringAsFixed(1)}',
-                            ),
-                            Text(
-                              'Community: ${dorm.communityAvg.toStringAsFixed(1)}',
-                            ),
-                          ],
-                        ),
-                        trailing: IconButton(
-                          icon: Icon(
-                            isSaved ? Icons.favorite : Icons.favorite_border,
-                          ),
-                          onPressed: () {
-                            _toggleSavedPlace(dorm);
-                          },
-                        ),
-                      ),
-                    ),
+                  return PlaceCard(
+                    dorm: dorm,
+                    isSaved: isSaved,
+                    toggleSavedPlace: _toggleSavedPlace,
                   );
                 },
               ),
