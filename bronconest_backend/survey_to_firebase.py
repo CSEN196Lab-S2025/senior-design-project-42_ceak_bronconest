@@ -1,32 +1,29 @@
-from flask import Flask, request, render_template
-from flask_cors import CORS
 from firebase_admin import credentials, firestore, initialize_app
-import csv
-
-app = Flask(__name__)
-CORS(app)
+import pandas as pd
+from datetime import datetime
 
 cred = credentials.Certificate("serviceAccountKey.json")
 default_app = initialize_app(cred)
 db = firestore.client()
-csv_file_path = "data.csv"
-data = []
+xlsx_file_path = "data.xlsx"
+
+def clear_current_reviews():
+    dorms = db.collection("schools").document("scu").collection("dorms").stream()
+    for dorm in dorms:
+        reviews = db.collection("schools").document("scu").collection("dorms").document(dorm.id).collection("reviews").stream()
+        for review in reviews:
+            db.collection("schools").document("scu").collection("dorms").document(dorm.id).collection("reviews").document(review.id).delete()
 
 
-@app.route("/")
-def index():
-    with open(csv_file_path, "r", encoding="utf-8") as file:
-        reader = csv.DictReader(file, quotechar='"')
-        for row in reader:
-            data.append(row)
-    return render_template("index.html", data=data)
-
-@app.route("/fill_firebase")
 def fill_firebase():
-    dorm_data = {}
-    for line in data[1:]:
+    df = pd.read_excel(xlsx_file_path)
+    for _, line in df.iterrows(): 
+        formatted_timestamp = line["timestamp"].strftime("%Y-%m-%dT%H:%M:%S.%f")        
         dorm_data = {
+            "timestamp": formatted_timestamp,
             "user_id": "",
+            "user_name": "",
+            "is_anonymous": True,
             "content": line["description"],
             "walkability": int(line["walkability"]),
             "cleanliness": int(line["cleanliness"]),
@@ -44,17 +41,7 @@ def fill_firebase():
           return {"error": "Dorm not found"}, 404
         dorm_data["id"] = doc_ref[1].id
         db.collection("schools").document("scu").collection("dorms").document(dorm_doc.id).collection("reviews").document(doc_ref[1].id).set(dorm_data)
-    return {"message": "Data added successfully"}, 200
 
-@app.route("/dorms")
-def dorms():
-    return render_template("dorms.html")
+# clear_current_reviews()
+fill_firebase()
 
-@app.route("/upload_dorm")
-def create_dorm():
-    school_id = request.args.get("school_id")
-    dorm_id = request.args.get("dorm_id")
-    dorm_data = request.json
-
-if __name__ == "__main__":
-    app.run(debug=True)

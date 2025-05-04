@@ -125,58 +125,50 @@ class _PlaceCardState extends State<PlaceCard> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(right: 40.0),
-                          child: Text(
-                            widget.dorm.name,
-                            style: Styles.largeTextStyle.copyWith(
-                              color: Colors.white,
-                            ),
-                            overflow: TextOverflow.fade,
-
-                            softWrap: false,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 40.0),
+                        child: Text(
+                          widget.dorm.name,
+                          style: Styles.largeTextStyle.copyWith(
+                            color: Colors.white,
                           ),
+                          overflow: TextOverflow.fade,
+                          softWrap: false,
                         ),
-                        Spacer(),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          spacing: 10.0,
-                          children:
-                              ratingScores
-                                  .sublist(0, 3)
-                                  .map(
-                                    (e) => Container(
-                                      decoration: BoxDecoration(
-                                        color: Color.fromARGB(100, 0, 0, 0),
-                                        borderRadius: BorderRadius.circular(
-                                          10.0,
-                                        ),
-                                      ),
-                                      child: Padding(
-                                        padding: EdgeInsets.all(3.5),
-                                        child: Row(
-                                          children: [
-                                            Icon(e.icon, color: Colors.white),
-                                            Text(
-                                              ' ${e.scoreString}',
-                                              style: Styles.smallTextStyle
-                                                  .copyWith(
-                                                    color: Colors.white,
-                                                  ),
-                                            ),
-                                          ],
-                                        ),
+                      ),
+                      Spacer(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children:
+                            ratingScores
+                                .sublist(0, 3)
+                                .map(
+                                  (e) => Container(
+                                    decoration: BoxDecoration(
+                                      color: Color.fromARGB(100, 0, 0, 0),
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsets.all(3.5),
+                                      child: Row(
+                                        children: [
+                                          Icon(e.icon, color: Colors.white),
+                                          Text(
+                                            ' ${e.scoreString}',
+                                            style: Styles.smallTextStyle
+                                                .copyWith(color: Colors.white),
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                  )
-                                  .toList(),
-                        ),
-                      ],
-                    ),
+                                  ),
+                                )
+                                .toList(),
+                      ),
+                    ],
                   ),
                 ),
                 Align(
