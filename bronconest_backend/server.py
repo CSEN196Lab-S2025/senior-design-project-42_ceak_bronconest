@@ -29,61 +29,6 @@ JINA_API_KEY = os.getenv("JINA_API_KEY")
 def hello_world():
     return {"message": "Hello, World!"}
 
-
-@app.route("/get_schools")
-def get_school():
-    schools = db.collection("schools").get()
-    return {"schools": [school.to_dict() for school in schools]}
-
-
-@app.route("/get_all_dorms")
-def get_all_dorms():
-    dorms = {}
-    for school in db.collection("schools").get():
-        dorms[school.id] = [
-            dorm.to_dict()
-            for dorm in db.collection("schools")
-            .document(school.id)
-            .collection("dorms")
-            .get()
-        ]
-    return dorms
-
-
-@app.route("/get_dorms")
-def get_dorms():
-    school_id = request.args.get("school_id")
-    dorms = db.collection("schools").document(school_id).collection("dorms").get()
-    dorms = [dorm.to_dict() for dorm in dorms]
-    return dorms
-
-
-@app.route("/get_dorm")
-def get_dorm():
-    school_id = request.args.get("school_id")
-    dorm_id = request.args.get("dorm_id")
-    dorm = (
-        db.collection("schools")
-        .document(school_id)
-        .collection("dorms")
-        .document(dorm_id)
-        .get()
-        .to_dict()
-    )
-    return dorm
-
-
-@app.route("/create_dorm", methods=["POST"])
-def create_dorm():
-    school_id = request.json["school_id"]
-    dorm = request.json["dorm"]
-    dorm_id = dorm["id"]
-    dorm.pop("id")
-    db.collection("schools").document(school_id).collection("dorms").document(
-        dorm_id
-    ).set(dorm)
-    return {"message": "Dorm created successfully!"}
-
 #Initialize the Pinecone Vector DB
 pc = Pinecone(api_key=PINECONE_API_KEY)
 index = pc.Index("dormreviews")
@@ -220,7 +165,7 @@ def rank_scu_dorms(user_query):
 
 @app.route("/rank_dorms", methods=["GET"])
 def rank_dorms_route():
-    query = request.args.get("query", "Rank the dorms by walkability.")
+    query = request.args.get("query")
     result = rank_scu_dorms(query)
     return result
 

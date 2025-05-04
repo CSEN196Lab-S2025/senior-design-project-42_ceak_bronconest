@@ -195,7 +195,7 @@ class _WelcomePageState extends State<WelcomePage> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('/images/home/Welcome_Page_Background.jpg'),
+            image: AssetImage('assets/images/home/Welcome_Page_Background.jpg'),
             fit: BoxFit.cover,
           ),
         ),
@@ -207,51 +207,56 @@ class _WelcomePageState extends State<WelcomePage> {
                 : Center(
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          'BroncoNest',
-                          style: Styles.homePageTitleTextStyle,
-                        ),
-                        Spacer(),
-                        Text(
-                          'Find housing that \nworks for you',
-                          style: Styles.largeTextStyle.copyWith(
-                            color: Colors.white,
+                    child: SafeArea(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            'BroncoNest',
+                            style: Styles.homePageTitleTextStyle,
                           ),
-                          textAlign: TextAlign.center,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 16.0, bottom: 32.0),
-                          child: Text(
-                            'Easily browse, compare, and learn about your next home. From cozy dorms, apartments to spacious houses, find it all here',
-                            style: Styles.normalTextStyle.copyWith(
+                          Spacer(),
+                          Text(
+                            'Find housing that \nworks for you',
+                            style: Styles.largeTextStyle.copyWith(
                               color: Colors.white,
                             ),
                             textAlign: TextAlign.center,
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 40.0),
-                          child: ElevatedButton(
-                            onPressed: () {
-                              _signInWithGoogle();
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.transparent,
-                              side: BorderSide(width: 1.5, color: Colors.white),
-                            ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 16.0, bottom: 32.0),
                             child: Text(
-                              'Start your journey',
-                              style: Styles.mediumTextStyle.copyWith(
+                              'Easily browse, compare, and learn about your next home. From cozy dorms, apartments to spacious houses, find it all here',
+                              style: Styles.normalTextStyle.copyWith(
                                 color: Colors.white,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 40.0),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                _signInWithGoogle();
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.transparent,
+                                side: BorderSide(
+                                  width: 1.5,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              child: Text(
+                                'Start your journey',
+                                style: Styles.mediumTextStyle.copyWith(
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),

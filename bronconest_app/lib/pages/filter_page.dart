@@ -34,55 +34,51 @@ class _FilterPageState extends State<FilterPage> {
     });
 
     try {
-      final allDorms =
-          await FirebaseFirestore.instance
-              .collection('schools')
-              .doc(school)
-              .collection('dorms')
-              .get();
+      // final allDorms =
+      //     await FirebaseFirestore.instance
+      //         .collection('schools')
+      //         .doc(school)
+      //         .collection('dorms')
+      //         .get();
 
-      final dormIds = allDorms.docs.map((doc) => doc.id).toList();
+      // final dormIds = allDorms.docs.map((doc) => doc.id).toList();
 
       // Sample sort by walkability
-      dormIds.sort((a, b) {
-        final dormA = allDorms.docs.firstWhere((doc) => doc.id == a);
-        final dormB = allDorms.docs.firstWhere((doc) => doc.id == b);
+      // dormIds.sort((a, b) {
+      //   final dormA = allDorms.docs.firstWhere((doc) => doc.id == a);
+      //   final dormB = allDorms.docs.firstWhere((doc) => doc.id == b);
 
-        final walkabilityA = dormA.data()['walkability'] ?? 0;
-        final walkabilityB = dormB.data()['walkability'] ?? 0;
+      //   final walkabilityA = dormA.data()['walkability'] ?? 0;
+      //   final walkabilityB = dormB.data()['walkability'] ?? 0;
 
-        return walkabilityB.compareTo(walkabilityA);
-      });
+      //   return walkabilityB.compareTo(walkabilityA);
+      // });
 
-      // final requestBody = {
-      //   'prompt': _filterController.text,
-      //   'school': school,
-      // };
-
-      // final response = await http.post(
-      //   Uri.parse('https://api.bronconest.com/filter'),
-      //   headers: {'Content-Type': 'application/json'},
-      //   body: requestBody,
-      // );
+      final response = await http.get(
+        Uri.parse(
+          'http://192.168.1.117:3000/rank_dorms?query=${_filterController.text}',
+        ),
+      );
 
       if (mounted) {
-        // final sortedIds = List<String>.from(
-        //   jsonDecode(response.body)['sortedIds'],
-        // );
+        final responseData = json.decode(response.body);
+        final List<String> sortedIds = List<String>.from(
+          responseData['sorted_ids'],
+        );
 
         // Placeholder
-        final sortedIds = dormIds;
+        // final sortedIds = dormIds;
 
         Navigator.of(context).pop(sortedIds);
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(const SnackBar(content: Text('Fliter applied')));
+        ).showSnackBar(const SnackBar(content: Text('Filter applied')));
       }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(SnackBar(content: Text('Error applying fliter: $e')));
+        ).showSnackBar(SnackBar(content: Text('Error applying filter: $e')));
       }
     } finally {
       setState(() {
@@ -98,34 +94,50 @@ class _FilterPageState extends State<FilterPage> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
-          child: Column(
-            children: [
-              const Text(
-                'Please tell us how you would like to filter the selection of dorms.',
-                style: TextStyle(fontSize: 16),
-              ),
-              const Text(
-                'Using the power of AI, we will filter the dorms based on your custom input. Things like "I want a dorm close to campus" and "I want a dorm with a good community" give a better rating.',
-                style: TextStyle(fontStyle: FontStyle.italic),
-              ),
-              TextField(
-                controller: _filterController,
-                decoration: const InputDecoration(
-                  labelText: "Put whatever you'd like!",
-                  border: OutlineInputBorder(),
-                ),
-                maxLines: 5,
-              ),
-              const SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: isLoading ? null : _submitFilter,
-                child:
-                    isLoading
-                        ? const CircularProgressIndicator()
-                        : const Text('Apply Filter'),
-              ),
-            ],
-          ),
+          child:
+              isLoading
+                  ? Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: const [
+                        CircularProgressIndicator(),
+                        SizedBox(height: 16),
+                        Text(
+                          'Curating your dorm list...',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontStyle: FontStyle.italic,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                  : Column(
+                    children: [
+                      const Text(
+                        'Please tell us how you would like to filter the selection of dorms.',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      const Text(
+                        'Using the power of AI, we will filter the dorms based on your custom input. Things like "I want a dorm close to campus" and "I want a dorm with a good community" give a better rating.',
+                        style: TextStyle(fontStyle: FontStyle.italic),
+                      ),
+                      TextField(
+                        controller: _filterController,
+                        decoration: const InputDecoration(
+                          labelText: "Put whatever you'd like!",
+                          border: OutlineInputBorder(),
+                        ),
+                        maxLines: 5,
+                      ),
+                      const SizedBox(height: 16),
+                      ElevatedButton(
+                        onPressed: _submitFilter,
+                        child: const Text('Apply Filter'),
+                      ),
+                    ],
+                  ),
         ),
       ),
     );
