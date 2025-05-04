@@ -90,6 +90,8 @@ class _EditReviewPageState extends State<EditReviewPage> {
         id: docRef.id,
         content: _reviewContentController.text,
         userId: userId,
+        userName: userName,
+        timestamp: DateTime.now(),
         walkability: walkability!,
         cleanliness: cleanliness!,
         quietness: quietness!,

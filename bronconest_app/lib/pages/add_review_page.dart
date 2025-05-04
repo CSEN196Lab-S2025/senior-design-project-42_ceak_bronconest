@@ -25,7 +25,7 @@ class _AddReviewPageState extends State<AddReviewPage> {
   int? community;
   bool isAnonymous = false;
   bool isLoading = false;
-  
+
   @override
   void dispose() {
     _reviewContentController.dispose();
@@ -71,6 +71,8 @@ class _AddReviewPageState extends State<AddReviewPage> {
         id: docRef.id,
         content: _reviewContentController.text,
         userId: userId,
+        userName: userName,
+        timestamp: DateTime.now(),
         walkability: walkability!,
         cleanliness: cleanliness!,
         quietness: quietness!,

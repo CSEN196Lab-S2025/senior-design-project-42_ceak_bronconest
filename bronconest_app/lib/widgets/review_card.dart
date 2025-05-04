@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:bronconest_app/pages/edit_review_page.dart';
 import 'package:bronconest_app/models/review.dart';
@@ -146,6 +147,19 @@ class _ReviewTileState extends State<ReviewTile> {
     }
   }
 
+  String formatDate(DateTime date) {
+    final day = date.day;
+    final suffix =
+        (day % 10 == 1 && day != 11)
+            ? 'st'
+            : (day % 10 == 2 && day != 12)
+            ? 'nd'
+            : (day % 10 == 3 && day != 13)
+            ? 'rd'
+            : 'th';
+    return '${DateFormat('MMM').format(date)} $day$suffix, ${date.year}';
+  }
+
   @override
   Widget build(BuildContext context) {
     final bool canEdit = widget.review.userId == userId;
@@ -155,11 +169,12 @@ class _ReviewTileState extends State<ReviewTile> {
       margin: const EdgeInsets.all(8.0),
       child: ExpansionTile(
         title: Text(
-          'User: ${widget.review.isAnonymous ? 'Anonymous' : widget.review.userId}',
+          'User: ${widget.review.isAnonymous ? 'Anonymous' : widget.review.userName}',
         ),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Text(formatDate(widget.review.timestamp)),
             Text(
               widget.review.content,
               maxLines: showFullContent ? null : 3,

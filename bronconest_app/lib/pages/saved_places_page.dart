@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:bronconest_app/pages/dorm_reviews_page.dart';
 import 'package:bronconest_app/models/dorm.dart';
 import 'package:bronconest_app/globals.dart';
 
@@ -35,18 +36,29 @@ class _SavedPlacesPageState extends State<SavedPlacesPage> {
         if (savedPlacesList.isEmpty) {
           savedPlaces = [];
         } else {
+          final schoolSnapshot =
+              await FirebaseFirestore.instance.collection('schools').get();
+
           savedPlaces = await Future.wait(
             savedPlacesList.map((dormId) async {
-              final dormSnapshot =
-                  await FirebaseFirestore.instance
-                      .collection('schools')
-                      .doc(school)
-                      .collection('dorms')
-                      .doc(dormId)
-                      .get();
-              return Dorm.fromJSON(dormSnapshot.data()!);
+              for (final schoolDoc in schoolSnapshot.docs) {
+                final dormSnapshot =
+                    await FirebaseFirestore.instance
+                        .collection('schools')
+                        .doc(schoolDoc.id)
+                        .collection('dorms')
+                        .doc(dormId)
+                        .get();
+
+                if (dormSnapshot.exists) {
+                  final dorm = Dorm.fromJSON(dormSnapshot.data()!);
+                  dorm.schoolId = schoolDoc.id;
+                  return dorm;
+                }
+              }
+              return null;
             }),
-          );
+          ).then((dorms) => dorms.whereType<Dorm>().toList());
         }
       } else {
         savedPlaces = [];
@@ -85,7 +97,16 @@ class _SavedPlacesPageState extends State<SavedPlacesPage> {
                     title: Text(dorm.name),
                     subtitle: Text(dorm.shortDescription),
                     onTap: () {
-                      // Navigate to dorm details page
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder:
+                              (context) => DormReviewsPage(
+                                dorm: dorm,
+                                schoolId: dorm.schoolId,
+                              ),
+                        ),
+                      );
                     },
                   );
                 },

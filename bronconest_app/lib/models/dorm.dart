@@ -16,6 +16,7 @@ class Dorm {
   final double amenitiesAvg;
   final double communityAvg;
   final List<Review> reviews;
+  String? schoolId;
 
   Dorm({
     required this.id,
@@ -32,6 +33,7 @@ class Dorm {
     required this.amenitiesAvg,
     required this.communityAvg,
     required this.reviews,
+    this.schoolId,
   });
 
   factory Dorm.fromJSON(Map<String, dynamic> json) => Dorm(

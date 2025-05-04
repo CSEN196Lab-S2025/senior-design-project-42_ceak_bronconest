@@ -18,6 +18,8 @@ class WelcomePage extends StatefulWidget {
 }
 
 class _WelcomePageState extends State<WelcomePage> {
+  bool isLoading = false;
+
   @override
   void initState() {
     super.initState();
@@ -30,6 +32,7 @@ class _WelcomePageState extends State<WelcomePage> {
 
     if (isLoggedIn) {
       userId = prefs.getString('userId') ?? '';
+      userName = prefs.getString('userName') ?? '';
       school = prefs.getString('school') ?? '';
       isStudent = prefs.getBool('isStudent') ?? false;
       isAdmin = prefs.getBool('isAdmin') ?? false;
@@ -73,6 +76,9 @@ class _WelcomePageState extends State<WelcomePage> {
   }
 
   Future<void> _signInWithGoogle() async {
+    setState(() {
+      isLoading = true;
+    });
     try {
       final GoogleSignIn googleSignIn = GoogleSignIn();
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
@@ -121,6 +127,7 @@ class _WelcomePageState extends State<WelcomePage> {
         }
         school = domain ?? '';
         userId = user.uid;
+        userName = user.displayName ?? '';
         isStudent = isStudentNow;
         isAdmin = isAdminNow;
         isLoggedIn = true;
@@ -129,11 +136,15 @@ class _WelcomePageState extends State<WelcomePage> {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setBool('isLoggedIn', true);
       await prefs.setString('userId', userId);
+      await prefs.setString('userName', userName);
       await prefs.setString('school', school);
       await prefs.setBool('isStudent', isStudent);
       await prefs.setBool('isAdmin', isAdmin);
 
       if (mounted) {
+        setState(() {
+          isLoading = false;
+        });
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
             builder:
@@ -184,22 +195,25 @@ class _WelcomePageState extends State<WelcomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text('Welcome Page'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          spacing: 50.0,
-          children: [
-            const Text('Welcome Page'),
-            TextButton(
-              onPressed: () {
-                _signInWithGoogle();
-              },
-              child: const Text('Login!'),
-            ),
-          ],
-        ),
-      ),
+      body:
+          isLoading
+              ? const Center(child: CircularProgressIndicator())
+              : Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  spacing: 50.0,
+                  children: [
+                    const Text('Welcome Page'),
+                    TextButton(
+                      onPressed: () {
+                        _signInWithGoogle();
+                      },
+                      child: const Text('Login!'),
+                    ),
+                  ],
+                ),
+              ),
     );
   }
 }

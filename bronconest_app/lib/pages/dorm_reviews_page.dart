@@ -8,8 +8,9 @@ import 'package:bronconest_app/pages/add_review_page.dart';
 
 class DormReviewsPage extends StatefulWidget {
   final Dorm dorm;
+  final String? schoolId;
 
-  const DormReviewsPage({super.key, required this.dorm});
+  const DormReviewsPage({super.key, required this.dorm, this.schoolId});
 
   @override
   State<DormReviewsPage> createState() => _DormReviewsPageState();
@@ -18,10 +19,12 @@ class DormReviewsPage extends StatefulWidget {
 class _DormReviewsPageState extends State<DormReviewsPage> {
   List<Review> reviews = [];
   bool isLoading = true;
+  String schoolId = '';
 
   @override
   void initState() {
     super.initState();
+    schoolId = widget.schoolId ?? school;
     _fetchReviews();
   }
 
@@ -30,7 +33,7 @@ class _DormReviewsPageState extends State<DormReviewsPage> {
       final reviewsSnapshot =
           await FirebaseFirestore.instance
               .collection('schools')
-              .doc(school)
+              .doc(schoolId)
               .collection('dorms')
               .doc(widget.dorm.id)
               .collection('reviews')
@@ -41,6 +44,7 @@ class _DormReviewsPageState extends State<DormReviewsPage> {
             reviewsSnapshot.docs
                 .map((doc) => Review.fromJSON(doc.data()))
                 .toList();
+        reviews.sort((a, b) => b.timestamp.compareTo(a.timestamp));
         isLoading = false;
       });
     } catch (e) {

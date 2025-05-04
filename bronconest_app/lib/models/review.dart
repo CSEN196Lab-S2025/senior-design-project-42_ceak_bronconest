@@ -3,6 +3,8 @@ import 'dart:convert';
 class Review {
   final String id;
   final String userId;
+  final String userName;
+  final DateTime timestamp;
   final String content;
   final int walkability;
   final int cleanliness;
@@ -16,6 +18,8 @@ class Review {
   Review({
     required this.id,
     required this.userId,
+    required this.userName,
+    required this.timestamp,
     required this.content,
     required this.walkability,
     required this.cleanliness,
@@ -30,6 +34,9 @@ class Review {
   factory Review.fromJSON(Map<String, dynamic> json) => Review(
     id: json['id'].toString(),
     userId: json['user_id'].toString(),
+    userName:
+        json['user_name'] != null ? json['user_name'].toString() : 'Anonymous',
+    timestamp: DateTime.parse(json['timestamp'].toString()),
     content: json['content'].toString(),
     walkability: int.parse(json['walkability'].toString()),
     cleanliness: int.parse(json['cleanliness'].toString()),
@@ -45,6 +52,8 @@ class Review {
   String toJsonString() => json.encode({
     'id': id,
     'user_id': userId,
+    'user_name': userName,
+    'timestamp': timestamp.toIso8601String(),
     'content': content,
     'walkability': walkability,
     'cleanliness': cleanliness,
@@ -60,6 +69,8 @@ class Review {
     return {
       'id': id,
       'user_id': userId,
+      'user_name': userName,
+      'timestamp': timestamp.toIso8601String(),
       'content': content,
       'walkability': walkability,
       'cleanliness': cleanliness,

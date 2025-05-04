@@ -41,29 +41,22 @@ class _FilterPageState extends State<FilterPage> {
               .collection('dorms')
               .get();
 
-      final dormsJson =
-          allDorms.docs.map((doc) {
-            final data = doc.data();
-            return {
-              'id': doc.id,
-              'walkability': data['walkability_avg'],
-              'cleanliness': data['cleanliness_avg'],
-              'quietness': data['quietness_avg'],
-              'comfort': data['comfort_avg'],
-              'safety': data['safety_avg'],
-              'amenities': data['amenities_avg'],
-              'community': data['community_avg'],
-            };
-          }).toList();
+      final dormIds = allDorms.docs.map((doc) => doc.id).toList();
 
       // Sample sort by walkability
-      dormsJson.sort(
-        (a, b) => (b['walkability'] as num).compareTo(a['walkability'] as num),
-      );
+      dormIds.sort((a, b) {
+        final dormA = allDorms.docs.firstWhere((doc) => doc.id == a);
+        final dormB = allDorms.docs.firstWhere((doc) => doc.id == b);
+
+        final walkabilityA = dormA.data()['walkability'] ?? 0;
+        final walkabilityB = dormB.data()['walkability'] ?? 0;
+
+        return walkabilityB.compareTo(walkabilityA);
+      });
 
       // final requestBody = {
       //   'prompt': _filterController.text,
-      //   'dorms': dormsJson,
+      //   'school': school,
       // };
 
       // final response = await http.post(
@@ -78,7 +71,8 @@ class _FilterPageState extends State<FilterPage> {
         // );
 
         // Placeholder
-        final sortedIds = dormsJson.map((dorm) => dorm['id']).toList();
+        final sortedIds = dormIds;
+
         Navigator.of(context).pop(sortedIds);
         ScaffoldMessenger.of(
           context,
