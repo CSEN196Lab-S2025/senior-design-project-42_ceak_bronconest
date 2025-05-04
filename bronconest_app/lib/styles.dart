@@ -7,7 +7,11 @@ class Styles {
 
   // Text Styles:
   static TextStyle homePageTitleTextStyle = GoogleFonts.onest(
-    textStyle: TextStyle(fontSize: 35.0, color: Colors.white),
+    textStyle: TextStyle(
+      fontSize: 35.0,
+      color: Colors.white,
+      fontWeight: FontWeight.bold,
+    ),
   );
 
   static TextStyle largeTextStyle = GoogleFonts.onest(

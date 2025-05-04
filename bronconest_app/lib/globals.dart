@@ -4,3 +4,6 @@ String userName = "";
 bool isStudent = true;
 bool isAdmin = true;
 bool isLoggedIn = false;
+
+// home page video stuff
+Duration lastVideoPosition = Duration(seconds: 60);

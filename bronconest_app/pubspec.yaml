@@ -46,6 +46,7 @@ dependencies:
   intl: ^0.20.2
   google_fonts: ^6.2.1
   flutter_staggered_grid_view: ^0.7.0
+  video_player: ^2.9.5
 
 dev_dependencies:
   flutter_test:
@@ -78,7 +79,8 @@ flutter:
 
   assets:
     - assets/
-    - assets/images/home/
+    - assets/welcome/
+    - assets/home/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

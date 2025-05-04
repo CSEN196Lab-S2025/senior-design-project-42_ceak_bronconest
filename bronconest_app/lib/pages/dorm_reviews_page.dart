@@ -92,115 +92,127 @@ class _DormReviewsPageState extends State<DormReviewsPage> {
                 ),
               ),
               ImageGradientOverlay(),
-              Align(
-                alignment: Alignment.topLeft,
-                child: IconButton(
-                  icon: Icon(Icons.arrow_back, color: Colors.white, size: 30.0),
-                  onPressed: () => Navigator.of(context).pop(),
+              SafeArea(
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.arrow_back,
+                      color: Colors.white,
+                      size: 30.0,
+                    ),
+                    onPressed: () => Navigator.of(context).pop(),
+                  ),
                 ),
               ),
             ],
           ),
-
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(widget.dorm.name, style: Styles.largeTextStyle),
+          ),
           Expanded(
-            child: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(widget.dorm.name, style: Styles.largeTextStyle),
-                    Text(
-                      widget.dorm.shortDescription,
-                      style: Styles.smallTextStyle,
-                    ),
-                    // Reviews:
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
-                      child: Text(
-                        'Overall Scores',
-                        style: Styles.mediumTextStyle,
-                        textAlign: TextAlign.start,
+            child: SafeArea(
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.dorm.shortDescription,
+                        style: Styles.smallTextStyle,
                       ),
-                    ),
-                    Wrap(
-                      children:
-                          widget.dorm.ratingScores
-                              .map(
-                                (e) => Padding(
-                                  padding: const EdgeInsets.all(4.0),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: Theme.of(
-                                        context,
-                                      ).primaryColor.withValues(alpha: 0.1),
-                                      borderRadius: BorderRadius.circular(8.0),
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(3.5),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Icon(e.icon),
-                                          Text(
-                                            ' ${e.name} ${e.scoreString}',
-                                            style: Styles.smallTextStyle,
-                                          ),
-                                        ],
+                      // Reviews:
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: Text(
+                          'Overall Scores',
+                          style: Styles.mediumTextStyle,
+                          textAlign: TextAlign.start,
+                        ),
+                      ),
+                      Wrap(
+                        children:
+                            widget.dorm.ratingScores
+                                .map(
+                                  (e) => Padding(
+                                    padding: const EdgeInsets.all(4.0),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: Theme.of(
+                                          context,
+                                        ).primaryColor.withValues(alpha: 0.1),
+                                        borderRadius: BorderRadius.circular(
+                                          8.0,
+                                        ),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(3.5),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Icon(e.icon),
+                                            Text(
+                                              ' ${e.name} ${e.scoreString}',
+                                              style: Styles.smallTextStyle,
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              )
-                              .toList(),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
-                      child: Text(
-                        'User Reviews',
-                        style: Styles.mediumTextStyle,
-                        textAlign: TextAlign.start,
+                                )
+                                .toList(),
                       ),
-                    ),
-                    isLoading
-                        ? const Center(child: CircularProgressIndicator())
-                        : Column(
-                          children: [
-                            if (isStudent)
-                              Card(
-                                margin: const EdgeInsets.all(16.0),
-                                child: ListTile(
-                                  leading: const Icon(Icons.add),
-                                  title: const Text('Add a Review'),
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder:
-                                            (context) => AddReviewPage(
-                                              dorm: widget.dorm,
-                                            ),
-                                      ),
-                                    ).then((_) => _fetchReviews());
-                                  },
-                                ),
-                              ),
-                            if (reviews.isEmpty)
-                              const Expanded(
-                                child: Center(child: Text('No reviews yet')),
-                              )
-                            else
-                              ...reviews.map(
-                                (review) => ReviewTile(
-                                  review: review,
-                                  dormId: widget.dorm.id,
-                                  onReviewChanged: _fetchReviews,
-                                ),
-                              ),
-                          ],
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: Text(
+                          'User Reviews',
+                          style: Styles.mediumTextStyle,
+                          textAlign: TextAlign.start,
                         ),
-                  ],
+                      ),
+                      isLoading
+                          ? const Center(child: CircularProgressIndicator())
+                          : Column(
+                            children: [
+                              if (isStudent)
+                                Card(
+                                  margin: const EdgeInsets.all(16.0),
+                                  child: ListTile(
+                                    leading: const Icon(Icons.add),
+                                    title: const Text('Add a Review'),
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder:
+                                              (context) => AddReviewPage(
+                                                dorm: widget.dorm,
+                                              ),
+                                        ),
+                                      ).then((_) => _fetchReviews());
+                                    },
+                                  ),
+                                ),
+                              if (reviews.isEmpty)
+                                const Expanded(
+                                  child: Center(child: Text('No reviews yet')),
+                                )
+                              else
+                                ...reviews.map(
+                                  (review) => ReviewTile(
+                                    review: review,
+                                    dormId: widget.dorm.id,
+                                    onReviewChanged: _fetchReviews,
+                                  ),
+                                ),
+                            ],
+                          ),
+                    ],
+                  ),
                 ),
               ),
             ),
