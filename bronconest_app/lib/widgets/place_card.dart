@@ -11,11 +11,13 @@ class PlaceCard extends StatefulWidget {
     required this.dorm,
     required this.isSaved,
     required this.toggleSavedPlace,
+    this.showScoreRow = true,
   });
 
   Dorm dorm;
   bool isSaved;
   Function toggleSavedPlace;
+  bool showScoreRow;
 
   @override
   State<PlaceCard> createState() => _PlaceCardState();
@@ -78,35 +80,40 @@ class _PlaceCardState extends State<PlaceCard> {
                         ),
                       ),
                       Spacer(),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        spacing: 8.0,
-                        children:
-                            widget.dorm.ratingScores
-                                .sublist(0, 3)
-                                .map(
-                                  (e) => Container(
-                                    decoration: BoxDecoration(
-                                      color: Color.fromARGB(100, 0, 0, 0),
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
-                                    child: Padding(
-                                      padding: EdgeInsets.all(3.5),
-                                      child: Row(
-                                        children: [
-                                          Icon(e.icon, color: Colors.white),
-                                          Text(
-                                            ' ${e.scoreString}',
-                                            style: Styles.smallTextStyle
-                                                .copyWith(color: Colors.white),
-                                          ),
-                                        ],
+                      if (widget.showScoreRow)
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          spacing: 8.0,
+                          children:
+                              widget.dorm.ratingScores
+                                  .sublist(0, 3)
+                                  .map(
+                                    (e) => Container(
+                                      decoration: BoxDecoration(
+                                        color: Color.fromARGB(100, 0, 0, 0),
+                                        borderRadius: BorderRadius.circular(
+                                          10.0,
+                                        ),
+                                      ),
+                                      child: Padding(
+                                        padding: EdgeInsets.all(3.5),
+                                        child: Row(
+                                          children: [
+                                            Icon(e.icon, color: Colors.white),
+                                            Text(
+                                              ' ${e.scoreString}',
+                                              style: Styles.smallTextStyle
+                                                  .copyWith(
+                                                    color: Colors.white,
+                                                  ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                )
-                                .toList(),
-                      ),
+                                  )
+                                  .toList(),
+                        ),
                     ],
                   ),
                 ),

@@ -116,6 +116,7 @@ class _WelcomePageState extends State<WelcomePage> {
             user.email != null && whitelist.contains(user.email);
         final bool isStudentNow =
             user.email != null && user.email!.endsWith('.edu');
+
         if (!userSnapshot.exists) {
           await userDoc.set({
             'id': user.uid,

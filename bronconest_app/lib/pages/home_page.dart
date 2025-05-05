@@ -18,12 +18,15 @@ class _HomePageState extends State<HomePage> {
   List<String> schools = [];
   bool isLoading = true;
 
+  String? name;
+
   late VideoPlayerController _controller;
 
   @override
   void initState() {
     super.initState();
 
+    _fetchUserInfo();
     _fetchSchools();
     _initializeVideo();
   }
@@ -73,6 +76,15 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  Future<void> _fetchUserInfo() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    String fullName = prefs.getString('userName')!;
+
+    // only get the "first name"
+    setState(() => name = fullName.substring(0, fullName.indexOf(' ')));
+  }
+
   Future<void> _logout() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool('isLoggedIn', false);
@@ -113,12 +125,22 @@ class _HomePageState extends State<HomePage> {
               padding: const EdgeInsets.only(top: 32.0),
               child: Align(
                 alignment: Alignment.topCenter,
-                child: Text(
-                  'BroncoNest',
-                  style: Styles.homePageTitleTextStyle.copyWith(
-                    color: Colors.white,
-                  ),
-                  textAlign: TextAlign.center,
+                child: Column(
+                  children: [
+                    Text(
+                      'BroncoNest',
+                      style: Styles.homePageTitleTextStyle.copyWith(
+                        color: Colors.white,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    Text(
+                      'Welcome ${name!}',
+                      style: Styles.largeTextStyle.copyWith(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -140,10 +162,50 @@ class _HomePageState extends State<HomePage> {
               padding: EdgeInsets.only(bottom: 64.0),
               child: Align(
                 alignment: Alignment.bottomCenter,
-                child: Text(
-                  'Start exploring \nyour new home',
-                  style: Styles.largeTextStyle.copyWith(color: Colors.white),
-                  textAlign: TextAlign.center,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      'Start exploring \nyour new home at',
+                      style: Styles.largeTextStyle.copyWith(
+                        color: Colors.white,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(
+                      width: 100,
+                      child: DropdownButton<String>(
+                        value: schools.contains(school) ? school : null,
+                        style: Styles.largeTextStyle,
+                        dropdownColor: Color.fromARGB(200, 0, 0, 0),
+                        borderRadius: BorderRadius.circular(10.0),
+                        elevation: 1,
+                        isExpanded: true,
+                        iconEnabledColor: Colors.white,
+                        iconDisabledColor: Colors.white,
+                        items:
+                            schools.map((String schoolName) {
+                              return DropdownMenuItem<String>(
+                                value: schoolName,
+                                child: Center(
+                                  child: Text(
+                                    schoolName.toUpperCase(),
+                                    style: Styles.largeTextStyle.copyWith(
+                                      color: Colors.white,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              );
+                            }).toList(),
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            school = newValue!;
+                          });
+                        },
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),

@@ -1,3 +1,4 @@
+import 'package:bronconest_app/widgets/place_card.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:bronconest_app/pages/dorm_reviews_page.dart';
@@ -76,6 +77,18 @@ class _SavedPlacesPageState extends State<SavedPlacesPage> {
     }
   }
 
+  Future<void> _toggleSavedPlace(Dorm dorm) async {
+    final userDoc = FirebaseFirestore.instance.collection('users').doc(userId);
+
+    await userDoc.update({
+      'savedPlaces': FieldValue.arrayRemove([dorm.id]),
+    });
+
+    setState(() {
+      savedPlaces.remove(dorm);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,22 +110,11 @@ class _SavedPlacesPageState extends State<SavedPlacesPage> {
                 itemCount: savedPlaces.length,
                 itemBuilder: (context, index) {
                   final dorm = savedPlaces[index];
-                  return ListTile(
-                    leading: Icon(Icons.favorite),
-                    title: Text(dorm.name),
-                    subtitle: Text(dorm.shortDescription),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder:
-                              (context) => DormReviewsPage(
-                                dorm: dorm,
-                                schoolId: dorm.schoolId,
-                              ),
-                        ),
-                      );
-                    },
+                  return PlaceCard(
+                    dorm: dorm,
+                    isSaved: true,
+                    toggleSavedPlace: _toggleSavedPlace,
+                    showScoreRow: false,
                   );
                 },
               ),
