@@ -9,12 +9,14 @@ class ReviewTile extends StatefulWidget {
   final Review review;
   final String dormId;
   final VoidCallback onReviewChanged;
+  final String? schoolId;
 
   const ReviewTile({
     super.key,
     required this.review,
     required this.dormId,
     required this.onReviewChanged,
+    this.schoolId,
   });
 
   @override
@@ -23,6 +25,13 @@ class ReviewTile extends StatefulWidget {
 
 class _ReviewTileState extends State<ReviewTile> {
   bool showFullContent = false;
+  String schoolId = '';
+
+  @override
+  void initState() {
+    super.initState();
+    schoolId = widget.schoolId ?? school;
+  }
 
   void _deleteReview() {
     showDialog(
@@ -57,7 +66,7 @@ class _ReviewTileState extends State<ReviewTile> {
 
       await FirebaseFirestore.instance
           .collection('schools')
-          .doc(school)
+          .doc(schoolId)
           .collection('dorms')
           .doc(widget.dormId)
           .collection('reviews')
@@ -82,7 +91,7 @@ class _ReviewTileState extends State<ReviewTile> {
     try {
       final dormRef = FirebaseFirestore.instance
           .collection('schools')
-          .doc(school)
+          .doc(schoolId)
           .collection('dorms')
           .doc(widget.dormId);
 

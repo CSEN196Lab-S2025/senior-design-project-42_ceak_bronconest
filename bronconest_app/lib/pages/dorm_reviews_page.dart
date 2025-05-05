@@ -178,7 +178,7 @@ class _DormReviewsPageState extends State<DormReviewsPage> {
                           ? const Center(child: CircularProgressIndicator())
                           : Column(
                             children: [
-                              if (isStudent)
+                              if (isStudent && widget.schoolId == null)
                                 Card(
                                   margin: const EdgeInsets.all(16.0),
                                   child: ListTile(
@@ -198,8 +198,11 @@ class _DormReviewsPageState extends State<DormReviewsPage> {
                                   ),
                                 ),
                               if (reviews.isEmpty)
-                                const Expanded(
-                                  child: Center(child: Text('No reviews yet')),
+                                const Center(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(16.0),
+                                    child: Text('No reviews yet'),
+                                  ),
                                 )
                               else
                                 ...reviews.map(

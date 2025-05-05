@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:bronconest_app/pages/dorm_reviews_page.dart';
 import 'package:bronconest_app/models/dorm.dart';
 import 'package:bronconest_app/styles.dart';
+import 'package:bronconest_app/globals.dart';
 
 class PlaceCard extends StatefulWidget {
   PlaceCard({
@@ -12,12 +13,14 @@ class PlaceCard extends StatefulWidget {
     required this.isSaved,
     required this.toggleSavedPlace,
     this.showScoreRow = true,
+    this.schoolId,
   });
 
   Dorm dorm;
   bool isSaved;
   Function toggleSavedPlace;
   bool showScoreRow;
+  String? schoolId;
 
   @override
   State<PlaceCard> createState() => _PlaceCardState();
@@ -27,6 +30,7 @@ class _PlaceCardState extends State<PlaceCard> {
   @override
   void initState() {
     super.initState();
+    widget.dorm.schoolId = widget.schoolId ?? school;
   }
 
   @override
@@ -35,7 +39,11 @@ class _PlaceCardState extends State<PlaceCard> {
       onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => DormReviewsPage(dorm: widget.dorm),
+            builder:
+                (context) => DormReviewsPage(
+                  dorm: widget.dorm,
+                  schoolId: widget.schoolId,
+                ),
           ),
         );
       },

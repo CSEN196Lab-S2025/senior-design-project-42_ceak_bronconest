@@ -1,6 +1,6 @@
 from firebase_functions import https_fn, options
 from firebase_functions.firestore_fn import on_document_written, Event, Change, DocumentSnapshot
-from firebase_admin import initialize_app, credentials, firestore
+from firebase_admin import initialize_app, messaging
 import os
 import requests
 import json
@@ -32,6 +32,19 @@ headers = {
     "Content-Type": "application/json",
     "Authorization": f"Bearer {JINA_API_KEY}"
 }
+
+
+def send_chat_notification(dorm_id, sender_name, message_text):
+    topic = f"dorm_{dorm_id}_chat"
+    message = messaging.Message(
+        notification=messaging.Notification(
+            title=f"New message from {sender_name}",
+            body=message_text,
+        ),
+        topic=topic,
+    )
+    messaging.send(message)
+
 
 # Json helper function to format LLM response
 def extract_json(text):
