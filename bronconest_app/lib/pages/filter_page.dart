@@ -56,6 +56,12 @@ class _FilterPageState extends State<FilterPage> {
         Uri.parse(
           'https://us-central1-bronconest-d1f01.cloudfunctions.net/rank_dorms?query=${_filterController.text}',
         ),
+
+        //Test API URL
+        // Uri.parse(
+        //   'http://0.0.0.0:3000/rank_dorms?query=${_filterController.text}',
+        // ),
+
       );
 
       if (mounted) {

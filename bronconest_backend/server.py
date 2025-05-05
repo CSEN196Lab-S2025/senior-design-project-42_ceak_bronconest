@@ -120,6 +120,8 @@ def rank_scu_dorms(user_query, school, max_retries=2):
         include_metadata=True
     )
 
+
+
     # Create context for LLM
     context_entries = []
     valid_ids = []
@@ -159,8 +161,36 @@ Use the exact Firebase dorm IDs provided. Do not invent or rename them.
             messages=[
                 {"role": "system", "content": sys_prompt},
                 {"role": "user", "content": user_query}
-            ]
+            ],
+            tools=[
+                {
+                    "type": "function",
+                    "function": {
+                        "name": "rank_dorms",
+                        "description": "Sort dorm IDs from best to worst based on the user's query.",
+                        "parameters": {
+                            "type": "object",
+                            "properties": {
+                                "sorted_ids": {
+                                    "type": "array",
+                                    "items": {"type": "string"},
+                                    "description": "Dorm IDs sorted from best to worst"
+                                }
+                            },
+                            "required": ["sorted_ids"]
+                        }
+                    }
+                }
+            ],
+            tool_choice={"type": "function", "function": {"name": "rank_dorms"}}
         )
+
+        tool_args = json.loads(chat_response.choices[0].message.tool_calls[0].function.arguments)
+        sorted_ids = tool_args.get("sorted_ids", [])
+        filtered = [id for id in sorted_ids if id in valid_ids]
+        return {"sorted_ids": filtered}
+
+
 
         response_content = chat_response.choices[0].message.content.strip()
         print("LLM RAW RESPONSE:\n", response_content)
@@ -176,7 +206,7 @@ Use the exact Firebase dorm IDs provided. Do not invent or rename them.
         print(f"[Retry {attempt+1}] Invalid JSON or IDs. Retrying...")
 
     # Return last raw response after all retries fail
-    return {"error": "Failed to get valid sorted_ids", "raw": response_content}
+    return {"error": "Failed to get valid sorted_ids"}
 
 
 
