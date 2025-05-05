@@ -115,31 +115,9 @@ class _SavedPlacesPageState extends State<SavedPlacesPage> {
                     toggleSavedPlace: _toggleSavedPlace,
                     showScoreRow: false,
                     schoolId: dorm.schoolId,
-                    // onTap: () {
-                    //   Navigator.of(context).push(
-                    //     MaterialPageRoute(
-                    //       builder: (context) => DormChatPage(dormId: dorm.id),
-                    //       ),
-                    //     ),
-                    //   );
-                    // },
                   );
                 },
               ),
     );
   }
 }
-
-// import 'package:firebase_messaging/firebase_messaging.dart';
-
-// @override
-// void initState() {
-//   super.initState();
-//   FirebaseMessaging.instance.subscribeToTopic('dorm_${widget.dormId}_chat');
-// }
-
-// @override
-// void dispose() {
-//   FirebaseMessaging.instance.unsubscribeFromTopic('dorm_${widget.dormId}_chat');
-//   super.dispose();
-// }

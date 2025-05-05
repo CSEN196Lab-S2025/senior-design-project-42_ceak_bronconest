@@ -2,6 +2,7 @@ import 'package:bronconest_app/widgets/image_gradient_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:bronconest_app/pages/dorm_reviews_page.dart';
+import 'package:bronconest_app/pages/chat_page.dart';
 import 'package:bronconest_app/models/dorm.dart';
 import 'package:bronconest_app/styles.dart';
 import 'package:bronconest_app/globals.dart';
@@ -125,8 +126,31 @@ class _PlaceCardState extends State<PlaceCard> {
                     ],
                   ),
                 ),
+                if (widget.schoolId != null)
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.chat, color: Colors.white),
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder:
+                                    (context) => ChatPage(
+                                      schoolId: widget.schoolId!,
+                                      dorm: widget.dorm,
+                                    ),
+                              ),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
                 Align(
-                  alignment: Alignment.topRight,
+                  alignment: Alignment.centerRight,
                   child: IconButton(
                     icon: Icon(
                       widget.isSaved ? Icons.favorite : Icons.favorite_border,

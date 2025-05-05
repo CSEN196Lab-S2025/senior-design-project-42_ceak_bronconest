@@ -89,6 +89,18 @@ class _AdminPageState extends State<AdminPage> {
         await reviewDoc.reference.delete();
       }
 
+      final messages =
+          await FirebaseFirestore.instance
+              .collection('schools')
+              .doc(school)
+              .collection('dorms')
+              .doc(dormId)
+              .collection('messages')
+              .get();
+      for (final messageDoc in messages.docs) {
+        await messageDoc.reference.delete();
+      }
+
       await FirebaseFirestore.instance
           .collection('schools')
           .doc(school)

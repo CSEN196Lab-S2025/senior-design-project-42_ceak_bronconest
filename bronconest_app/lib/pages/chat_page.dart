@@ -1,47 +1,63 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:bronconest_app/models/dorm.dart';
+import 'package:bronconest_app/globals.dart';
 
-class DormChatPage extends StatefulWidget {
-  final String dormId;
+class ChatPage extends StatefulWidget {
+  final String schoolId;
+  final Dorm dorm;
 
-  const DormChatPage({super.key, required this.dormId});
+  const ChatPage({super.key, required this.schoolId, required this.dorm});
 
   @override
-  State<DormChatPage> createState() => _DormChatPageState();
+  State<ChatPage> createState() => _ChatPageState();
 }
 
-class _DormChatPageState extends State<DormChatPage> {
+class _ChatPageState extends State<ChatPage> {
   final TextEditingController _messageController = TextEditingController();
 
   Future<void> _sendMessage(String text) async {
     if (text.trim().isEmpty) return;
 
-    await FirebaseFirestore.instance
-        .collection('dorm_chats')
-        .doc(widget.dormId)
-        .collection('messages')
-        .add({
-          'senderId': userId, // Replace with the current user's ID
-          'senderName': userName, // Replace with the current user's name
-          'text': text.trim(),
-          'timestamp': FieldValue.serverTimestamp(),
-        });
+    try {
+      await FirebaseFirestore.instance
+          .collection('schools')
+          .doc(widget.schoolId)
+          .collection('dorms')
+          .doc(widget.dorm.id)
+          .collection('messages')
+          .add({
+            'sender_id': userId,
+            'sender_name': userName,
+            'text': text.trim(),
+            'timestamp': FieldValue.serverTimestamp(),
+          });
 
-    _messageController.clear();
+      _messageController.clear();
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text('Failed to send message')));
+      }
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Dorm Chat')),
+      appBar: AppBar(title: Text('${widget.dorm.name} Chat')),
       body: Column(
         children: [
           Expanded(
             child: StreamBuilder<QuerySnapshot>(
               stream:
                   FirebaseFirestore.instance
-                      .collection('dorm_chats')
-                      .doc(widget.dormId)
+                      .collection('schools')
+                      .doc(widget.schoolId)
+                      .collection('dorms')
+                      .doc(widget.dorm.id)
                       .collection('messages')
                       .orderBy('timestamp', descending: true)
                       .snapshots(),
@@ -58,14 +74,22 @@ class _DormChatPageState extends State<DormChatPage> {
                   itemBuilder: (context, index) {
                     final message = messages[index];
                     return ListTile(
-                      title: Text(message['senderName']),
+                      title: Text(message['sender_name']),
                       subtitle: Text(message['text']),
-                      trailing: Text(
-                        (message['timestamp'] as Timestamp)
-                            .toDate()
-                            .toLocal()
-                            .toString(),
-                        style: const TextStyle(fontSize: 10),
+                      trailing: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            message['timestamp'] != null
+                                ? DateFormat('hh:mm a').format(
+                                  (message['timestamp'] as Timestamp)
+                                      .toDate()
+                                      .toLocal(),
+                                )
+                                : 'Just now',
+                            style: const TextStyle(fontSize: 10),
+                          ),
+                        ],
                       ),
                     );
                   },
@@ -73,23 +97,25 @@ class _DormChatPageState extends State<DormChatPage> {
               },
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: _messageController,
-                    decoration: const InputDecoration(
-                      hintText: 'Type a message...',
+          SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 16.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: _messageController,
+                      decoration: const InputDecoration(
+                        hintText: 'Type a message...',
+                      ),
                     ),
                   ),
-                ),
-                IconButton(
-                  icon: const Icon(Icons.send),
-                  onPressed: () => _sendMessage(_messageController.text),
-                ),
-              ],
+                  IconButton(
+                    icon: const Icon(Icons.send),
+                    onPressed: () => _sendMessage(_messageController.text),
+                  ),
+                ],
+              ),
             ),
           ),
         ],
