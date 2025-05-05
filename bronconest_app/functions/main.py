@@ -1,25 +1,23 @@
-from firebase_functions import https_fn
+from firebase_functions import https_fn, options
+from firebase_functions.firestore_fn import on_document_written, Event, Change, DocumentSnapshot
 from firebase_admin import initialize_app, credentials, firestore
 import os
 import requests
 import json
 import re
 from pinecone import Pinecone
-from dotenv import load_dotenv
 from groq import Groq
+from dotenv import load_dotenv
 
 # Initialize Firebase Admin
-cred = credentials.Certificate("serviceAccountKey.json")
-initialize_app(cred)
-db = firestore.client()
+initialize_app()
 
-# Load environment variables
 load_dotenv()
 
 # API Keys
-GROQ_API_KEY = os.getenv("GROQ_API_KEY")
-PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
-JINA_API_KEY = os.getenv("JINA_API_KEY")
+GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
+PINECONE_API_KEY = os.environ.get("PINECONE_API_KEY")
+JINA_API_KEY = os.environ.get("JINA_API_KEY")
 
 # Initialize the Pinecone Vector DB
 pc = Pinecone(api_key=PINECONE_API_KEY)
@@ -88,30 +86,26 @@ def upsert_dorm_to_index(dorm_id, dorm):
     print(f"Upserted dorm {dorm_id} to Pinecone index.")
 
 # Firestore trigger to update Pinecone index when a dorm is added, updated, or deleted
-@https_fn.on_document_written("schools/{school}/dorms/{dorm_id}")
-def index_dorms(event: https_fn.Event[firestore.DocumentSnapshot]):
+@on_document_written(document="schools/{school}/dorms/{dorm_id}")
+def index_dorms(event: Event[Change[DocumentSnapshot | None]]) -> None:
     # Document snapshot
-    old_value = event.data.old_value
-    new_value = event.data.value
+    old_data = event.data.before.to_dict() if event.data.before else None 
+    new_data = event.data.after.to_dict() if event.data.after else None
 
     dorm_id = event.params["dorm_id"]
 
     # Check if the dorm was deleted
-    if not new_value:
+    if not new_data:
         print(f"Dorm {dorm_id} deleted. Removing from index.")
         index.delete([dorm_id])
         return
     
     # Check if the dorm was created or updated
-    if not old_value:
+    if not old_data:
         print(f"Dorm {dorm_id} created. Adding to index.")
-        dorm = new_value.to_dict()
+        dorm = new_data.to_dict()
         upsert_dorm_to_index(dorm_id, dorm)
         return
-
-    # If the dorm document was updated, check relevant fields
-    old_data = old_value.to_dict()
-    new_data = new_value.to_dict()
 
     relevant_fields = [
         "amenities_avg", "cleanliness_avg", "comfort_avg",
@@ -125,8 +119,8 @@ def index_dorms(event: https_fn.Event[firestore.DocumentSnapshot]):
         print(f"Dorm {dorm_id} updated but no relevant fields changed. No action taken.")
 
 
-#Rank SCU dorms based on user query
-def rank_dorms(user_query, max_retries=2):
+#Rank dorms based on user query
+def rank_dorms_helper(user_query, max_retries=2):
     # Embed the user query
     query_data = {
         "model": "jina-clip-v2",
@@ -201,18 +195,18 @@ Use the exact Firebase dorm IDs provided. Do not invent or rename them.
     return {"error": "Failed to get valid sorted_ids", "raw": response_content}
 
 # Firebase Function to rank dorms
-@https_fn.on_request()
+@https_fn.on_request(cors=options.CorsOptions(cors_origins="*", cors_methods=["get"]))
 def rank_dorms(req: https_fn.Request) -> https_fn.Response:
-    query = req.args.get("query")
-    school = req.args.get("school")
-    if not query or not school:
+    print(req.args["query"])
+    query = req.args["query"]
+    if not query:
         return https_fn.Response(
-            json.dumps({"error": "Missing 'query' or 'school' parameter"}),
+            json.dumps({"error": "Missing 'query' parameter"}),
             status=400,
             mimetype="application/json"
         )
 
-    result = rank_dorms(query)
+    result = rank_dorms_helper(query)
     return https_fn.Response(
         json.dumps(result),
         status=200,

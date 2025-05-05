@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:bronconest_app/globals.dart';
 
 class FilterPage extends StatefulWidget {
   const FilterPage({super.key});
@@ -55,7 +54,7 @@ class _FilterPageState extends State<FilterPage> {
 
       final response = await http.get(
         Uri.parse(
-          'http://0.0.0.0:3000/rank_dorms?query=${_filterController.text}&school=$school',
+          'https://us-central1-bronconest-d1f01.cloudfunctions.net/rank_dorms?query=${_filterController.text}',
         ),
       );
 
