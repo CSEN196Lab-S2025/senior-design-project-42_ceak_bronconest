@@ -65,8 +65,8 @@ def extract_json(text):
 
 
 #Vectorize and index SCU dorms
-def index_scu_dorms():
-    dorms = db.collection("schools").document("scu").collection("dorms").get()
+def index_scu_dorms(school="scu"):
+    dorms = db.collection("schools").document(school).collection("dorms").get()
     for dorm_doc in dorms:
         dorm = dorm_doc.to_dict()
         dorm_id = dorm_doc.id
@@ -103,7 +103,7 @@ def index_scu_dorms():
 
 
 #Rank SCU dorms based on user query
-def rank_scu_dorms(user_query, max_retries=2):
+def rank_scu_dorms(user_query, school, max_retries=2):
     # Embed the user query
     query_data = {
         "model": "jina-clip-v2",
@@ -186,7 +186,8 @@ Use the exact Firebase dorm IDs provided. Do not invent or rename them.
 @app.route("/rank_dorms", methods=["GET"])
 def rank_dorms_route():
     query = request.args.get("query")
-    result = rank_scu_dorms(query)
+    school = request.args.get("school")
+    result = rank_scu_dorms(query, school)
     return result
 
 
