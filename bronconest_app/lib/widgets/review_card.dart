@@ -192,7 +192,7 @@ class _ReviewTileState extends State<ReviewTile> {
                 },
                 child: Text(
                   showFullContent ? 'Show less' : 'Show more...',
-                  style: TextStyle(color: Theme.of(context).primaryColor),
+                  style: TextStyle(color: Theme.of(context).primaryColorDark),
                 ),
               ),
             const SizedBox(height: 8.0),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:bronconest_app/globals.dart';
 
 class FilterPage extends StatefulWidget {

@@ -69,7 +69,9 @@ class _AdminCardState extends State<AdminCard> {
                       },
                       child: Text(
                         showFullContent ? 'Show less' : 'Show more...',
-                        style: TextStyle(color: Theme.of(context).primaryColor),
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColorDark,
+                        ),
                       ),
                     ),
                 ],
