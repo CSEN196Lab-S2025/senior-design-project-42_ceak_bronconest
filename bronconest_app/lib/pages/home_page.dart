@@ -50,10 +50,14 @@ class _HomePageState extends State<HomePage> {
       ..setVolume(0)
       ..setLooping(true);
 
-    // doesn't work :/
-    await _controller.seekTo(lastVideoPosition);
-
     await _controller.play();
+
+    // works outside web?
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (lastVideoPosition > Duration.zero) {
+        _controller.seekTo(lastVideoPosition);
+      }
+    });
 
     // ensure the first frame is shown after the video is initialized
     setState(() {});
@@ -135,7 +139,7 @@ class _HomePageState extends State<HomePage> {
                       textAlign: TextAlign.center,
                     ),
                     Text(
-                      'Welcome ${name!}',
+                      'Welcome ${name ?? ''}',
                       style: Styles.largeTextStyle.copyWith(
                         color: Colors.white,
                       ),
