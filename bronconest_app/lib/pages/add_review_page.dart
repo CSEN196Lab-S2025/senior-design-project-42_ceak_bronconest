@@ -215,6 +215,7 @@ class _AddReviewPageState extends State<AddReviewPage> {
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
           child: Column(
+            spacing: 7.5,
             children: [
               const Text(
                 'Please provide a review of your dorm experience.',
@@ -319,12 +320,15 @@ class _AddReviewPageState extends State<AddReviewPage> {
                 },
               ),
               const SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: isLoading ? null : _submitReview,
-                child:
-                    isLoading
-                        ? const CircularProgressIndicator()
-                        : const Text('Submit Review'),
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0, bottom: 16.0),
+                child: ElevatedButton(
+                  onPressed: isLoading ? null : _submitReview,
+                  child:
+                      isLoading
+                          ? const CircularProgressIndicator()
+                          : const Text('Submit Review'),
+                ),
               ),
             ],
           ),
