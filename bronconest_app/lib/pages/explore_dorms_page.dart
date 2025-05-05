@@ -110,6 +110,7 @@ class _ExploreDormsPageState extends State<ExploreDormsPage> {
                     dorm: dorm,
                     isSaved: isSaved,
                     toggleSavedPlace: _toggleSavedPlace,
+                    runOnPop: _fetchDorms,
                   );
                 },
               ),

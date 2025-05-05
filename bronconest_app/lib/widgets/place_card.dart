@@ -15,6 +15,7 @@ class PlaceCard extends StatefulWidget {
     required this.toggleSavedPlace,
     this.showScoreRow = true,
     this.schoolId,
+    this.runOnPop,
   });
 
   Dorm dorm;
@@ -22,6 +23,7 @@ class PlaceCard extends StatefulWidget {
   Function toggleSavedPlace;
   bool showScoreRow;
   String? schoolId;
+  Function? runOnPop;
 
   @override
   State<PlaceCard> createState() => _PlaceCardState();
@@ -38,15 +40,21 @@ class _PlaceCardState extends State<PlaceCard> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder:
-                (context) => DormReviewsPage(
-                  dorm: widget.dorm,
-                  schoolId: widget.schoolId,
-                ),
-          ),
-        );
+        Navigator.of(context)
+            .push(
+              MaterialPageRoute(
+                builder:
+                    (context) => DormReviewsPage(
+                      dorm: widget.dorm,
+                      schoolId: widget.schoolId,
+                    ),
+              ),
+            )
+            .then((_) async {
+              if (widget.runOnPop != null) {
+                await widget.runOnPop!();
+              }
+            });
       },
       child: Card(
         elevation: 5.0,
@@ -150,7 +158,10 @@ class _PlaceCardState extends State<PlaceCard> {
                     ),
                   ),
                 Align(
-                  alignment: Alignment.centerRight,
+                  alignment:
+                      widget.schoolId != null
+                          ? Alignment.centerRight
+                          : Alignment.topRight,
                   child: IconButton(
                     icon: Icon(
                       widget.isSaved ? Icons.favorite : Icons.favorite_border,

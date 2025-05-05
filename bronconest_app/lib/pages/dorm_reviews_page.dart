@@ -13,7 +13,7 @@ class DormReviewsPage extends StatefulWidget {
   final Dorm dorm;
   final String? schoolId;
 
-  const DormReviewsPage({super.key, required this.dorm, this.schoolId});
+  DormReviewsPage({super.key, required this.dorm, this.schoolId});
 
   @override
   State<DormReviewsPage> createState() => _DormReviewsPageState();
@@ -23,6 +23,7 @@ class _DormReviewsPageState extends State<DormReviewsPage> {
   List<Review> reviews = [];
   bool isLoading = true;
   String schoolId = '';
+  bool isSaved = false;
 
   @override
   void initState() {
@@ -42,12 +43,23 @@ class _DormReviewsPageState extends State<DormReviewsPage> {
               .collection('reviews')
               .get();
 
+      final userSnapshot =
+          await FirebaseFirestore.instance
+              .collection('users')
+              .doc(userId)
+              .get();
+      List<dynamic> savedPlaces =
+          userSnapshot.data()?['savedPlaces'] as List<dynamic>;
+
       setState(() {
         reviews =
             reviewsSnapshot.docs
                 .map((doc) => Review.fromJSON(doc.data()))
                 .toList();
         reviews.sort((a, b) => b.timestamp.compareTo(a.timestamp));
+
+        isSaved = savedPlaces.contains(widget.dorm.id);
+
         isLoading = false;
       });
     } catch (e) {
@@ -57,6 +69,24 @@ class _DormReviewsPageState extends State<DormReviewsPage> {
         ).showSnackBar(SnackBar(content: Text('Error fetching reviews: $e')));
       }
     }
+  }
+
+  Future<void> _toggleSavedPlace(Dorm dorm) async {
+    final userDoc = FirebaseFirestore.instance.collection('users').doc(userId);
+
+    if (isSaved) {
+      await userDoc.update({
+        'savedPlaces': FieldValue.arrayRemove([dorm.id]),
+      });
+    } else {
+      await userDoc.update({
+        'savedPlaces': FieldValue.arrayUnion([dorm.id]),
+      });
+    }
+
+    setState(() {
+      isSaved = !isSaved;
+    });
   }
 
   @override
@@ -93,16 +123,32 @@ class _DormReviewsPageState extends State<DormReviewsPage> {
               ),
               ImageGradientOverlay(),
               SafeArea(
-                child: Align(
-                  alignment: Alignment.topLeft,
-                  child: IconButton(
-                    icon: Icon(
-                      Icons.arrow_back,
-                      color: Colors.white,
-                      size: 30.0,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+
+                  children: [
+                    // back page arrow
+                    IconButton(
+                      icon: Icon(
+                        Icons.arrow_back,
+                        color: Colors.white,
+                        size: 30.0,
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
                     ),
-                    onPressed: () => Navigator.of(context).pop(),
-                  ),
+                    // save place button
+                    IconButton(
+                      icon: Icon(
+                        isSaved ? Icons.favorite : Icons.favorite_outline,
+                        color: Colors.white,
+                        size: 30.0,
+                      ),
+                      onPressed: () => _toggleSavedPlace(widget.dorm),
+                    ),
+                  ],
                 ),
               ),
             ],

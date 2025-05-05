@@ -115,6 +115,7 @@ class _SavedPlacesPageState extends State<SavedPlacesPage> {
                     toggleSavedPlace: _toggleSavedPlace,
                     showScoreRow: false,
                     schoolId: dorm.schoolId,
+                    runOnPop: _fetchSavedPlaces,
                   );
                 },
               ),
