@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "853556404389-j4kci77dk73ipg99eopd52l2lfere59h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bronconest_app",
+            "certificate_hash": "a28a42fa0a8f4a8d2b252ba934d1226843f4c198"
+          }
+        },
+        {
           "client_id": "853556404389-sus8ekd5q9atvaefafuj05nru02v911p.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

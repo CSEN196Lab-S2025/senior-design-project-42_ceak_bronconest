@@ -70,6 +70,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '853556404389',
     projectId: 'bronconest-d1f01',
     storageBucket: 'bronconest-d1f01.firebasestorage.app',
+    androidClientId: '853556404389-j4kci77dk73ipg99eopd52l2lfere59h.apps.googleusercontent.com',
     iosClientId: '853556404389-ppc8e4u60ucm27s9oqr8pch8u7v0l5k2.apps.googleusercontent.com',
     iosBundleId: 'com.example.bronconestApp',
   );
