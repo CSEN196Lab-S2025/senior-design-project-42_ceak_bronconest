@@ -1,6 +1,5 @@
 import 'package:bronconest_app/widgets/custom_image.dart';
 import 'package:flutter/material.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:bronconest_app/models/dorm.dart';
 
 class AdminCard extends StatefulWidget {

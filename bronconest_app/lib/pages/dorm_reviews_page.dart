@@ -1,7 +1,6 @@
 import 'package:bronconest_app/widgets/custom_image.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:bronconest_app/models/review.dart';
 import 'package:bronconest_app/models/dorm.dart';
 import 'package:bronconest_app/widgets/review_card.dart';
@@ -14,7 +13,7 @@ class DormReviewsPage extends StatefulWidget {
   final Dorm dorm;
   final String? schoolId;
 
-  DormReviewsPage({super.key, required this.dorm, this.schoolId});
+  const DormReviewsPage({super.key, required this.dorm, this.schoolId});
 
   @override
   State<DormReviewsPage> createState() => _DormReviewsPageState();

@@ -212,7 +212,7 @@ class _HomePageState extends State<HomePage> {
                         onChanged: (String? newValue) async {
                           setState(() {
                             school = newValue!;
-                            
+
                             lastVideoPosition = Duration.zero;
                           });
 

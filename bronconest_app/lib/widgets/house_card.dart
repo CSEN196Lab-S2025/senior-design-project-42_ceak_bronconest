@@ -1,11 +1,11 @@
 import 'package:bronconest_app/widgets/custom_image.dart';
 import 'package:flutter/material.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:bronconest_app/models/house.dart';
 import 'package:bronconest_app/styles.dart';
 import 'package:bronconest_app/widgets/image_gradient_overlay.dart';
 
+//ignore: must_be_immutable
 class HouseCard extends StatefulWidget {
   final House house;
   bool isSaved;
