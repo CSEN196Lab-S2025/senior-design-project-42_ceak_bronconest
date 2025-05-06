@@ -1,3 +1,4 @@
+import 'package:bronconest_app/widgets/custom_image.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -106,19 +107,7 @@ class _DormReviewsPageState extends State<DormReviewsPage> {
                 ),
                 child: SizedBox(
                   height: 250,
-                  child: CachedNetworkImage(
-                    imageUrl: widget.dorm.coverImage,
-                    fit: BoxFit.cover,
-                    width: 2000, // lol this makes the cover fit the width
-                    placeholder:
-                        (context, url) => Center(
-                          child: const CircularProgressIndicator(
-                            color: Colors.white,
-                          ),
-                        ),
-                    errorWidget:
-                        (context, url, error) => const Icon(Icons.error),
-                  ),
+                  child: CustomImage(imageUrl: widget.dorm.coverImage),
                 ),
               ),
               ImageGradientOverlay(),

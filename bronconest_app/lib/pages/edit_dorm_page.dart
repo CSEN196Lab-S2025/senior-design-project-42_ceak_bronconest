@@ -180,6 +180,8 @@ class _EditDormPageState extends State<EditDormPage> {
                 decoration: const InputDecoration(
                   labelText: 'Short Description',
                 ),
+                minLines: 1,
+                maxLines: 4,
               ),
               const SizedBox(height: 16),
               TextField(

@@ -1,3 +1,4 @@
+import 'package:bronconest_app/widgets/custom_image.dart';
 import 'package:bronconest_app/widgets/image_gradient_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -67,18 +68,7 @@ class _PlaceCardState extends State<PlaceCard> {
             width: double.infinity,
             child: Stack(
               children: [
-                CachedNetworkImage(
-                  imageUrl: widget.dorm.coverImage,
-                  fit: BoxFit.cover,
-                  width: 2000, // lol this makes the cover fit the width
-                  placeholder:
-                      (context, url) => Center(
-                        child: const CircularProgressIndicator(
-                          color: Colors.white,
-                        ),
-                      ),
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
-                ),
+                CustomImage(imageUrl: widget.dorm.coverImage),
                 ImageGradientOverlay(),
                 Padding(
                   padding: const EdgeInsets.all(8.0),

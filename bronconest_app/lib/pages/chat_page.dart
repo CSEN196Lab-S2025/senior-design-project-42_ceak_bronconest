@@ -139,7 +139,6 @@ class _ChatPageState extends State<ChatPage> {
                       decoration: const InputDecoration(
                         hintText: 'Type a message...',
                       ),
-                      // expands: true,
                       maxLines: 10,
                       minLines: 1,
                     ),

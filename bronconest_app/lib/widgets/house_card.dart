@@ -1,3 +1,4 @@
+import 'package:bronconest_app/widgets/custom_image.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -72,18 +73,7 @@ class _HouseCardState extends State<HouseCard> {
             width: double.infinity,
             child: Stack(
               children: [
-                CachedNetworkImage(
-                  imageUrl: widget.house.image,
-                  fit: BoxFit.cover,
-                  width: 2000, // lol this makes the cover fit the width
-                  placeholder:
-                      (context, url) => Center(
-                        child: const CircularProgressIndicator(
-                          color: Colors.white,
-                        ),
-                      ),
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
-                ),
+                CustomImage(imageUrl: widget.house.image),
                 ImageGradientOverlay(),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
