@@ -31,7 +31,7 @@ def hello_world():
 
 #Initialize the Pinecone Vector DB
 pc = Pinecone(api_key=PINECONE_API_KEY)
-index = pc.Index("dormreviews")
+index = pc.Index(school="scu")
 
 #Initialize Groq
 client = Groq(api_key=GROQ_API_KEY)
@@ -67,6 +67,7 @@ def extract_json(text):
 #Vectorize and index SCU dorms
 def index_scu_dorms(school="scu"):
     dorms = db.collection("schools").document(school).collection("dorms").get()
+    index = pc.Index(school)
     for dorm_doc in dorms:
         dorm = dorm_doc.to_dict()
         dorm_id = dorm_doc.id
