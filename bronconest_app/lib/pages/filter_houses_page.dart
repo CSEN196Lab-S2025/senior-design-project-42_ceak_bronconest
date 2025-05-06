@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:bronconest_app/styles.dart';
 
 class FilterHousesPage extends StatefulWidget {
   const FilterHousesPage({super.key});
@@ -58,8 +59,6 @@ class _FilterHousesPageState extends State<FilterHousesPage> {
               isLoading
                   ? Center(
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: const [
                         CircularProgressIndicator(),
                         SizedBox(height: 16),
@@ -76,6 +75,7 @@ class _FilterHousesPageState extends State<FilterHousesPage> {
                   : Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      const SizedBox(height: 100),
                       const Text(
                         'Filter your house search using the options below:',
                         style: TextStyle(fontSize: 16),
@@ -115,39 +115,74 @@ class _FilterHousesPageState extends State<FilterHousesPage> {
                         },
                       ),
                       const SizedBox(height: 16),
-                      const Text('Minimum Bedrooms:'),
-                      Slider(
-                        value: _minBedrooms,
-                        min: 1,
-                        max: 10,
-                        divisions: 9,
-                        inactiveColor: Colors.black26,
-                        label: '${_minBedrooms.toInt()}',
-                        onChanged: (value) {
-                          setState(() {
-                            _minBedrooms = value;
-                          });
-                        },
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Column(
+                              children: [
+                                const Text('Minimum Bedrooms:'),
+                                DropdownMenu<double>(
+                                  onSelected: (value) {
+                                    setState(() {
+                                      _minBedrooms = value!;
+                                    });
+                                  },
+                                  dropdownMenuEntries:
+                                      [for (var i = 1; i <= 10; i++) i]
+                                          .map(
+                                            (i) => DropdownMenuEntry<double>(
+                                              value: i.toDouble(),
+                                              label: '${i.toInt()} bed',
+                                            ),
+                                          )
+                                          .toList(),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(width: 16),
+                          Expanded(
+                            child: Column(
+                              children: [
+                                const Text('Minimum Bathrooms:'),
+                                DropdownMenu<double>(
+                                  onSelected: (value) {
+                                    setState(() {
+                                      _minBathrooms = value!;
+                                    });
+                                  },
+                                  dropdownMenuEntries:
+                                      [for (var i = 1; i <= 10; i++) i]
+                                          .map(
+                                            (i) => DropdownMenuEntry<double>(
+                                              value: i.toDouble(),
+                                              label: '${i.toInt()} bath',
+                                            ),
+                                          )
+                                          .toList(),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
-                      const SizedBox(height: 16),
-                      const Text('Minimum Bathrooms:'),
-                      Slider(
-                        value: _minBathrooms,
-                        min: 1,
-                        max: 10,
-                        divisions: 9,
-                        inactiveColor: Colors.black26,
-                        label: '${_minBathrooms.toInt()}',
-                        onChanged: (value) {
-                          setState(() {
-                            _minBathrooms = value;
-                          });
-                        },
-                      ),
-                      const SizedBox(height: 16),
-                      ElevatedButton(
-                        onPressed: _submitFilter,
-                        child: const Text('Apply Filter'),
+                      const SizedBox(height: 50),
+                      Center(
+                        child: ElevatedButton(
+                          onPressed: _submitFilter,
+                          child: SizedBox(
+                            height: 50,
+                            width: 100,
+                            child: Center(
+                              child: Text(
+                                'Apply Filter',
+                                style: Styles.normalTextStyle.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
                     ],
                   ),

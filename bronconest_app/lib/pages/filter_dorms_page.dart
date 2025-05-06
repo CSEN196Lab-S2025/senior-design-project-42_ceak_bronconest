@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:bronconest_app/globals.dart';
+import 'package:bronconest_app/styles.dart';
 
 class FilterDormsPage extends StatefulWidget {
   const FilterDormsPage({super.key});
@@ -102,9 +103,8 @@ class _FilterDormsPageState extends State<FilterDormsPage> {
               isLoading
                   ? Center(
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: const [
+                        SizedBox(height: 300), // fake center lol
                         CircularProgressIndicator(),
                         SizedBox(height: 16),
                         Text(
@@ -118,7 +118,10 @@ class _FilterDormsPageState extends State<FilterDormsPage> {
                     ),
                   )
                   : Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      const SizedBox(height: 100),
                       const Text(
                         'Please tell us how you would like to filter the selection of dorms.',
                         style: TextStyle(fontSize: 16),
@@ -127,18 +130,31 @@ class _FilterDormsPageState extends State<FilterDormsPage> {
                         'Using the power of AI, we will filter the dorms based on your custom input. Things like "I want a dorm close to campus" and "I want a dorm with a good community" give a better rating.',
                         style: TextStyle(fontStyle: FontStyle.italic),
                       ),
+                      const SizedBox(height: 10),
                       TextField(
                         controller: _filterController,
                         decoration: const InputDecoration(
                           labelText: "Put whatever you'd like!",
                           border: OutlineInputBorder(),
                         ),
-                        maxLines: 5,
+                        minLines: 7,
+                        maxLines: 7,
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 50),
                       ElevatedButton(
                         onPressed: _submitFilter,
-                        child: const Text('Apply Filter'),
+                        child: SizedBox(
+                          height: 50,
+                          width: 100,
+                          child: Center(
+                            child: Text(
+                              'Apply Filter',
+                              style: Styles.normalTextStyle.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
                     ],
                   ),
