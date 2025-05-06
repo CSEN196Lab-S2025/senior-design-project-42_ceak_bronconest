@@ -174,88 +174,111 @@ class _ReviewTileState extends State<ReviewTile> {
     final bool canEdit = widget.review.userId == userId;
     final bool canDelete = widget.review.userId == userId || isAdmin;
 
-    return Card(
-      margin: const EdgeInsets.all(8.0),
-      child: ExpansionTile(
-        title: Text(
-          'User: ${widget.review.isAnonymous ? 'Anonymous' : widget.review.userName}',
-        ),
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(formatDate(widget.review.timestamp)),
-            Text(
-              widget.review.content,
-              maxLines: showFullContent ? null : 3,
-              overflow:
-                  showFullContent
-                      ? TextOverflow.visible
-                      : TextOverflow.ellipsis,
+    return Stack(
+      children: [
+        Card(
+          margin: const EdgeInsets.all(8.0),
+          child: ListTile(
+            title: Text(
+              'User: ${widget.review.isAnonymous ? 'Anonymous' : widget.review.userName}',
             ),
-            if (widget.review.content.length > 100)
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    showFullContent = !showFullContent;
-                  });
-                },
-                child: Text(
-                  showFullContent ? 'Show less' : 'Show more...',
-                  style: TextStyle(color: Theme.of(context).primaryColorDark),
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(formatDate(widget.review.timestamp)),
+                Text(
+                  widget.review.content,
+                  maxLines: showFullContent ? null : 3,
+                  overflow:
+                      showFullContent
+                          ? TextOverflow.visible
+                          : TextOverflow.ellipsis,
+                ),
+                if (widget.review.content.length > 100)
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        showFullContent = !showFullContent;
+                      });
+                    },
+                    child: Text(
+                      showFullContent ? 'Show less' : 'Show more...',
+                      style: TextStyle(
+                        color: Theme.of(context).primaryColorDark,
+                      ),
+                    ),
+                  ),
+                const SizedBox(height: 8.0),
+                Container(
+                  padding: const EdgeInsets.all(8.0),
+                  decoration: BoxDecoration(
+                    color: Theme.of(
+                      context,
+                    ).primaryColor.withValues(alpha: 0.1),
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  child: Wrap(
+                    spacing: 8.0,
+                    runSpacing: 4.0,
+
+                    children: [
+                      Text('Walkability: ${widget.review.walkability}'),
+                      Text('Cleanliness: ${widget.review.cleanliness}'),
+                      Text('Quietness: ${widget.review.quietness}'),
+                      Text('Comfort: ${widget.review.comfort}'),
+                      Text('Safety: ${widget.review.safety}'),
+                      Text('Amenities: ${widget.review.amenities}'),
+                      Text('Community: ${widget.review.community}'),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        canEdit || canDelete
+            ? Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Align(
+                alignment: Alignment.topRight,
+                child: PopupMenuButton(
+                  icon: Icon(Icons.more_vert),
+                  itemBuilder:
+                      (BuildContext context) => [
+                        if (canEdit)
+                          PopupMenuItem(
+                            child: Row(
+                              children: [Icon(Icons.edit), Text('Edit')],
+                            ),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder:
+                                      (context) => EditReviewPage(
+                                        review: widget.review,
+                                        dormId: widget.dormId,
+                                        onReviewChanged: widget.onReviewChanged,
+                                      ),
+                                ),
+                              );
+                            },
+                          ),
+                        if (canDelete)
+                          PopupMenuItem(
+                            child: Row(
+                              children: [Icon(Icons.delete), Text('Delete')],
+                            ),
+                            onTap: () {
+                              _deleteReview();
+                            },
+                          ),
+                      ],
                 ),
               ),
-            const SizedBox(height: 8.0),
-            Container(
-              padding: const EdgeInsets.all(8.0),
-              decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor.withValues(alpha: 0.1),
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-              child: Wrap(
-                spacing: 8.0,
-                runSpacing: 4.0,
-
-                children: [
-                  Text('Walkability: ${widget.review.walkability}'),
-                  Text('Cleanliness: ${widget.review.cleanliness}'),
-                  Text('Quietness: ${widget.review.quietness}'),
-                  Text('Comfort: ${widget.review.comfort}'),
-                  Text('Safety: ${widget.review.safety}'),
-                  Text('Amenities: ${widget.review.amenities}'),
-                  Text('Community: ${widget.review.community}'),
-                ],
-              ),
-            ),
-          ],
-        ),
-        showTrailingIcon: canEdit || canDelete,
-        children: [
-          if (canEdit)
-            ListTile(
-              title: const Text('Edit'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder:
-                        (context) => EditReviewPage(
-                          review: widget.review,
-                          dormId: widget.dormId,
-                          onReviewChanged: widget.onReviewChanged,
-                        ),
-                  ),
-                );
-              },
-            ),
-          if (canDelete)
-            ListTile(
-              title: const Text('Delete'),
-              onTap: () {
-                _deleteReview();
-              },
-            ),
-        ],
-      ),
+            )
+            : SizedBox.shrink(),
+      ],
     );
   }
 }
