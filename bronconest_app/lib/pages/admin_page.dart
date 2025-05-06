@@ -125,10 +125,7 @@ class _AdminPageState extends State<AdminPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Admin Page'),
-      ),
+      appBar: AppBar(title: const Text('Admin Page')),
       body:
           isLoading
               ? const Center(child: CircularProgressIndicator())

@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:bronconest_app/models/dorm.dart';
 import 'package:bronconest_app/globals.dart';
+import 'package:bronconest_app/styles.dart';
 
 class AddDormPage extends StatefulWidget {
   const AddDormPage({super.key});
@@ -154,27 +155,66 @@ class _AddDormPageState extends State<AddDormPage> {
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
           child: Column(
+            // spacing: 5.0,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Text('Basic Info', style: Styles.mediumTextStyle),
+              const SizedBox(height: 10),
               TextField(
                 controller: _nameController,
-                decoration: const InputDecoration(labelText: 'Name'),
+                decoration: InputDecoration(
+                  labelText: 'Name',
+                  border: OutlineInputBorder(),
+                ),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 10),
               TextField(
                 controller: _shortDescriptionController,
                 decoration: const InputDecoration(
                   labelText: 'Short Description',
+                  border: OutlineInputBorder(),
                 ),
                 minLines: 1,
                 maxLines: 4,
               ),
               const SizedBox(height: 16),
+              Text('Location', style: Styles.mediumTextStyle),
+              const SizedBox(height: 10),
               TextField(
                 controller: _addressController,
-                decoration: const InputDecoration(labelText: 'Address'),
+                decoration: const InputDecoration(
+                  labelText: 'Address',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              const SizedBox(height: 10),
+              Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: _latController,
+                      decoration: const InputDecoration(
+                        labelText: 'Latitude',
+                        border: OutlineInputBorder(),
+                      ),
+                      keyboardType: TextInputType.number,
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: TextField(
+                      controller: _longController,
+                      decoration: const InputDecoration(
+                        labelText: 'Longitude',
+                        border: OutlineInputBorder(),
+                      ),
+                      keyboardType: TextInputType.number,
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(height: 16),
+              Text('Media', style: Styles.mediumTextStyle),
               GestureDetector(
                 onTap: _pickImage,
                 child: Container(
@@ -191,24 +231,14 @@ class _AddDormPageState extends State<AddDormPage> {
                 ),
               ),
               const SizedBox(height: 16),
-              TextField(
-                controller: _latController,
-                decoration: const InputDecoration(labelText: 'Latitude'),
-                keyboardType: TextInputType.number,
-              ),
-              const SizedBox(height: 16),
-              TextField(
-                controller: _longController,
-                decoration: const InputDecoration(labelText: 'Longitude'),
-                keyboardType: TextInputType.number,
-              ),
-              const SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: isLoading ? null : _submitDorm,
-                child:
-                    isLoading
-                        ? const CircularProgressIndicator()
-                        : const Text('Add Dorm'),
+              Center(
+                child: ElevatedButton(
+                  onPressed: isLoading ? null : _submitDorm,
+                  child:
+                      isLoading
+                          ? const CircularProgressIndicator()
+                          : const Text('Add Dorm'),
+                ),
               ),
             ],
           ),

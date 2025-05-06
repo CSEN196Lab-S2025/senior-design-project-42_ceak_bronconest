@@ -130,7 +130,6 @@ class _ExploreHousesPageState extends State<ExploreHousesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Explore Houses')),
       body:
           isLoading
               ? const Center(child: CircularProgressIndicator())
