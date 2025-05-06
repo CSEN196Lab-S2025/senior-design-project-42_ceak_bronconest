@@ -115,7 +115,9 @@ class _WelcomePageState extends State<WelcomePage> {
         final bool isAdminNow =
             user.email != null && whitelist.contains(user.email);
         final bool isStudentNow =
-            user.email != null && user.email!.endsWith('.edu');
+            user.email != null &&
+            (user.email!.endsWith('.edu') ||
+                user.email! == 'bronconesttest@gmail.com');
 
         if (!userSnapshot.exists) {
           await userDoc.set({
