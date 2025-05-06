@@ -1,4 +1,4 @@
-import 'package:bronconest_app/widgets/place_card.dart';
+import 'package:bronconest_app/widgets/dorm_card.dart';
 import 'package:bronconest_app/widgets/house_card.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

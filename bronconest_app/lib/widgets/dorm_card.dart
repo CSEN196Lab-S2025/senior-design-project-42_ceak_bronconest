@@ -97,71 +97,72 @@ class _PlaceCardState extends State<PlaceCard> {
                         ),
                       ),
                       Spacer(),
-                      if (widget.showScoreRow)
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          spacing: 8.0,
-                          children:
-                              widget.dorm.ratingScores
-                                  .sublist(0, 3)
-                                  .map(
-                                    (e) => Container(
-                                      decoration: BoxDecoration(
-                                        color: Color.fromARGB(100, 0, 0, 0),
-                                        borderRadius: BorderRadius.circular(
-                                          10.0,
+                      widget.schoolId == null
+                          ? Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            spacing: 8.0,
+                            children:
+                                widget.dorm.ratingScores
+                                    .sublist(0, 3)
+                                    .map(
+                                      (e) => Container(
+                                        decoration: BoxDecoration(
+                                          color: Color.fromARGB(100, 0, 0, 0),
+                                          borderRadius: BorderRadius.circular(
+                                            10.0,
+                                          ),
+                                        ),
+                                        child: Padding(
+                                          padding: EdgeInsets.all(3.5),
+                                          child: Row(
+                                            children: [
+                                              Icon(e.icon, color: Colors.white),
+                                              Text(
+                                                ' ${e.scoreString}',
+                                                style: Styles.smallTextStyle
+                                                    .copyWith(
+                                                      color: Colors.white,
+                                                    ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                      child: Padding(
-                                        padding: EdgeInsets.all(3.5),
-                                        child: Row(
-                                          children: [
-                                            Icon(e.icon, color: Colors.white),
-                                            Text(
-                                              ' ${e.scoreString}',
-                                              style: Styles.smallTextStyle
-                                                  .copyWith(
-                                                    color: Colors.white,
-                                                  ),
-                                            ),
-                                          ],
+                                    )
+                                    .toList(),
+                          )
+                          : Align(
+                            alignment: Alignment.bottomLeft,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder:
+                                        (context) => ChatPage(
+                                          schoolId: widget.schoolId!,
+                                          dorm: widget.dorm,
                                         ),
-                                      ),
-                                    ),
-                                  )
-                                  .toList(),
-                        ),
+                                  ),
+                                );
+                              },
+                              child: Row(
+                                spacing: 8.0,
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  const Icon(Icons.chat),
+                                  const Text('Chat'),
+                                ],
+                              ),
+                            ),
+                          ),
                     ],
                   ),
                 ),
-                if (widget.schoolId != null)
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        IconButton(
-                          icon: const Icon(Icons.chat, color: Colors.white),
-                          onPressed: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder:
-                                    (context) => ChatPage(
-                                      schoolId: widget.schoolId!,
-                                      dorm: widget.dorm,
-                                    ),
-                              ),
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
                 Align(
-                  alignment:
-                      widget.schoolId != null
-                          ? Alignment.centerRight
-                          : Alignment.topRight,
+                  alignment: Alignment.topRight,
                   child: IconButton(
                     icon: Icon(
                       widget.isSaved ? Icons.favorite : Icons.favorite_border,
