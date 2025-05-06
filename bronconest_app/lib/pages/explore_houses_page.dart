@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:bronconest_app/models/house.dart';
 import 'package:bronconest_app/widgets/house_card.dart';
+import 'package:bronconest_app/pages/filter_houses_page.dart';
 import 'package:bronconest_app/globals.dart';
 
 class ExploreHousesPage extends StatefulWidget {
@@ -22,7 +23,7 @@ class _ExploreHousesPageState extends State<ExploreHousesPage> {
     _fetchHouses();
   }
 
-  Future<void> _fetchHouses() async {
+  Future<void> _fetchHouses({Map<String, dynamic>? filters}) async {
     try {
       final housesSnapshot =
           await FirebaseFirestore.instance
@@ -36,11 +37,48 @@ class _ExploreHousesPageState extends State<ExploreHousesPage> {
               .doc(userId)
               .get();
 
+      List<House> filteredHouses =
+          housesSnapshot.docs.map((doc) => House.fromJSON(doc.data())).toList();
+
+      if (filters != null) {
+        filteredHouses =
+            filteredHouses.where((house) {
+              final matchesPrice =
+                  (filters['minPrice'] == null ||
+                      (int.parse(
+                            house.price
+                                .replaceAll('+', '')
+                                .replaceAll('\$', '')
+                                .replaceAll(',', ''),
+                          ) >=
+                          filters['minPrice'])) &&
+                  (filters['maxPrice'] == null ||
+                      (int.parse(
+                            house.price
+                                .replaceAll('+', '')
+                                .replaceAll('\$', '')
+                                .replaceAll(',', ''),
+                          ) <=
+                          filters['maxPrice']));
+              final matchesDistance =
+                  filters['maxDistance'] == null ||
+                  (house.distanceFromSchool != null &&
+                      house.distanceFromSchool! <= filters['maxDistance']);
+              final matchesBedrooms =
+                  filters['minBedrooms'] == null ||
+                  house.bedrooms >= filters['minBedrooms'];
+              final matchesBathrooms =
+                  filters['minBathrooms'] == null ||
+                  (house.bathrooms != null &&
+                      house.bathrooms! >= filters['minBathrooms']);
+              return matchesPrice &&
+                  matchesDistance &&
+                  matchesBedrooms &&
+                  matchesBathrooms;
+            }).toList();
+      }
       setState(() {
-        houses =
-            housesSnapshot.docs
-                .map((doc) => House.fromJSON(doc.data()))
-                .toList();
+        houses = filteredHouses;
         savedPlaceIds =
             userSnapshot.data()?['savedPlaces'] != null
                 ? List<String>.from(userSnapshot.data()!['savedPlaces'])
@@ -76,6 +114,19 @@ class _ExploreHousesPageState extends State<ExploreHousesPage> {
     }
   }
 
+  Future<void> _navigateToFilterPage() async {
+    final filters = await Navigator.of(
+      context,
+    ).push(MaterialPageRoute(builder: (context) => const FilterHousesPage()));
+
+    if (filters != null && filters is Map<String, dynamic>) {
+      setState(() {
+        isLoading = true;
+      });
+      await _fetchHouses(filters: filters);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -95,6 +146,10 @@ class _ExploreHousesPageState extends State<ExploreHousesPage> {
                   );
                 },
               ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _navigateToFilterPage,
+        child: const Icon(Icons.filter_list),
+      ),
     );
   }
 }

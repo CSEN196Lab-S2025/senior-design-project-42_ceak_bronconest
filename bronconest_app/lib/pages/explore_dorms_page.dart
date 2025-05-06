@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:bronconest_app/models/dorm.dart';
 import 'package:bronconest_app/globals.dart';
 import 'package:bronconest_app/widgets/place_card.dart';
-import 'package:bronconest_app/pages/filter_page.dart';
+import 'package:bronconest_app/pages/filter_dorms_page.dart';
 
 class ExploreDormsPage extends StatefulWidget {
   const ExploreDormsPage({super.key});
@@ -78,7 +78,7 @@ class _ExploreDormsPageState extends State<ExploreDormsPage> {
   Future<void> _navigateToFilterPage() async {
     final sortedIds = await Navigator.of(
       context,
-    ).push(MaterialPageRoute(builder: (context) => const FilterPage()));
+    ).push(MaterialPageRoute(builder: (context) => const FilterDormsPage()));
 
     if (sortedIds != null) {
       setState(() {

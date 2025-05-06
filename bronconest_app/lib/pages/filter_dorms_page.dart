@@ -3,14 +3,14 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:bronconest_app/globals.dart';
 
-class FilterPage extends StatefulWidget {
-  const FilterPage({super.key});
+class FilterDormsPage extends StatefulWidget {
+  const FilterDormsPage({super.key});
 
   @override
-  State<FilterPage> createState() => _FilterPageState();
+  State<FilterDormsPage> createState() => _FilterDormsPageState();
 }
 
-class _FilterPageState extends State<FilterPage> {
+class _FilterDormsPageState extends State<FilterDormsPage> {
   final TextEditingController _filterController = TextEditingController();
   bool isLoading = false;
 
