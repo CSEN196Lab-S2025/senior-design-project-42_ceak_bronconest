@@ -1,7 +1,9 @@
 import 'package:bronconest_app/widgets/place_card.dart';
+import 'package:bronconest_app/widgets/house_card.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:bronconest_app/models/dorm.dart';
+import 'package:bronconest_app/models/house.dart';
 import 'package:bronconest_app/globals.dart';
 
 class SavedPlacesPage extends StatefulWidget {
@@ -12,7 +14,7 @@ class SavedPlacesPage extends StatefulWidget {
 }
 
 class _SavedPlacesPageState extends State<SavedPlacesPage> {
-  List<Dorm> savedPlaces = [];
+  List<dynamic> savedPlaces = [];
   bool isLoading = true;
 
   @override
@@ -40,25 +42,48 @@ class _SavedPlacesPageState extends State<SavedPlacesPage> {
               await FirebaseFirestore.instance.collection('schools').get();
 
           savedPlaces = await Future.wait(
-            savedPlacesList.map((dormId) async {
+            savedPlacesList.map((placeId) async {
+              dynamic foundPlace;
               for (final schoolDoc in schoolSnapshot.docs) {
                 final dormSnapshot =
                     await FirebaseFirestore.instance
                         .collection('schools')
                         .doc(schoolDoc.id)
                         .collection('dorms')
-                        .doc(dormId)
+                        .doc(placeId)
                         .get();
 
                 if (dormSnapshot.exists) {
                   final dorm = Dorm.fromJSON(dormSnapshot.data()!);
                   dorm.schoolId = schoolDoc.id;
-                  return dorm;
+                  foundPlace = dorm;
+                  break;
+                }
+
+                final houseSnapshot =
+                    await FirebaseFirestore.instance
+                        .collection('schools')
+                        .doc(schoolDoc.id)
+                        .collection('houses')
+                        .doc(placeId)
+                        .get();
+
+                if (houseSnapshot.exists) {
+                  final house = House.fromJSON(houseSnapshot.data()!);
+                  house.schoolId = schoolDoc.id;
+                  foundPlace = house;
+                  break;
                 }
               }
-              return null;
+              if (foundPlace == null && mounted) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('No saved places found')),
+                );
+              }
+
+              return foundPlace;
             }),
-          ).then((dorms) => dorms.whereType<Dorm>().toList());
+          ).then((places) => places.where((place) => place != null).toList());
         }
       } else {
         savedPlaces = [];
@@ -76,15 +101,15 @@ class _SavedPlacesPageState extends State<SavedPlacesPage> {
     }
   }
 
-  Future<void> _toggleSavedPlace(Dorm dorm) async {
+  Future<void> _toggleSavedPlace(dynamic place) async {
     final userDoc = FirebaseFirestore.instance.collection('users').doc(userId);
 
     await userDoc.update({
-      'savedPlaces': FieldValue.arrayRemove([dorm.id]),
+      'savedPlaces': FieldValue.arrayRemove([place.id]),
     });
 
     setState(() {
-      savedPlaces.remove(dorm);
+      savedPlaces.remove(place);
     });
   }
 
@@ -108,15 +133,25 @@ class _SavedPlacesPageState extends State<SavedPlacesPage> {
               : ListView.builder(
                 itemCount: savedPlaces.length,
                 itemBuilder: (context, index) {
-                  final dorm = savedPlaces[index];
-                  return PlaceCard(
-                    dorm: dorm,
-                    isSaved: true,
-                    toggleSavedPlace: _toggleSavedPlace,
-                    showScoreRow: false,
-                    schoolId: dorm.schoolId,
-                    runOnPop: _fetchSavedPlaces,
-                  );
+                  final place = savedPlaces[index];
+                  if (place is Dorm) {
+                    return PlaceCard(
+                      dorm: place,
+                      isSaved: true,
+                      toggleSavedPlace: _toggleSavedPlace,
+                      showScoreRow: false,
+                      schoolId: place.schoolId,
+                      runOnPop: _fetchSavedPlaces,
+                    );
+                  } else if (place is House) {
+                    return HouseCard(
+                      house: place,
+                      isSaved: true,
+                      toggleSavedPlace: _toggleSavedPlace,
+                    );
+                  } else {
+                    return const SizedBox.shrink();
+                  }
                 },
               ),
     );

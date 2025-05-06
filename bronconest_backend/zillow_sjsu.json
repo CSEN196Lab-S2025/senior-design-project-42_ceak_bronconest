@@ -1,0 +1,2148 @@
+{
+  "props": [
+    {
+      "bathrooms": 2,
+      "carouselPhotos": [
+        {
+          "url": "https://photos.zillowstatic.com/fp/483d6c94b4e8c20d2ba52b6cf17147a1-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/a35cf4348809599eea204aa6cc585ca5-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/63443dbfb10987e431d3aa9d3b0dd5bd-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/68180138f0d681087b53e5ab175f9d52-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/4ad972572b73779ca2dfd2575722bddc-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/22c18af1b5e8195d18c4d7eb21489456-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/f87c524a5df2a4e45b10beb6c421430e-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/11f674b2408c24325fe3989aee9b9c4c-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/6e64de979ec3a23597d06a83c69cef5b-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/c7abc2ab448a90c3b39eba5a765bed99-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/edda58d74feb8b9e2a418c436b8c4813-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/ef76a0f9e188f9ff5d91564f63114726-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/bbf49c5a0f2df864fc0dd7b3fdd605f4-p_e.jpg"
+        }
+      ],
+      "has3DModel": false,
+      "propertyType": "APARTMENT",
+      "longitude": -121.8776,
+      "unit": "# C",
+      "address": "370 N 18th St #C, San Jose, CA 95112",
+      "livingArea": 798,
+      "variableData": {
+        "type": "TIME_ON_INFO",
+        "data": {
+          "isRead": null,
+          "isFresh": true
+        },
+        "text": "4 hours ago"
+      },
+      "rentZestimate": 2918,
+      "zestimate": null,
+      "imgSrc": "https://photos.zillowstatic.com/fp/483d6c94b4e8c20d2ba52b6cf17147a1-p_e.jpg",
+      "latitude": 37.350334,
+      "price": 2900,
+      "bedrooms": 2,
+      "lotAreaValue": null,
+      "hasVideo": false,
+      "lotAreaUnit": null,
+      "listingStatus": "FOR_RENT",
+      "zpid": "2055053361",
+      "listingSubType": {},
+      "detailUrl": "/homedetails/370-N-18th-St-C-San-Jose-CA-95112/2055053361_zpid/",
+      "contingentListingType": null,
+      "daysOnZillow": 0,
+      "datePriceChanged": null,
+      "country": "USA",
+      "currency": "USD",
+      "comingSoonOnMarketDate": null,
+      "hasImage": true
+    },
+    {
+      "longitude": -121.91498,
+      "units": [
+        {
+          "roomForRent": false,
+          "beds": "1",
+          "price": "$2,569+"
+        },
+        {
+          "roomForRent": false,
+          "beds": "2",
+          "price": "$4,047+"
+        }
+      ],
+      "availabilityCount": 5,
+      "detailUrl": "/apartments/san-jose-ca/century-towers/CkBCHY/",
+      "has3DModel": true,
+      "listingStatus": "FOR_RENT",
+      "zpid": "37.367737--121.91498",
+      "isInstantTourEnabled": true,
+      "buildingName": "Century Towers",
+      "address": "1729 N 1st St, San Jose, CA",
+      "latitude": 37.367737,
+      "isContactable": true,
+      "hasImage": true,
+      "lotId": 2750773542,
+      "imgSrc": "https://photos.zillowstatic.com/fp/197604758a0034486b9478e55eec6ea4-p_e.jpg",
+      "isBuilding": true
+    },
+    {
+      "longitude": -121.89302,
+      "units": [
+        {
+          "roomForRent": false,
+          "beds": "0",
+          "price": "$2,740+"
+        },
+        {
+          "roomForRent": false,
+          "beds": "1",
+          "price": "$3,182+"
+        },
+        {
+          "roomForRent": false,
+          "beds": "2",
+          "price": "$4,019+"
+        },
+        {
+          "roomForRent": false,
+          "beds": "3",
+          "price": "$5,580+"
+        }
+      ],
+      "availabilityCount": 39,
+      "detailUrl": "/apartments/san-jose-ca/sixth-and-jackson/CjmJ4H/",
+      "has3DModel": true,
+      "listingStatus": "FOR_RENT",
+      "zpid": "37.35003--121.89302",
+      "isInstantTourEnabled": false,
+      "buildingName": "Sixth and Jackson",
+      "address": "620 N 6th St, San Jose, CA",
+      "latitude": 37.35003,
+      "isContactable": true,
+      "hasImage": true,
+      "lotId": 2748432014,
+      "imgSrc": "https://photos.zillowstatic.com/fp/9bd2be3cdc35955a873f21ea070b4d96-p_e.jpg",
+      "isBuilding": true
+    },
+    {
+      "longitude": -121.88481,
+      "units": [
+        {
+          "roomForRent": false,
+          "beds": "0",
+          "price": "$1,926+"
+        },
+        {
+          "roomForRent": false,
+          "beds": "1",
+          "price": "$2,126+"
+        },
+        {
+          "roomForRent": false,
+          "beds": "2",
+          "price": "$2,745+"
+        }
+      ],
+      "availabilityCount": 10,
+      "detailUrl": "/apartments/san-jose-ca/the-colonnade-apartments/5XjVTk/",
+      "has3DModel": false,
+      "listingStatus": "FOR_RENT",
+      "zpid": "37.3337--121.88481",
+      "isInstantTourEnabled": false,
+      "buildingName": "The Colonnade Apartments",
+      "address": "201 S 4th St, San Jose, CA",
+      "latitude": 37.3337,
+      "isContactable": true,
+      "hasImage": true,
+      "lotId": 1001487075,
+      "imgSrc": "https://photos.zillowstatic.com/fp/a148a479f6125236d9ccd72451c26d64-p_e.jpg",
+      "isBuilding": true
+    },
+    {
+      "longitude": -121.8762,
+      "units": [
+        {
+          "roomForRent": false,
+          "beds": "1",
+          "price": "$2,731+"
+        },
+        {
+          "roomForRent": false,
+          "beds": "2",
+          "price": "$3,285+"
+        }
+      ],
+      "availabilityCount": 11,
+      "detailUrl": "/apartments/san-jose-ca/foundry-commons/CkBCm7/",
+      "has3DModel": false,
+      "listingStatus": "FOR_RENT",
+      "zpid": "37.325615--121.8762",
+      "isInstantTourEnabled": false,
+      "buildingName": "Foundry Commons",
+      "address": "868 S 5th St, San Jose, CA",
+      "latitude": 37.325615,
+      "isContactable": true,
+      "hasImage": true,
+      "lotId": 2750774696,
+      "imgSrc": "https://photos.zillowstatic.com/fp/da9720b46402aa9f7134eda0d85cdea3-p_e.jpg",
+      "isBuilding": true
+    },
+    {
+      "longitude": -121.89107,
+      "units": [
+        {
+          "roomForRent": false,
+          "beds": "1",
+          "price": "$3,006+"
+        },
+        {
+          "roomForRent": false,
+          "beds": "2",
+          "price": "$3,316+"
+        }
+      ],
+      "availabilityCount": 12,
+      "detailUrl": "/apartments/san-jose-ca/exhibit-at-j-town-apartments/CkCPCB/",
+      "has3DModel": false,
+      "listingStatus": "FOR_RENT",
+      "zpid": "37.34807--121.89107",
+      "isInstantTourEnabled": false,
+      "buildingName": "Exhibit at J Town Apartments",
+      "address": "525 N 7th St, San Jose, CA",
+      "latitude": 37.34807,
+      "isContactable": true,
+      "hasImage": true,
+      "lotId": 2750914986,
+      "imgSrc": "https://photos.zillowstatic.com/fp/429acb69d61b2b370dff2a34b23b5873-p_e.jpg",
+      "isBuilding": true
+    },
+    {
+      "longitude": -121.89316,
+      "units": [
+        {
+          "roomForRent": false,
+          "beds": "1",
+          "price": "$2,720+"
+        },
+        {
+          "roomForRent": false,
+          "beds": "2",
+          "price": "$3,375+"
+        }
+      ],
+      "availabilityCount": 4,
+      "detailUrl": "/apartments/san-jose-ca/mio/65cRs3/",
+      "has3DModel": true,
+      "listingStatus": "FOR_RENT",
+      "zpid": "37.352154--121.89316",
+      "isInstantTourEnabled": true,
+      "buildingName": "Mio",
+      "address": "688 N 7th St, San Jose, CA",
+      "latitude": 37.352154,
+      "isContactable": true,
+      "hasImage": true,
+      "lotId": 1150777349,
+      "imgSrc": "https://photos.zillowstatic.com/fp/a75dfe6899cbfb130de79fa786eb9df6-p_e.jpg",
+      "isBuilding": true
+    },
+    {
+      "longitude": -121.886665,
+      "units": [
+        {
+          "roomForRent": false,
+          "beds": "0",
+          "price": "$2,349+"
+        },
+        {
+          "roomForRent": false,
+          "beds": "1",
+          "price": "$2,419+"
+        },
+        {
+          "roomForRent": false,
+          "beds": "2",
+          "price": "$3,274+"
+        }
+      ],
+      "availabilityCount": 15,
+      "detailUrl": "/apartments/san-jose-ca/101-san-fernando/5XjQ2y/",
+      "has3DModel": true,
+      "listingStatus": "FOR_RENT",
+      "zpid": "37.33571--121.886665",
+      "isInstantTourEnabled": true,
+      "buildingName": "101 San Fernando",
+      "address": "101 E San Fernando St, San Jose, CA",
+      "latitude": 37.33571,
+      "isContactable": true,
+      "hasImage": true,
+      "lotId": 1001476355,
+      "imgSrc": "https://photos.zillowstatic.com/fp/15b682b90daf997066a24bdd77f99e65-p_e.jpg",
+      "isBuilding": true
+    },
+    {
+      "longitude": -121.89218,
+      "units": [
+        {
+          "roomForRent": false,
+          "beds": "0",
+          "price": "$2,875+"
+        },
+        {
+          "roomForRent": false,
+          "beds": "1",
+          "price": "$3,155+"
+        },
+        {
+          "roomForRent": false,
+          "beds": "2",
+          "price": "$4,035+"
+        }
+      ],
+      "availabilityCount": 18,
+      "detailUrl": "/apartments/san-jose-ca/cannery-park-by-windsor/CjmGqm/",
+      "has3DModel": true,
+      "listingStatus": "FOR_RENT",
+      "zpid": "37.35445--121.89218",
+      "isInstantTourEnabled": true,
+      "buildingName": "Cannery Park by Windsor",
+      "address": "415 E Taylor St, San Jose, CA",
+      "latitude": 37.35445,
+      "isContactable": true,
+      "hasImage": true,
+      "lotId": 2748429098,
+      "imgSrc": "https://photos.zillowstatic.com/fp/011a93036ef50b859043cff31953ba53-p_e.jpg",
+      "isBuilding": true
+    },
+    {
+      "bathrooms": 1,
+      "carouselPhotos": [
+        {
+          "url": "https://photos.zillowstatic.com/fp/caf0011e2005d5d7656b816abc8c9cd5-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/67fb0dfbada5d9256f9bbf87c1a08d38-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/0b1c2cd899833a83bd112ea0bc3d494e-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/98990a82dfd87594e88cd5bd05433103-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/58a5e8e4f823974fe37ba036e6d9026a-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/ea972f45ff2d96c3daa1192c23cf924f-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/8f7764b6b62be74f3a9dfbeb16970b5c-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/ad8cf60bed87dd18e2b7845e8b44a0b3-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/da6be2cd5e7bc34532f8270421fb7a72-p_e.jpg"
+        }
+      ],
+      "has3DModel": false,
+      "propertyType": "APARTMENT",
+      "longitude": -121.88292,
+      "unit": "Apt 3",
+      "address": "381 N 13th St APT 3, San Jose, CA 95112",
+      "livingArea": 785,
+      "variableData": {
+        "type": "TIME_ON_INFO",
+        "data": {
+          "isRead": null,
+          "isFresh": false
+        },
+        "text": "3 days ago"
+      },
+      "rentZestimate": 2613,
+      "zestimate": null,
+      "imgSrc": "https://photos.zillowstatic.com/fp/caf0011e2005d5d7656b816abc8c9cd5-p_e.jpg",
+      "latitude": 37.34796,
+      "price": 2250,
+      "bedrooms": 2,
+      "lotAreaValue": null,
+      "hasVideo": false,
+      "lotAreaUnit": null,
+      "listingStatus": "FOR_RENT",
+      "zpid": "339977889",
+      "listingSubType": {},
+      "detailUrl": "/homedetails/381-N-13th-St-APT-3-San-Jose-CA-95112/339977889_zpid/",
+      "contingentListingType": null,
+      "daysOnZillow": 3,
+      "datePriceChanged": null,
+      "country": "USA",
+      "currency": "USD",
+      "comingSoonOnMarketDate": null,
+      "hasImage": true
+    },
+    {
+      "bathrooms": 1,
+      "carouselPhotos": [
+        {
+          "url": "https://photos.zillowstatic.com/fp/8c32b8cf94dadf8d286654a471842042-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/342f8b1a742baba970badc333e87d200-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/007cbb6f0007061bcd4a0c7a89a46512-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/8dad0b789fab402484e080bfe8dd7ab4-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/802e00111a879fb22f8e6177aa9b8f3f-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/320d95fed190163906a8a1a6a67335ff-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/60123deb176f4bbf71c4b65f34643a5c-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/ad8cf60bed87dd18e2b7845e8b44a0b3-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/da6be2cd5e7bc34532f8270421fb7a72-p_e.jpg"
+        }
+      ],
+      "has3DModel": false,
+      "propertyType": "APARTMENT",
+      "longitude": -121.89759,
+      "address": "595 N 2nd St, San Jose, CA 95112",
+      "livingArea": 600,
+      "variableData": {
+        "type": "TIME_ON_INFO",
+        "data": {
+          "isRead": null,
+          "isFresh": false
+        },
+        "text": "3 days ago"
+      },
+      "rentZestimate": 2279,
+      "zestimate": null,
+      "imgSrc": "https://photos.zillowstatic.com/fp/8c32b8cf94dadf8d286654a471842042-p_e.jpg",
+      "latitude": 37.347168,
+      "price": 2245,
+      "bedrooms": 1,
+      "lotAreaValue": null,
+      "hasVideo": false,
+      "lotAreaUnit": null,
+      "listingStatus": "FOR_RENT",
+      "zpid": "2108873889",
+      "listingSubType": {},
+      "detailUrl": "/homedetails/595-N-2nd-St-San-Jose-CA-95112/2108873889_zpid/",
+      "contingentListingType": null,
+      "daysOnZillow": 3,
+      "datePriceChanged": null,
+      "country": "USA",
+      "currency": "USD",
+      "comingSoonOnMarketDate": null,
+      "hasImage": true
+    },
+    {
+      "bathrooms": 1,
+      "carouselPhotos": [
+        {
+          "url": "https://photos.zillowstatic.com/fp/d63b5adb1ce81d96875c703823a58512-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/d4fb71ea85f8110b3edd58b78dd5611c-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/e99563981fa5cda295b9574c7aec1eb0-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/e20e854d02aa3c21a41eccc2f1d96bb6-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/d9d8436e0a76b17c981772ceccd2a8c2-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/a3bd51ad9b38942a6ae5076293ce17a1-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/4ad838b490257a97fcd1682831a33796-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/19d255a3d6e70f447ca063570d6bc21a-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/095a391eac82dbb060622edb387b8fc6-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/474a067994438b0eacf597c73df67081-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/df447d655872e458a9d2cc972a803eed-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/63055b09cb70c4ee880a0c048449495e-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/f642d0e5858ad1b83a26d1249d5de36a-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/de186da6287057cdb6edf760d7bfc6a4-p_e.jpg"
+        }
+      ],
+      "has3DModel": false,
+      "propertyType": "APARTMENT",
+      "longitude": -121.89064,
+      "address": "579 Vestal St, San Jose, CA 95112",
+      "livingArea": 500,
+      "variableData": {
+        "type": "TIME_ON_INFO",
+        "data": {
+          "isRead": null,
+          "isFresh": false
+        },
+        "text": "3 days ago"
+      },
+      "rentZestimate": 2084,
+      "zestimate": null,
+      "imgSrc": "https://photos.zillowstatic.com/fp/d63b5adb1ce81d96875c703823a58512-p_e.jpg",
+      "latitude": 37.35813,
+      "price": 2295,
+      "bedrooms": 0,
+      "lotAreaValue": null,
+      "hasVideo": false,
+      "lotAreaUnit": null,
+      "listingStatus": "FOR_RENT",
+      "zpid": "2087004888",
+      "listingSubType": {},
+      "detailUrl": "/homedetails/579-Vestal-St-San-Jose-CA-95112/2087004888_zpid/",
+      "contingentListingType": null,
+      "daysOnZillow": 3,
+      "datePriceChanged": null,
+      "country": "USA",
+      "currency": "USD",
+      "comingSoonOnMarketDate": null,
+      "hasImage": true
+    },
+    {
+      "longitude": -121.91071,
+      "units": [
+        {
+          "roomForRent": false,
+          "beds": "1",
+          "price": "$2,479+"
+        },
+        {
+          "roomForRent": false,
+          "beds": "2",
+          "price": "$3,134+"
+        }
+      ],
+      "availabilityCount": 13,
+      "detailUrl": "/apartments/san-jose-ca/waterford-place/5XjQRX/",
+      "has3DModel": true,
+      "listingStatus": "FOR_RENT",
+      "zpid": "37.366043--121.91071",
+      "isInstantTourEnabled": true,
+      "buildingName": "Waterford Place",
+      "address": "1700 N 1st St, San Jose, CA",
+      "latitude": 37.366043,
+      "isContactable": true,
+      "hasImage": true,
+      "lotId": 1001477363,
+      "imgSrc": "https://photos.zillowstatic.com/fp/e5a9eafa79e4964e6e6469b6c8d0bf56-p_e.jpg",
+      "isBuilding": true
+    },
+    {
+      "longitude": -121.89115,
+      "units": [
+        {
+          "roomForRent": false,
+          "beds": "1",
+          "price": "$2,809+"
+        },
+        {
+          "roomForRent": false,
+          "beds": "3",
+          "price": "$4,649+"
+        }
+      ],
+      "availabilityCount": 4,
+      "detailUrl": "/apartments/san-jose-ca/the-esplanade/5XjVsF/",
+      "has3DModel": true,
+      "listingStatus": "FOR_RENT",
+      "zpid": "37.351303--121.89115",
+      "isInstantTourEnabled": true,
+      "buildingName": "The Esplanade",
+      "address": "350 E Taylor St, San Jose, CA",
+      "latitude": 37.351303,
+      "isContactable": true,
+      "hasImage": true,
+      "lotId": 1001487981,
+      "imgSrc": "https://photos.zillowstatic.com/fp/28eb9a12e9074452c7aaa190da072614-p_e.jpg",
+      "isBuilding": true
+    },
+    {
+      "bathrooms": 1,
+      "carouselPhotos": [
+        {
+          "url": "https://photos.zillowstatic.com/fp/b33368f826c75beb0bb381a9debce402-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/c889bdfe112c1697f3b7e8e48a412b1e-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/92ffd2ac6e407285076719ad0598558d-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/7056b5dd4e0905daa4cb7309b26a2017-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/00fbdffd439fc0ad308cb92134152462-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/40efb25ac0f246b770509a1175de0fe1-p_e.jpg"
+        }
+      ],
+      "has3DModel": false,
+      "propertyType": "APARTMENT",
+      "longitude": -121.89935,
+      "unit": "# 1058-01",
+      "address": "El Castillo Metro, 1040-1058 N 4th St #1058-01, San Jose, CA 95112",
+      "livingArea": 425,
+      "variableData": {
+        "type": "TIME_ON_INFO",
+        "data": {
+          "isRead": null,
+          "isFresh": false
+        },
+        "text": "3 days ago"
+      },
+      "rentZestimate": 2104,
+      "zestimate": null,
+      "imgSrc": "https://photos.zillowstatic.com/fp/b33368f826c75beb0bb381a9debce402-p_e.jpg",
+      "latitude": 37.35371,
+      "price": 1835,
+      "bedrooms": 0,
+      "lotAreaValue": null,
+      "hasVideo": false,
+      "lotAreaUnit": null,
+      "listingStatus": "FOR_RENT",
+      "zpid": "2059990611",
+      "listingSubType": {},
+      "detailUrl": "/apartments/san-jose-ca/el-castillo-metro/BW78bc/",
+      "contingentListingType": null,
+      "daysOnZillow": 3,
+      "datePriceChanged": null,
+      "country": "USA",
+      "currency": "USD",
+      "comingSoonOnMarketDate": null,
+      "hasImage": true
+    },
+    {
+      "longitude": -121.87642,
+      "units": [
+        {
+          "roomForRent": false,
+          "beds": "1",
+          "price": "$2,295+"
+        },
+        {
+          "roomForRent": false,
+          "beds": "2",
+          "price": "$2,995+"
+        }
+      ],
+      "availabilityCount": 4,
+      "detailUrl": "/b/1060-s-3rd-st-san-jose-ca-5XjLFc/",
+      "has3DModel": false,
+      "listingStatus": "FOR_RENT",
+      "zpid": "37.321533--121.87642",
+      "isInstantTourEnabled": false,
+      "buildingName": null,
+      "address": "1060 S 3rd St, San Jose, CA",
+      "latitude": 37.321533,
+      "isContactable": false,
+      "hasImage": true,
+      "lotId": 1001467273,
+      "imgSrc": "https://photos.zillowstatic.com/fp/b0d0cd452316d1e2ea019d76b955610e-p_e.jpg",
+      "isBuilding": true
+    },
+    {
+      "longitude": -121.88593,
+      "units": [
+        {
+          "roomForRent": false,
+          "beds": "0",
+          "price": "$1,895+"
+        },
+        {
+          "roomForRent": false,
+          "beds": "1",
+          "price": "$2,300+"
+        }
+      ],
+      "availabilityCount": 3,
+      "detailUrl": "/b/59-s.-5th-street-san-jose-ca-9VGkTm/",
+      "has3DModel": false,
+      "listingStatus": "FOR_RENT",
+      "zpid": "37.337--121.88593",
+      "isInstantTourEnabled": false,
+      "buildingName": "59 S. 5th Street",
+      "address": "59 S 5th St, San Jose, CA",
+      "latitude": 37.337,
+      "isContactable": true,
+      "hasImage": true,
+      "lotId": 2117181355,
+      "imgSrc": "https://photos.zillowstatic.com/fp/2eefe2bcf20d6e1a45efb0d0cc32a063-p_e.jpg",
+      "isBuilding": true
+    },
+    {
+      "bathrooms": 1,
+      "carouselPhotos": [
+        {
+          "url": "https://photos.zillowstatic.com/fp/8b00e67126859fc9196235680c3dab09-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/1905a18024e90efeb84fd4436ea73f9d-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/ad3fd8ac4f01d55f70dc3f7984dfd325-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/640b295929313baeb48418453dfeb77c-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/4a537de44b210cb7643bbc5959e98aea-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/3725f997dc10b15d757b832e1917d15e-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/6586f86a4928ece381828aa1977b7e61-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/f827d571b9cdb8775e7c51f90ca2dd87-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/76d0fe75c4880fde2d565c02ff4ac1f8-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/c40f2b498f0f7790c2d3c1cdce90059e-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/2ff17e90d708c7c8b45bb20e8ace7b99-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/bd3163879e67ff36b77dbb34b18bce82-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/0c250e3624abd73658c3e87335089866-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/8c833d6168510dd1012eef453a3a3f55-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/6661a40b80bcb03c292b10d4065402f2-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/9ddf86e3ac4a9ec959ac88d925166be7-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/c9447cb6aa8dd7952fc81acca46c91b1-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/5d13130fcabf1f6345c661781511e58e-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/34f675b28eaf2d583f1453e295001ea5-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/2420e6d821429415c8e52cebd1a95691-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/bca037eb1c7e97577486f81f72df0135-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/e3ee3acf63b990c4fd913175ce6355d6-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/8ad65eda431a25bc6d0e50345cb831c4-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/cc215c3b4c9b4b4a5670c387acc5ae7c-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/37dc64b452252479700c64cd9aa3aaf2-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/46e8284f1cb8e77ed730a1e1775f18cf-p_e.jpg"
+        }
+      ],
+      "has3DModel": false,
+      "propertyType": "APARTMENT",
+      "longitude": -121.8829,
+      "unit": "# &-510",
+      "address": "298 N 11th St #&-510, San Jose, CA 95112",
+      "livingArea": 730,
+      "variableData": {
+        "type": "TIME_ON_INFO",
+        "data": {
+          "isRead": null,
+          "isFresh": false
+        },
+        "text": "4 days ago"
+      },
+      "rentZestimate": 2324,
+      "zestimate": null,
+      "imgSrc": "https://photos.zillowstatic.com/fp/8b00e67126859fc9196235680c3dab09-p_e.jpg",
+      "latitude": 37.34557,
+      "price": 2495,
+      "bedrooms": 1,
+      "lotAreaValue": null,
+      "hasVideo": false,
+      "lotAreaUnit": null,
+      "listingStatus": "FOR_RENT",
+      "zpid": "343928110",
+      "listingSubType": {},
+      "detailUrl": "/homedetails/298-N-11th-St-510-San-Jose-CA-95112/343928110_zpid/",
+      "contingentListingType": null,
+      "daysOnZillow": 4,
+      "datePriceChanged": null,
+      "country": "USA",
+      "currency": "USD",
+      "comingSoonOnMarketDate": null,
+      "hasImage": true
+    },
+    {
+      "bathrooms": 1,
+      "carouselPhotos": [
+        {
+          "url": "https://photos.zillowstatic.com/fp/8b2e41afa15036cb1b043264bc04683f-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/a0121a526d6cfd21c7c9ee020119e947-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/f0506eb9ec34538e852ab1c1996ff237-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/e98396705d6f338858d9f0a5d08edea1-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/33bb71b0ae0c1f682ff5717cbd65cb38-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/256bd7d0376122b9af2be888e0c77d79-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/1b5aa6f3fca878a6bfe00d789a9720f9-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/429f1cc5aa03b468b9cb332e9748b7cc-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/67534657a2afd62f0e7132434abc35e5-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/c959be058520dda4a5aada54db864b38-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/3723ab50d9c10c0207c2471336ed10a7-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/e051ba4b1d6090a61058c8ff13b41bcb-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/f96fdb48493704809f1e1eeef3817e45-p_e.jpg"
+        }
+      ],
+      "has3DModel": false,
+      "propertyType": "APARTMENT",
+      "longitude": -121.88221,
+      "unit": "Apt 4",
+      "address": "S8th42, 42 S 8th St APT 4, San Jose, CA 95112",
+      "livingArea": 350,
+      "variableData": {
+        "type": "TIME_ON_INFO",
+        "data": {
+          "isRead": null,
+          "isFresh": false
+        },
+        "text": "4 days ago"
+      },
+      "rentZestimate": 1552,
+      "zestimate": null,
+      "imgSrc": "https://photos.zillowstatic.com/fp/8b2e41afa15036cb1b043264bc04683f-p_e.jpg",
+      "latitude": 37.339043,
+      "price": 1695,
+      "bedrooms": 0,
+      "lotAreaValue": null,
+      "hasVideo": false,
+      "lotAreaUnit": null,
+      "listingStatus": "FOR_RENT",
+      "zpid": "2114363500",
+      "listingSubType": {},
+      "detailUrl": "/b/s8th42-san-jose-ca-5YCFLC/",
+      "contingentListingType": null,
+      "daysOnZillow": 4,
+      "datePriceChanged": null,
+      "country": "USA",
+      "currency": "USD",
+      "comingSoonOnMarketDate": null,
+      "hasImage": true
+    },
+    {
+      "longitude": -121.892914,
+      "units": [
+        {
+          "roomForRent": false,
+          "beds": "1",
+          "price": "$2,599+"
+        },
+        {
+          "roomForRent": false,
+          "beds": "2",
+          "price": "$3,269+"
+        }
+      ],
+      "availabilityCount": 9,
+      "detailUrl": "/apartments/san-jose-ca/marquis/5ZJsT3/",
+      "has3DModel": true,
+      "listingStatus": "FOR_RENT",
+      "zpid": "37.356236--121.892914",
+      "isInstantTourEnabled": true,
+      "buildingName": "Marquis",
+      "address": "817 N 10th St, San Jose, CA",
+      "latitude": 37.356236,
+      "isContactable": true,
+      "hasImage": true,
+      "lotId": 1010589231,
+      "imgSrc": "https://photos.zillowstatic.com/fp/960544bece4fb37b8c33a5f9e8e7576d-p_e.jpg",
+      "isBuilding": true
+    },
+    {
+      "bathrooms": 1,
+      "carouselPhotos": [
+        {
+          "url": "https://photos.zillowstatic.com/fp/b752f11a279e8a8d374a0169ae5979f8-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/6902a51eb731b5580315005b092642ef-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/119a0a5c9cf75f74c216cd88c4b7c1f1-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/d9afd053c3fbfb9d8d4780d618044872-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/b2bfc11aba9deb76b4b15d3afb83342d-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/45b8ada090832f2b729c4cf435744afa-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/42f4eabfb2ee95d3f00ed8a2572a2e14-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/a82a72730b1fed7792243e0d4f33f25c-p_e.jpg"
+        }
+      ],
+      "has3DModel": false,
+      "propertyType": "APARTMENT",
+      "longitude": -121.89045,
+      "unit": "# 8",
+      "address": "041 - 333 N 5th St, 333 N 5th St #8, San Jose, CA 95112",
+      "livingArea": null,
+      "variableData": {
+        "type": "TIME_ON_INFO",
+        "data": {
+          "isRead": null,
+          "isFresh": false
+        },
+        "text": "4 days ago"
+      },
+      "rentZestimate": 1033,
+      "zestimate": null,
+      "imgSrc": "https://photos.zillowstatic.com/fp/b752f11a279e8a8d374a0169ae5979f8-p_e.jpg",
+      "latitude": 37.34306,
+      "price": 1850,
+      "bedrooms": 1,
+      "lotAreaValue": null,
+      "hasVideo": false,
+      "lotAreaUnit": null,
+      "listingStatus": "FOR_RENT",
+      "zpid": "2078304843",
+      "listingSubType": {},
+      "detailUrl": "/b/041-333-n-5th-st-san-jose-ca-5YCHVp/",
+      "contingentListingType": null,
+      "daysOnZillow": 4,
+      "datePriceChanged": null,
+      "country": "USA",
+      "currency": "USD",
+      "comingSoonOnMarketDate": null,
+      "hasImage": true
+    },
+    {
+      "bathrooms": 1,
+      "carouselPhotos": [
+        {
+          "url": "https://photos.zillowstatic.com/fp/352fa9ab6920e132e7915e6152da3ecc-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/2f32c0c7f9102db2bd74243eb67eb515-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/f247f6554a57ed2326cde489d959ad3b-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/63ca17df98c477c2034ce53c73ddcf4f-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/14afed09b41ebd170c74198605debbe4-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/2d5087322a042e6cc6ba54ad6672f525-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/09e50ef2648330eb4735b0768d825e2f-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/6b757868ffe6d6b429ddda8908226845-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/6ee52a54c8b9d359a8dcd9ce3a4ea886-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/841f049004c1824bce5755d0764f91c5-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/cc36ee428544d1d14ae06513523b4f39-p_e.jpg"
+        }
+      ],
+      "has3DModel": false,
+      "propertyType": "APARTMENT",
+      "longitude": -121.891754,
+      "unit": "# 76",
+      "address": "76-82 N 7th St, 76-82 N 7th St #76, San Jose, CA 95112",
+      "livingArea": null,
+      "variableData": {
+        "type": "TIME_ON_INFO",
+        "data": {
+          "isRead": null,
+          "isFresh": false
+        },
+        "text": "5 days ago"
+      },
+      "rentZestimate": null,
+      "zestimate": null,
+      "imgSrc": "https://photos.zillowstatic.com/fp/352fa9ab6920e132e7915e6152da3ecc-p_e.jpg",
+      "latitude": 37.34933,
+      "price": 2050,
+      "bedrooms": 1,
+      "lotAreaValue": null,
+      "hasVideo": false,
+      "lotAreaUnit": null,
+      "listingStatus": "FOR_RENT",
+      "zpid": "450477374",
+      "listingSubType": {},
+      "detailUrl": "/b/76-82-n-7th-st-san-jose-ca-CbVMDg/",
+      "contingentListingType": null,
+      "daysOnZillow": 5,
+      "datePriceChanged": null,
+      "country": "USA",
+      "currency": "USD",
+      "comingSoonOnMarketDate": null,
+      "hasImage": true
+    },
+    {
+      "longitude": -121.874466,
+      "units": [
+        {
+          "roomForRent": false,
+          "beds": "1",
+          "price": "$1,950+"
+        },
+        {
+          "roomForRent": false,
+          "beds": "2",
+          "price": "$2,350+"
+        }
+      ],
+      "availabilityCount": 2,
+      "detailUrl": "/b/56-0107-san-jose-ca-5j4FQK/",
+      "has3DModel": false,
+      "listingStatus": "FOR_RENT",
+      "zpid": "37.334454--121.874466",
+      "isInstantTourEnabled": false,
+      "buildingName": null,
+      "address": "446 S 11th St, San Jose, CA",
+      "latitude": 37.334454,
+      "isContactable": false,
+      "hasImage": true,
+      "lotId": 1049456486,
+      "imgSrc": "https://photos.zillowstatic.com/fp/2ec35ca70128257d5037d27844791e33-p_e.jpg",
+      "isBuilding": true
+    },
+    {
+      "bathrooms": 3,
+      "carouselPhotos": [
+        {
+          "url": "https://photos.zillowstatic.com/fp/24961396aa76edf1ab2091023031d966-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/0f5dc3a602a018321063ff99e2981fcb-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/fd076140ef2f7d609097af28aa32dd39-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/475c6fcd60649a43eb48f18afa29c6cb-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/734641a830f7fcdfdaf5d2cdbed1f121-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/206a4c0534fa9fc5c4f0fb44c2f3ef4f-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/c60bd7a844ec0ecd9df6c03552794ce7-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/57df2a5c5c734ea37e164bd4e7151f66-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/8b8aee0e5a1fd20d6a42b6b221777a2b-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/7f4655aa793070c13ff1672a2356957d-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/57e3084e45d22b28a31548cc7be8f18d-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/eaa7f5143b8c75cb5ac03a3edc895618-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/6a42a30d0dddedb1321d872f53bc1ba1-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/15f888b0c72fa1ee04030903384d3180-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/8de4c2612114f16233fe29ae25dbc98f-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/5520940cc37408e4cc54576b93759664-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/cac946eca7fcecb4b57ae90d0698d4fc-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/f1f64f4609d162527f0e3b5670f459de-p_e.jpg"
+        }
+      ],
+      "has3DModel": false,
+      "propertyType": "SINGLE_FAMILY",
+      "longitude": null,
+      "address": "(undisclosed Address), San Jose, CA 95112",
+      "livingArea": 1260,
+      "variableData": {
+        "type": "TIME_ON_INFO",
+        "data": {
+          "isRead": null,
+          "isFresh": false
+        },
+        "text": "8 days ago"
+      },
+      "rentZestimate": 4372,
+      "zestimate": 1190100,
+      "imgSrc": "https://photos.zillowstatic.com/fp/24961396aa76edf1ab2091023031d966-p_e.jpg",
+      "latitude": null,
+      "price": 4650,
+      "bedrooms": 3,
+      "lotAreaValue": null,
+      "hasVideo": false,
+      "lotAreaUnit": null,
+      "listingStatus": "FOR_RENT",
+      "zpid": "19569130",
+      "listingSubType": {},
+      "detailUrl": "/homedetails/San-Jose-CA-95112/19569130_zpid/",
+      "contingentListingType": null,
+      "daysOnZillow": 8,
+      "datePriceChanged": null,
+      "country": "USA",
+      "currency": "USD",
+      "comingSoonOnMarketDate": null,
+      "hasImage": true
+    },
+    {
+      "bathrooms": 1,
+      "carouselPhotos": [
+        {
+          "url": "https://photos.zillowstatic.com/fp/a9b704da90968d00570eabd3e1097f18-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/e4f4f41014f17a58e17a44bd58b6c39d-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/2933073f4b222e5db79d32bd7dca5125-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/52c29ef9f48524b6bda4743367f01e9b-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/9f00b2a56af9dca0f7d91181e637c562-p_e.jpg"
+        }
+      ],
+      "has3DModel": false,
+      "propertyType": "APARTMENT",
+      "longitude": -121.87117,
+      "address": "740-742 S 10th St, San Jose, CA 95112",
+      "livingArea": null,
+      "variableData": {
+        "type": "TIME_ON_INFO",
+        "data": {
+          "isRead": null,
+          "isFresh": false
+        },
+        "text": "9 days ago"
+      },
+      "rentZestimate": null,
+      "zestimate": null,
+      "imgSrc": "https://photos.zillowstatic.com/fp/a9b704da90968d00570eabd3e1097f18-p_e.jpg",
+      "latitude": 37.32744,
+      "price": 2595,
+      "bedrooms": 2,
+      "lotAreaValue": null,
+      "hasVideo": false,
+      "lotAreaUnit": null,
+      "listingStatus": "FOR_RENT",
+      "zpid": "450270089",
+      "listingSubType": {},
+      "detailUrl": "/homedetails/740-742-S-10th-St-San-Jose-CA-95112/450270089_zpid/",
+      "contingentListingType": null,
+      "daysOnZillow": 9,
+      "datePriceChanged": 1746169200000,
+      "country": "USA",
+      "currency": "USD",
+      "comingSoonOnMarketDate": null,
+      "hasImage": true
+    },
+    {
+      "longitude": -121.894066,
+      "units": [
+        {
+          "roomForRent": false,
+          "beds": "1",
+          "price": "$2,995+"
+        },
+        {
+          "roomForRent": false,
+          "beds": "2",
+          "price": "$3,465+"
+        }
+      ],
+      "availabilityCount": 8,
+      "detailUrl": "/apartments/san-jose-ca/pavona-apartments/5XjTRx/",
+      "has3DModel": true,
+      "listingStatus": "FOR_RENT",
+      "zpid": "37.3535--121.894066",
+      "isInstantTourEnabled": true,
+      "buildingName": "Pavona Apartments",
+      "address": "760 N 7th St, San Jose, CA",
+      "latitude": 37.3535,
+      "isContactable": true,
+      "hasImage": true,
+      "lotId": 1001484586,
+      "imgSrc": "https://photos.zillowstatic.com/fp/1766f641c67cd4b765d3678e262a04b8-p_e.jpg",
+      "isBuilding": true
+    },
+    {
+      "longitude": -121.86882,
+      "units": [
+        {
+          "roomForRent": false,
+          "beds": "1",
+          "price": "$2,795+"
+        },
+        {
+          "roomForRent": false,
+          "beds": "2",
+          "price": "$3,625+"
+        }
+      ],
+      "availabilityCount": 2,
+      "detailUrl": "/b/952-s-11th-st-san-jose-ca-5Xtpny/",
+      "has3DModel": false,
+      "listingStatus": "FOR_RENT",
+      "zpid": "37.327133--121.86882",
+      "isInstantTourEnabled": false,
+      "buildingName": null,
+      "address": "952 S 11th St, San Jose, CA",
+      "latitude": 37.327133,
+      "isContactable": false,
+      "hasImage": true,
+      "lotId": 1002465028,
+      "imgSrc": "https://photos.zillowstatic.com/fp/ad496a2fae8a845b231406c918c34de5-p_e.jpg",
+      "isBuilding": true
+    },
+    {
+      "bathrooms": 4,
+      "carouselPhotos": [
+        {
+          "url": "https://photos.zillowstatic.com/fp/21560b097903ed3dae91c2df6e6b6d8c-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/95bada7e4324ed5bbe4ec85b8b823cbd-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/dd6a41048b071419a468a0cfd64b0583-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/783336fb0a41a0e5acb13c7887ee7bd2-p_e.jpg"
+        }
+      ],
+      "has3DModel": false,
+      "propertyType": "TOWNHOUSE",
+      "longitude": -121.89475,
+      "address": "976 Sakura Dr, San Jose, CA 95112",
+      "livingArea": 1675,
+      "variableData": {
+        "type": "TIME_ON_INFO",
+        "data": {
+          "isRead": null,
+          "isFresh": false
+        },
+        "text": "10 days ago"
+      },
+      "rentZestimate": 4197,
+      "zestimate": 1153600,
+      "imgSrc": "https://photos.zillowstatic.com/fp/21560b097903ed3dae91c2df6e6b6d8c-p_e.jpg",
+      "latitude": 37.356976,
+      "price": 4165,
+      "bedrooms": 4,
+      "lotAreaValue": null,
+      "hasVideo": false,
+      "lotAreaUnit": null,
+      "listingStatus": "FOR_RENT",
+      "zpid": "69227035",
+      "listingSubType": {},
+      "detailUrl": "/homedetails/976-Sakura-Dr-San-Jose-CA-95112/69227035_zpid/",
+      "contingentListingType": null,
+      "daysOnZillow": 10,
+      "datePriceChanged": null,
+      "country": "USA",
+      "currency": "USD",
+      "comingSoonOnMarketDate": null,
+      "hasImage": true
+    },
+    {
+      "bathrooms": 1,
+      "carouselPhotos": [
+        {
+          "url": "https://photos.zillowstatic.com/fp/ba11644001aacaca46438cb2913458d2-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/227b1a220e99831540409a4d5902183a-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/8d558e428d9c3489ed12da589e9eccbd-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/d733c536200b6095ad81eb4323c7e76a-p_e.jpg"
+        }
+      ],
+      "has3DModel": false,
+      "propertyType": "APARTMENT",
+      "longitude": -121.89654,
+      "unit": "Apt 3",
+      "address": "618 N 3rd St APT 3, San Jose, CA 95112",
+      "livingArea": 962,
+      "variableData": {
+        "type": "TIME_ON_INFO",
+        "data": {
+          "isRead": null,
+          "isFresh": false
+        },
+        "text": "11 days ago"
+      },
+      "rentZestimate": null,
+      "zestimate": null,
+      "imgSrc": "https://photos.zillowstatic.com/fp/ba11644001aacaca46438cb2913458d2-p_e.jpg",
+      "latitude": 37.348583,
+      "price": 2495,
+      "bedrooms": 2,
+      "lotAreaValue": null,
+      "hasVideo": false,
+      "lotAreaUnit": null,
+      "listingStatus": "FOR_RENT",
+      "zpid": "450237222",
+      "listingSubType": {},
+      "detailUrl": "/homedetails/618-N-3rd-St-APT-3-San-Jose-CA-95112/450237222_zpid/",
+      "contingentListingType": null,
+      "daysOnZillow": 11,
+      "datePriceChanged": null,
+      "country": "USA",
+      "currency": "USD",
+      "comingSoonOnMarketDate": null,
+      "hasImage": true
+    },
+    {
+      "bathrooms": 3,
+      "carouselPhotos": [
+        {
+          "url": "https://photos.zillowstatic.com/fp/1ea9c869c39a86bad98ddd6c4e3a8fc7-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/c0f6ec11758e3dd111316a6d1a769c73-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/5562ee2964275ff63a99c0d257c6a2af-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/f4d7542116dbaaaf4a9ce7eeab3ef9c6-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/9830e92c13a9697b22fcf1d6854d5db2-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/b0ade0edf899b0a5548778cb74433a3a-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/b3cf13a1d43c4b98fcf9dbfc93647390-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/0bb2a4a2e9c7929c568106095f023da8-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/dd8c8a145bd4f2f7e3a39e15b27b4f2a-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/2211cfd31b87f1090ef2568fdc5e7232-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/87f41b21595cd286132699960a564aaa-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/cfe56efa37624b0af593a9f88989fc4a-p_e.jpg"
+        }
+      ],
+      "has3DModel": false,
+      "propertyType": "TOWNHOUSE",
+      "longitude": -121.87526,
+      "address": "388 S 11th St, San Jose, CA 95112",
+      "livingArea": 1050,
+      "variableData": {
+        "type": "TIME_ON_INFO",
+        "data": {
+          "isRead": null,
+          "isFresh": false
+        },
+        "text": "11 days ago"
+      },
+      "rentZestimate": 3097,
+      "zestimate": 789900,
+      "imgSrc": "https://photos.zillowstatic.com/fp/1ea9c869c39a86bad98ddd6c4e3a8fc7-p_e.jpg",
+      "latitude": 37.335255,
+      "price": 3000,
+      "bedrooms": 2,
+      "lotAreaValue": null,
+      "hasVideo": false,
+      "lotAreaUnit": null,
+      "listingStatus": "FOR_RENT",
+      "zpid": "19712081",
+      "listingSubType": {},
+      "detailUrl": "/homedetails/388-S-11th-St-San-Jose-CA-95112/19712081_zpid/",
+      "contingentListingType": null,
+      "daysOnZillow": 11,
+      "datePriceChanged": null,
+      "country": "USA",
+      "currency": "USD",
+      "comingSoonOnMarketDate": null,
+      "hasImage": true
+    },
+    {
+      "bathrooms": 2,
+      "carouselPhotos": [
+        {
+          "url": "https://photos.zillowstatic.com/fp/6282964b7f2f6621abd17f5f163fd6c3-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/02cdeea27254f33b3648ac5b396fbe49-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/ac9162c1365116b7137acf1a37328765-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/2f68fbfc5dcdb2e9dcd8a6a06f7b1179-p_e.jpg"
+        }
+      ],
+      "has3DModel": false,
+      "propertyType": "APARTMENT",
+      "longitude": -121.87568,
+      "unit": "# 2",
+      "address": "246 S. 12th Street, 246 S 12th St #2, San Jose, CA 95112",
+      "livingArea": 1309,
+      "variableData": {
+        "type": "TIME_ON_INFO",
+        "data": {
+          "isRead": null,
+          "isFresh": false
+        },
+        "text": "11 days ago"
+      },
+      "rentZestimate": 2380,
+      "zestimate": null,
+      "imgSrc": "https://photos.zillowstatic.com/fp/6282964b7f2f6621abd17f5f163fd6c3-p_e.jpg",
+      "latitude": 37.33769,
+      "price": 3745,
+      "bedrooms": 2,
+      "lotAreaValue": null,
+      "hasVideo": false,
+      "lotAreaUnit": null,
+      "listingStatus": "FOR_RENT",
+      "zpid": "2058946048",
+      "listingSubType": {},
+      "detailUrl": "/b/246-s.-12th-street-san-jose-ca-5bf2Lf/",
+      "contingentListingType": null,
+      "daysOnZillow": 11,
+      "datePriceChanged": null,
+      "country": "USA",
+      "currency": "USD",
+      "comingSoonOnMarketDate": null,
+      "hasImage": true
+    },
+    {
+      "longitude": -121.8821,
+      "units": [
+        {
+          "roomForRent": false,
+          "beds": "1",
+          "price": "$1,895+"
+        },
+        {
+          "roomForRent": false,
+          "beds": "2",
+          "price": "$2,695+"
+        }
+      ],
+      "availabilityCount": 2,
+      "detailUrl": "/apartments/san-jose-ca/college-spaces/CkBSnP/",
+      "has3DModel": false,
+      "listingStatus": "FOR_RENT",
+      "zpid": "37.32969--121.8821",
+      "isInstantTourEnabled": false,
+      "buildingName": "College Spaces",
+      "address": "148 E William St, San Jose, CA",
+      "latitude": 37.32969,
+      "isContactable": true,
+      "hasImage": true,
+      "lotId": 2750805972,
+      "imgSrc": "https://photos.zillowstatic.com/fp/68b9b14d4ab725d534664b75b4719df3-p_e.jpg",
+      "isBuilding": true
+    },
+    {
+      "bathrooms": 1,
+      "carouselPhotos": [
+        {
+          "url": "https://photos.zillowstatic.com/fp/34a58484fdd6a3bd09008b1e8d818cce-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/3953482de63837d388588e6f9a061c70-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/a6ca90de336ad9ff5544b32ea339d266-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/4806ec335e5a349166602928adca4063-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/72a653382050946d00c2f3a7aab91a37-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/ba442faed483dbcaa9054f51a203f782-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/331e899827e944834227766cd2f1ca00-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/c8e7987c6f1034e4ef598500ba8f26c3-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/1bcb77577113c1e7045a50be8bdb5304-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/997878565d627a8d6884454892d136cc-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/6a3ed402333f613b6372293e0857046d-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/67ef0508c63d8d8a885736e3b4aaaf0b-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/58f640fd957d1ebf26a987cdd3630e59-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/5c49add12429b657b6afedafd11a4939-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/10774937eea8bf43346c13a5debfa426-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/6ecfed86a6844ff3e1a63985cec5c50f-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/a046f6561100196894b62961a048ccbe-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/622b8fe9af6a5228c42e8c22bae32f86-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/54fe08bc6afe59fbad380b26d43fcd62-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/f12fbefecd6720a1ab5fbda42d71c78e-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/aeeb07c5f3893dec35eed412e18aaf4c-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/c9fbc5af225e09f2fccc727d373f9332-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/7b595d429a72798d26bfb29dfdcb655a-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/5d32ac2d35db85d7ecf4522032eaae36-p_e.jpg"
+        }
+      ],
+      "has3DModel": false,
+      "propertyType": "APARTMENT",
+      "longitude": -121.88355,
+      "unit": "Unit 205",
+      "address": "Bayshore Estates, 855 N Bayshore Rd W UNIT 205, San Jose, CA 95112",
+      "livingArea": 650,
+      "variableData": {
+        "type": "TIME_ON_INFO",
+        "data": {
+          "isRead": null,
+          "isFresh": false
+        },
+        "text": "12 days ago"
+      },
+      "rentZestimate": 2444,
+      "zestimate": null,
+      "imgSrc": "https://photos.zillowstatic.com/fp/34a58484fdd6a3bd09008b1e8d818cce-p_e.jpg",
+      "latitude": 37.361664,
+      "price": 2400,
+      "bedrooms": 2,
+      "lotAreaValue": null,
+      "hasVideo": false,
+      "lotAreaUnit": null,
+      "listingStatus": "FOR_RENT",
+      "zpid": "2059117741",
+      "listingSubType": {},
+      "detailUrl": "/apartments/san-jose-ca/bayshore-estates/5dtp5W/",
+      "contingentListingType": null,
+      "daysOnZillow": 12,
+      "datePriceChanged": null,
+      "country": "USA",
+      "currency": "USD",
+      "comingSoonOnMarketDate": null,
+      "hasImage": true
+    },
+    {
+      "bathrooms": 1,
+      "carouselPhotos": [
+        {
+          "url": "https://photos.zillowstatic.com/fp/398030440fc90d63197644a42001ad37-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/041e57299f1ba42406b7c943dd792128-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/4e0ee43170fe65f83f7dab2e289877ea-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/309298b5709042552869df9ab23f0d46-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/9e6cdc32518daa1d42629bc36be3d701-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/728e2d3f661ab4844e1b905bd512e3a4-p_e.jpg"
+        }
+      ],
+      "has3DModel": false,
+      "propertyType": "APARTMENT",
+      "longitude": -121.87816,
+      "unit": "Apt 4",
+      "address": "325 E William St APT 4, San Jose, CA 95112",
+      "livingArea": 505,
+      "variableData": {
+        "type": "TIME_ON_INFO",
+        "data": {
+          "isRead": null,
+          "isFresh": false
+        },
+        "text": "12 days ago"
+      },
+      "rentZestimate": 1853,
+      "zestimate": null,
+      "imgSrc": "https://photos.zillowstatic.com/fp/398030440fc90d63197644a42001ad37-p_e.jpg",
+      "latitude": 37.332092,
+      "price": 1895,
+      "bedrooms": 1,
+      "lotAreaValue": null,
+      "hasVideo": false,
+      "lotAreaUnit": null,
+      "listingStatus": "FOR_RENT",
+      "zpid": "2083451331",
+      "listingSubType": {},
+      "detailUrl": "/homedetails/325-E-William-St-APT-4-San-Jose-CA-95112/2083451331_zpid/",
+      "contingentListingType": null,
+      "daysOnZillow": 12,
+      "datePriceChanged": null,
+      "country": "USA",
+      "currency": "USD",
+      "comingSoonOnMarketDate": null,
+      "hasImage": true
+    },
+    {
+      "longitude": -121.8762,
+      "units": [
+        {
+          "roomForRent": false,
+          "beds": "1",
+          "price": "$2,540+"
+        },
+        {
+          "roomForRent": false,
+          "beds": "2",
+          "price": "$3,095+"
+        }
+      ],
+      "availabilityCount": 2,
+      "detailUrl": "/b/1060-s-3rd-st-san-jose-ca-5XjLFc/",
+      "has3DModel": false,
+      "listingStatus": "FOR_RENT",
+      "zpid": "37.322178--121.8762",
+      "isInstantTourEnabled": false,
+      "buildingName": null,
+      "address": "1060 S 3rd St, San Jose, CA",
+      "latitude": 37.322178,
+      "isContactable": false,
+      "hasImage": true,
+      "lotId": 1001467273,
+      "imgSrc": "https://photos.zillowstatic.com/fp/7e0049a41f925ded865b2aa984ab2635-p_e.jpg",
+      "isBuilding": true
+    },
+    {
+      "bathrooms": 1,
+      "carouselPhotos": [
+        {
+          "url": "https://photos.zillowstatic.com/fp/cf03af38d8c023b70b34138ddfb93ca6-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/bd28281f62f58fa4c88d63aef6526788-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/ed8103fdf0d7dae8fa109c49e8ab0901-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/89d45e5c71ae24254a64ee6881a4f48b-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/b331d1505ea1ebbe57673ba3095cc287-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/8438bfe947d441bfd15f2f96c5b5c201-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/56a22502ac9dd1aaa0b32fe3f5712233-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/08be43eb8a920b13eade7fbe09565ece-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/00afc1ee6601514f07845a2bb3494f87-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/dc37524e01334fb7e95ef2bd132bd0b8-p_e.jpg"
+        }
+      ],
+      "has3DModel": false,
+      "propertyType": "APARTMENT",
+      "longitude": -121.87766,
+      "address": "238 N 16th St, San Jose, CA 95112",
+      "livingArea": 600,
+      "variableData": {
+        "type": "TIME_ON_INFO",
+        "data": {
+          "isRead": null,
+          "isFresh": false
+        },
+        "text": "12 days ago"
+      },
+      "rentZestimate": 2119,
+      "zestimate": null,
+      "imgSrc": "https://photos.zillowstatic.com/fp/cf03af38d8c023b70b34138ddfb93ca6-p_e.jpg",
+      "latitude": 37.34703,
+      "price": 2100,
+      "bedrooms": 1,
+      "lotAreaValue": null,
+      "hasVideo": false,
+      "lotAreaUnit": null,
+      "listingStatus": "FOR_RENT",
+      "zpid": "153392514",
+      "listingSubType": {},
+      "detailUrl": "/homedetails/238-N-16th-St-San-Jose-CA-95112/153392514_zpid/",
+      "contingentListingType": null,
+      "daysOnZillow": 12,
+      "datePriceChanged": null,
+      "country": "USA",
+      "currency": "USD",
+      "comingSoonOnMarketDate": null,
+      "hasImage": true
+    },
+    {
+      "bathrooms": 1,
+      "carouselPhotos": [
+        {
+          "url": "https://photos.zillowstatic.com/fp/3d97146d25ae2675bf2c35e98441dab4-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/edf98f730d50a1467088cfecf622bc47-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/8747b081c2d3b8927ef67f0bf730b33c-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/616cb495813d6a06a4d1db43e71da1d8-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/f3d9c1c1c950700e1aad119b5ac2ea7c-p_e.jpg"
+        }
+      ],
+      "has3DModel": false,
+      "propertyType": "APARTMENT",
+      "longitude": -121.88093,
+      "unit": "Apt 10",
+      "address": "Fourth Street Apartments, 542 S 4th St APT 10, San Jose, CA 95112",
+      "livingArea": 676,
+      "variableData": {
+        "type": "TIME_ON_INFO",
+        "data": {
+          "isRead": null,
+          "isFresh": false
+        },
+        "text": "12 days ago"
+      },
+      "rentZestimate": 1993,
+      "zestimate": null,
+      "imgSrc": "https://photos.zillowstatic.com/fp/3d97146d25ae2675bf2c35e98441dab4-p_e.jpg",
+      "latitude": 37.329563,
+      "price": 2050,
+      "bedrooms": 1,
+      "lotAreaValue": null,
+      "hasVideo": false,
+      "lotAreaUnit": null,
+      "listingStatus": "FOR_RENT",
+      "zpid": "2083439401",
+      "listingSubType": {},
+      "detailUrl": "/apartments/san-jose-ca/fourth-street-apartments/5YCd6P/",
+      "contingentListingType": null,
+      "daysOnZillow": 12,
+      "datePriceChanged": null,
+      "country": "USA",
+      "currency": "USD",
+      "comingSoonOnMarketDate": null,
+      "hasImage": true
+    },
+    {
+      "bathrooms": 2,
+      "carouselPhotos": [
+        {
+          "url": "https://photos.zillowstatic.com/fp/d0ac4ef49bedd942067674238c9210b9-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/db6d0bfc36489b9698af5ee778fa1794-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/27803fcec1e6f8dca9d207d0ce2d70cc-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/862bad2e03f3ce0501fb3a1ff0431a96-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/bc2d3c52c9fbf6a04f600c537903134b-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/c54e5d4d9480bbc7ea7843e116b7e8f1-p_e.jpg"
+        }
+      ],
+      "has3DModel": false,
+      "propertyType": "APARTMENT",
+      "longitude": null,
+      "address": "(undisclosed Address), San Jose, CA 95112",
+      "livingArea": 700,
+      "variableData": {
+        "type": "TIME_ON_INFO",
+        "data": {
+          "isRead": null,
+          "isFresh": false
+        },
+        "text": "14 days ago"
+      },
+      "rentZestimate": null,
+      "zestimate": null,
+      "imgSrc": "https://photos.zillowstatic.com/fp/d0ac4ef49bedd942067674238c9210b9-p_e.jpg",
+      "latitude": null,
+      "price": 2800,
+      "bedrooms": 2,
+      "lotAreaValue": null,
+      "hasVideo": false,
+      "lotAreaUnit": null,
+      "listingStatus": "FOR_RENT",
+      "zpid": "351157701",
+      "listingSubType": {},
+      "detailUrl": "/homedetails/San-Jose-CA-95112/351157701_zpid/",
+      "contingentListingType": null,
+      "daysOnZillow": 14,
+      "datePriceChanged": null,
+      "country": "USA",
+      "currency": "USD",
+      "comingSoonOnMarketDate": null,
+      "hasImage": true
+    },
+    {
+      "bathrooms": 1,
+      "carouselPhotos": [
+        {
+          "url": "https://photos.zillowstatic.com/fp/bc388fc198122216f939c0729d18f9d4-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/5b1da5079723afde483599bba5cb1cd7-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/e895f8654be301bbc79a62a5f4e6187b-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/b0d23ad77db5245f7b8850d114bbd176-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/46be7b33d9093816e7cb64238b1b6f0f-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/2395a249aa7df7270455851b9e080d16-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/18da0f49b18bc14da4ee181d72284da7-p_e.jpg"
+        }
+      ],
+      "has3DModel": false,
+      "propertyType": "APARTMENT",
+      "longitude": -121.88379,
+      "address": "445 S 3rd St, San Jose, CA 95112",
+      "livingArea": 600,
+      "variableData": {
+        "type": "TIME_ON_INFO",
+        "data": {
+          "isRead": null,
+          "isFresh": false
+        },
+        "text": "16 days ago"
+      },
+      "rentZestimate": 2713,
+      "zestimate": null,
+      "imgSrc": "https://photos.zillowstatic.com/fp/bc388fc198122216f939c0729d18f9d4-p_e.jpg",
+      "latitude": 37.330315,
+      "price": 1845,
+      "bedrooms": 0,
+      "lotAreaValue": null,
+      "hasVideo": false,
+      "lotAreaUnit": null,
+      "listingStatus": "FOR_RENT",
+      "zpid": "300476190",
+      "listingSubType": {},
+      "detailUrl": "/homedetails/445-S-3rd-St-San-Jose-CA-95112/300476190_zpid/",
+      "contingentListingType": null,
+      "daysOnZillow": 16,
+      "datePriceChanged": null,
+      "country": "USA",
+      "currency": "USD",
+      "comingSoonOnMarketDate": null,
+      "hasImage": true
+    },
+    {
+      "bathrooms": 3,
+      "carouselPhotos": [
+        {
+          "url": "https://photos.zillowstatic.com/fp/e730d06bd549a2e00ba534ee71615767-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/fe9de50ceeef98eab58ff47175f6b088-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/3299d85192a98401e6402df90c3634e0-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/2673cb5efac7081e1f9ffb9014e68e17-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/e54fea244245a518cb58db0970b49c5e-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/7835373456be0198aec308f8a4df3624-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/4291d7ccd6e582a0a53e964d8ec00aa9-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/2bca855321175f3df5bb896f557bf9c7-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/2b49fa9db094db25da0a1f77066fc438-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/54928203c4daf9e5e5440c6f1c2cb6df-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/216c0ce89ea03de64b9c9aaf999e0516-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/2458493b1a739fae4f7d4444cf5a910d-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/09faa1b96cbde8bb1e7a21ef418e25e5-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/f642d0e5858ad1b83a26d1249d5de36a-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/de186da6287057cdb6edf760d7bfc6a4-p_e.jpg"
+        }
+      ],
+      "has3DModel": false,
+      "propertyType": "APARTMENT",
+      "longitude": -121.87602,
+      "unit": "Unit 302",
+      "address": "659 S 8th St UNIT 302, San Jose, CA 95112",
+      "livingArea": 2002,
+      "variableData": {
+        "type": "TIME_ON_INFO",
+        "data": {
+          "isRead": null,
+          "isFresh": false
+        },
+        "text": "19 days ago"
+      },
+      "rentZestimate": 4555,
+      "zestimate": null,
+      "imgSrc": "https://photos.zillowstatic.com/fp/e730d06bd549a2e00ba534ee71615767-p_e.jpg",
+      "latitude": 37.329582,
+      "price": 4295,
+      "bedrooms": 4,
+      "lotAreaValue": null,
+      "hasVideo": false,
+      "lotAreaUnit": null,
+      "listingStatus": "FOR_RENT",
+      "zpid": "2085402056",
+      "listingSubType": {},
+      "detailUrl": "/homedetails/659-S-8th-St-UNIT-302-San-Jose-CA-95112/2085402056_zpid/",
+      "contingentListingType": null,
+      "daysOnZillow": 19,
+      "datePriceChanged": null,
+      "country": "USA",
+      "currency": "USD",
+      "comingSoonOnMarketDate": null,
+      "hasImage": true
+    },
+    {
+      "bathrooms": 1,
+      "carouselPhotos": [
+        {
+          "url": "https://photos.zillowstatic.com/fp/969b996e0df0ff36afd7d5d787182e44-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/c6b0237db24c45f58ed676da2c8872ff-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/9ee76fdde6a5d46e86bd4fc27badd3f6-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/9995e79e6c916612b274307a84940d25-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/06caea7d77d62fb56db8a3b6f9f017d7-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/9be01103da79effea6eda1924fcf2778-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/346458c58fbbe9cac287849fcbcc55cf-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/ccbb72dcf664d41042127519276803d8-p_e.jpg"
+        },
+        {
+          "url": "https://photos.zillowstatic.com/fp/2ab26207286013b717f75eb1510f7ed0-p_e.jpg"
+        }
+      ],
+      "has3DModel": true,
+      "propertyType": "APARTMENT",
+      "longitude": -121.88373,
+      "address": "466 N 13th St, San Jose, CA 95112",
+      "livingArea": 650,
+      "variableData": {
+        "text": "3D Tour",
+        "type": "3D_HOME"
+      },
+      "rentZestimate": 2644,
+      "zestimate": null,
+      "imgSrc": "https://photos.zillowstatic.com/fp/969b996e0df0ff36afd7d5d787182e44-p_e.jpg",
+      "latitude": 37.35017,
+      "price": 2145,
+      "bedrooms": 1,
+      "lotAreaValue": null,
+      "hasVideo": false,
+      "lotAreaUnit": null,
+      "listingStatus": "FOR_RENT",
+      "zpid": "300473969",
+      "listingSubType": {},
+      "detailUrl": "/homedetails/466-N-13th-St-San-Jose-CA-95112/300473969_zpid/",
+      "contingentListingType": null,
+      "daysOnZillow": 19,
+      "datePriceChanged": 1745910000000,
+      "country": "USA",
+      "currency": "USD",
+      "comingSoonOnMarketDate": null,
+      "hasImage": true
+    }
+  ]
+}
