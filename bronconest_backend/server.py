@@ -31,7 +31,7 @@ def hello_world():
 
 #Initialize the Pinecone Vector DB
 pc = Pinecone(api_key=PINECONE_API_KEY)
-index = pc.Index(school="scu")
+index = pc.Index("scu")
 
 #Initialize Groq
 client = Groq(api_key=GROQ_API_KEY)

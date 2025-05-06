@@ -76,14 +76,14 @@ class _ReviewTileState extends State<ReviewTile> {
       if (!mounted) return;
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(const SnackBar(content: Text('Dorm deleted')));
+      ).showSnackBar(const SnackBar(content: Text('Review deleted')));
 
       widget.onReviewChanged();
     } catch (e) {
       if (!mounted) return;
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text('Error deleting dorm: $e')));
+      ).showSnackBar(SnackBar(content: Text('Error deleting review: $e')));
     }
   }
 

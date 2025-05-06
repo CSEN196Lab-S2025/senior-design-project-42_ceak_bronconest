@@ -21,7 +21,7 @@ JINA_API_KEY = os.environ.get("JINA_API_KEY")
 
 # Initialize the Pinecone Vector DB
 pc = Pinecone(api_key=PINECONE_API_KEY)
-index = pc.Index("dormreviews")
+index = pc.Index("scu")
 
 # Initialize Groq
 client = Groq(api_key=GROQ_API_KEY)
@@ -52,7 +52,9 @@ def extract_json(text):
     return {"error": "No JSON found", "raw": text}
 
 # Helper function to upsert dorm data to Pinecone
-def upsert_dorm_to_index(dorm_id, dorm):
+def upsert_dorm_to_index(dorm_id, dorm, school):
+    index = pc.Index(school)
+
     # Score summary to embed
     score_text = (
         f"Amenities: {dorm.get('amenities_avg', 0)}, "
@@ -114,13 +116,14 @@ def index_dorms(event: Event[Change[DocumentSnapshot | None]]) -> None:
 
     if any(old_data.get(field) != new_data.get(field) for field in relevant_fields):
         print(f"Dorm {dorm_id} updated. Updating index.")
-        upsert_dorm_to_index(dorm_id, new_data)
+        upsert_dorm_to_index(dorm_id, new_data, event.params["school"])
     else:
         print(f"Dorm {dorm_id} updated but no relevant fields changed. No action taken.")
 
 
 #Rank dorms based on user query
-def rank_dorms_helper(user_query, max_retries=2):
+def rank_dorms_helper(user_query, school, max_retries=2):
+    index = pc.Index(school)
     # Embed the user query
     query_data = {
         "model": "jina-clip-v2",
@@ -212,14 +215,15 @@ Use the exact Firebase dorm IDs provided. Do not invent or rename them.
 def rank_dorms(req: https_fn.Request) -> https_fn.Response:
     print(req.args["query"])
     query = req.args["query"]
-    if not query:
+    school = req.args["school"]
+    if not query or not school:
         return https_fn.Response(
-            json.dumps({"error": "Missing 'query' parameter"}),
+            json.dumps({"error": "Missing 'query' or 'school' parameter"}),
             status=400,
             mimetype="application/json"
         )
 
-    result = rank_dorms_helper(query)
+    result = rank_dorms_helper(query, school)
     return https_fn.Response(
         json.dumps(result),
         status=200,
