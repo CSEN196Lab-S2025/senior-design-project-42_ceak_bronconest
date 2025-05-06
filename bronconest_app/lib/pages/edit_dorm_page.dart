@@ -79,8 +79,7 @@ class _EditDormPageState extends State<EditDormPage> {
         _shortDescriptionController.text.isEmpty ||
         _addressController.text.isEmpty ||
         _latController.text.isEmpty ||
-        _longController.text.isEmpty ||
-        _coverImage == null) {
+        _longController.text.isEmpty) {
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(const SnackBar(content: Text('Please fill all fields')));
@@ -100,14 +99,17 @@ class _EditDormPageState extends State<EditDormPage> {
     });
 
     try {
-      final imageUrl = await _uploadImage(_coverImage!);
-      if (imageUrl.isEmpty) {
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Error uploading image')),
-          );
+      String imageUrl = widget.dorm.coverImage;
+      if (_coverImage != null) {
+        imageUrl = await _uploadImage(_coverImage!);
+        if (imageUrl.isEmpty) {
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Error uploading image')),
+            );
+          }
+          return;
         }
-        return;
       }
 
       final docRef = FirebaseFirestore.instance
