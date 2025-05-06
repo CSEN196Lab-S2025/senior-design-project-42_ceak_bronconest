@@ -51,9 +51,12 @@ class _HomePageState extends State<HomePage> {
       case 'sjsu':
         videoPath = 'assets/home/sjsu.mp4';
         break;
+      default:
+        videoPath = 'assets/home/scu.mp4';
+        break;
     }
 
-    _controller = VideoPlayerController.asset(videoPath!);
+    _controller = VideoPlayerController.asset(videoPath);
 
     await _controller.initialize();
 
@@ -93,7 +96,13 @@ class _HomePageState extends State<HomePage> {
     String fullName = prefs.getString('userName')!;
 
     // only get the "first name"
-    setState(() => name = fullName.substring(0, fullName.indexOf(' ')));
+    setState(
+      () =>
+          name =
+              fullName.contains(' ')
+                  ? fullName.substring(0, fullName.indexOf(' '))
+                  : fullName,
+    );
   }
 
   Future<void> _logout() async {
