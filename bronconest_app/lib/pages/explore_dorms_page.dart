@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:bronconest_app/models/dorm.dart';
 import 'package:bronconest_app/globals.dart';
-import 'package:bronconest_app/widgets/place_card.dart';
+import 'package:bronconest_app/widgets/dorm_card.dart';
 import 'package:bronconest_app/pages/filter_dorms_page.dart';
 
 class ExploreDormsPage extends StatefulWidget {

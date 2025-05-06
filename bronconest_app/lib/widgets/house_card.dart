@@ -34,18 +34,23 @@ class _HouseCardState extends State<HouseCard> {
   }
 
   Widget _buildInfoChip({required IconData icon, required String label}) {
-    return Chip(
-      backgroundColor: Colors.white.withValues(alpha: 0.8),
-      label: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, color: Colors.black),
-          const SizedBox(width: 4.0),
-          Text(
-            label,
-            style: Styles.smallTextStyle.copyWith(color: Colors.black),
-          ),
-        ],
+    return Container(
+      decoration: BoxDecoration(
+        color: Color.fromARGB(100, 0, 0, 0),
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      child: Padding(
+        padding: EdgeInsets.all(3.5),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(icon, color: Colors.white),
+            Text(
+              ' $label',
+              style: Styles.smallTextStyle.copyWith(color: Colors.white),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -100,6 +105,7 @@ class _HouseCardState extends State<HouseCard> {
                       Wrap(
                         spacing: 8.0,
                         runSpacing: 4.0,
+                        verticalDirection: VerticalDirection.up,
                         children: [
                           _buildInfoChip(
                             icon: Icons.bed,

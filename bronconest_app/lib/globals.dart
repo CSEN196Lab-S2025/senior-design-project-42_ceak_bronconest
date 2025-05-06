@@ -6,4 +6,4 @@ bool isAdmin = true;
 bool isLoggedIn = false;
 
 // home page video stuff
-Duration lastVideoPosition = Duration(seconds: 60);
+Duration lastVideoPosition = Duration.zero;

@@ -42,7 +42,18 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> _initializeVideo() async {
-    _controller = VideoPlayerController.asset('assets/home/720p60_cut.mp4');
+    String? videoPath;
+
+    switch (school) {
+      case 'scu':
+        videoPath = 'assets/home/scu.mp4';
+        break;
+      case 'sjsu':
+        videoPath = 'assets/home/sjsu.mp4';
+        break;
+    }
+
+    _controller = VideoPlayerController.asset(videoPath!);
 
     await _controller.initialize();
 
@@ -198,10 +209,14 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               );
                             }).toList(),
-                        onChanged: (String? newValue) {
+                        onChanged: (String? newValue) async {
                           setState(() {
                             school = newValue!;
+                            
+                            lastVideoPosition = Duration.zero;
                           });
+
+                          await _initializeVideo();
                         },
                       ),
                     ),
