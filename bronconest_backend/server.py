@@ -105,6 +105,7 @@ def index_scu_dorms(school="scu"):
 
 #Rank SCU dorms based on user query
 def rank_scu_dorms(user_query, school, max_retries=2):
+    index = pc.Index(school)
     # Embed the user query
     query_data = {
         "model": "jina-clip-v2",
