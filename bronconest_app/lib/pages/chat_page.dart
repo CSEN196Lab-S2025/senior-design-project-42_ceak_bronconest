@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:bronconest_app/models/dorm.dart';
 import 'package:bronconest_app/globals.dart';
+import 'package:bronconest_app/styles.dart';
 
 class ChatPage extends StatefulWidget {
   final String schoolId;
@@ -75,9 +76,9 @@ class _ChatPageState extends State<ChatPage> {
                     final message = messages[index];
                     return ListTile(
                       title: Text(message['sender_name']),
-                      subtitle: Text(message['text']),
-                      trailing: Column(
+                      subtitle: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             message['timestamp'] != null
@@ -87,10 +88,40 @@ class _ChatPageState extends State<ChatPage> {
                                       .toLocal(),
                                 )
                                 : 'Just now',
-                            style: const TextStyle(fontSize: 10),
+                            style: Styles.smallTextStyle.copyWith(
+                              fontSize: 12.0,
+                            ),
                           ),
+                          Text(message['text']),
                         ],
                       ),
+                      trailing:
+                          isAdmin || message['sender_id'] == userId
+                              ? PopupMenuButton(
+                                icon: Icon(Icons.more_vert),
+                                itemBuilder:
+                                    (BuildContext context) => [
+                                      PopupMenuItem(
+                                        child: Row(
+                                          children: [
+                                            Icon(Icons.delete),
+                                            Text('Delete'),
+                                          ],
+                                        ),
+                                        onTap: () async {
+                                          await FirebaseFirestore.instance
+                                              .collection('schools')
+                                              .doc(widget.schoolId)
+                                              .collection('dorms')
+                                              .doc(widget.dorm.id)
+                                              .collection('messages')
+                                              .doc(message.id)
+                                              .delete();
+                                        },
+                                      ),
+                                    ],
+                              )
+                              : SizedBox.shrink(),
                     );
                   },
                 );
@@ -108,6 +139,9 @@ class _ChatPageState extends State<ChatPage> {
                       decoration: const InputDecoration(
                         hintText: 'Type a message...',
                       ),
+                      // expands: true,
+                      maxLines: 10,
+                      minLines: 1,
                     ),
                   ),
                   IconButton(
