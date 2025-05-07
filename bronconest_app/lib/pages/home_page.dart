@@ -105,6 +105,11 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  Future<void> _changeSchoolPreference(String newSchool) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('school', newSchool);
+  }
+
   Future<void> _logout() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool('isLoggedIn', false);
@@ -221,7 +226,7 @@ class _HomePageState extends State<HomePage> {
                         onChanged: (String? newValue) async {
                           setState(() {
                             school = newValue!;
-
+                            _changeSchoolPreference(newValue);
                             lastVideoPosition = Duration.zero;
                           });
 
@@ -234,35 +239,6 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          // Old contents of home page:
-          // Center(
-          //   child: Column(
-          //     mainAxisAlignment: MainAxisAlignment.center,
-          //     children: [
-          //       const Text('Home Page'),
-          //       Text('School: $school'),
-          //       Text('User ID: $userId'),
-          //       isLoading
-          //           ? const CircularProgressIndicator()
-          //           : DropdownButton<String>(
-          //             value: schools.contains(school) ? school : null,
-          //             hint: const Text('Select a school'),
-          //             items:
-          //                 schools.map((String schoolName) {
-          //                   return DropdownMenuItem<String>(
-          //                     value: schoolName,
-          //                     child: Text(schoolName),
-          //                   );
-          //                 }).toList(),
-          //             onChanged: (String? newValue) {
-          //               setState(() {
-          //                 school = newValue!;
-          //               });
-          //             },
-          //           ),
-          //     ],
-          //   ),
-          // ),
         ],
       ),
     );
