@@ -84,6 +84,9 @@ class _WelcomePageState extends State<WelcomePage> {
       final GoogleSignIn googleSignIn = GoogleSignIn();
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
       if (googleUser == null) {
+        setState(() {
+          isLoading = false;
+        });
         return;
       }
       final GoogleSignInAuthentication googleAuth =
